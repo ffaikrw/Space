@@ -1,0 +1,111 @@
+@charset "UTF-8";
+
+#wrap {
+	width: 1200px;
+	height: 600px;
+	margin: auto;
+	background-color: #000;
+}
+
+#wrap-start {
+	width: 1200px;
+	height: 600px;
+	margin: auto;
+	background-color: #000;
+}
+
+.background-wrap {
+	width: 1200px;
+	height: 600px;
+	position: relative;
+}
+
+.background-wrap::before {
+	content: "";
+	background-image: url("/static/images/books_image.jpg");
+	background-size: cover;
+	opacity: 0.3;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+	right: 0px;
+	bottom: 0px;
+	
+}
+
+.start-content {
+	position: relative;
+}
+
+header {
+	height: 100px;
+}
+
+.header-logo {
+	color: #6b4bde;
+	font-size: 42px;
+	font-weight: 600;
+	text-decoration:line-through;
+	letter-spacing: 3px;
+	padding-top: 10px;
+	padding-left: 30px;
+}
+
+.header-btn {
+	padding-top: 40px;
+	padding-right: 30px;
+}
+
+.start-section {
+	height: 400px;
+}
+
+.start-text1 {
+	font-size: 31px;
+	font-weight: bold;
+	padding-left: 50px;
+}
+
+.start-text2 {
+	color: #999;
+	font-size: 20px;
+	padding-top: 15px;
+}
+
+.signin-btn {
+	border-radius: 30px;
+	border-color: #6b4bde;
+	background-color: #000;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 100px;
+	margin-right: 10px;
+}
+
+.signup-btn {
+	border-radius: 30px;
+	border: 0;
+	background-color: #6b4bde;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 100px;
+	box-shadow: 0;
+}
+
+footer {
+	height: 100px;
+	color: #777;
+	font-size: 15px;
+}
+
+
+
+
+
+
