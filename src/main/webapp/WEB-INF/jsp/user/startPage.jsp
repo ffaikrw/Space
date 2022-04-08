@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -52,11 +53,8 @@
 						</div>
 					</div>
 				</section>
-				<footer class="d-flex justify-content-center align-items-center">
-					<div>
-						Copyright 2022. space All Rights Reserved.
-					</div>
-				</footer>
+				
+				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 			</div>
 		</div>
 	

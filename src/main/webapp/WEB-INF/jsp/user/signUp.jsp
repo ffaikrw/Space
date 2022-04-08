@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,8 +22,27 @@
 </head>
 <body>
 	
-	<div id="wrap">
+	<div id="wrap" class="d-flex">
 		
+		<div class="signBox-background">
+			<img src="/static/images/reading_image.jpg">
+		</div>
+		<div class="signBox-content d-flex justify-content-center">
+			<div class="sign-box">
+				<div class="signBox-logo text-center mt-5">
+					space
+				</div>
+				<div class="signBox-text1">
+					이 도서관에 들어오면 <br>
+					내가 왜 여기서 나가는지 이해할 수가 없다.
+				</div>
+				<div class="signBox-text2">
+					마리 드 세비네 Marie de Sevigne
+				</div>
+				<input>
+				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+			</div>
+		</div>
 		
 		
 	
