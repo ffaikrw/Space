@@ -2,7 +2,6 @@
 
 #wrap {
 	width: 1200px;
-	height: 600px;
 	margin: auto;
 	background-color: #000;
 }
@@ -113,7 +112,6 @@ footer {
 .signBox-background {
 	position: relative;
 	width: 600px;
-	height: 600px;
 }
 
 .signBox-background img {
@@ -130,7 +128,6 @@ footer {
 
 .signBox-content {
 	width: 600px;
-	height: 600px;
 }
 
 .sign-box {
@@ -143,7 +140,6 @@ footer {
 	font-weight: 600;
 	text-decoration:line-through;
 	letter-spacing: 3px;
-	padding-top: 10px;
 	padding-bottom: 10px;
 }
 
@@ -160,6 +156,59 @@ footer {
 	padding-top: 5px;
 	padding-left: 20px;
 }
+
+.sign-input {
+	width: 350px;
+	height: 40px;
+	border: 2px solid;
+	border-radius: 5px;
+	border-color: #6b4bde;
+	background-color: #333;
+	color: #fff;
+	font-weight: 600;
+	padding-left: 10px;
+	margin-left: 20px;
+}
+
+.sign-input::placeholder {
+	color: #999;
+}
+
+.validation-text {
+	font-size: 12px;
+	margin-top: 5px;
+	margin-left: 20px;
+}
+
+.validation-icon {
+	font-size: 25px;
+}
+
+.sign-btn {
+	width: 350px;
+	height: 40px;
+	border: 0;
+	border-radius: 5px;
+	background-color: #6b4bde;
+	color: #fff;
+	margin-left: 20px;
+}
+
+.sign-link-box {
+	width: 350px;
+	height: 40px;
+	margin-left: 20px;
+}
+
+.sign-link {
+	color: #fff;
+}
+
+.sign-link:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
 
 
 

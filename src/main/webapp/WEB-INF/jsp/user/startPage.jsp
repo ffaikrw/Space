@@ -32,7 +32,7 @@
 						<span>space</span>
 					</div>
 					<div class="header-btn">
-						<a href="#"><button class="signin-btn">로그인</button></a>
+						<a href="/user/sign_in"><button class="signin-btn">로그인</button></a>
 						<a href="/user/sign_up"><button class="signup-btn">회원가입</button></a>
 					</div>
 				</header>
