@@ -88,7 +88,7 @@
 					, success:function(data){
 						
 						if (data.result == "success") {
-							alert("로그인 성공");
+							location.href="/browse/home";
 						} else {
 							alert("입력하신 회원정보를 찾을 수 없습니다.");
 						}

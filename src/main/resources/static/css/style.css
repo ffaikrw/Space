@@ -53,6 +53,11 @@ header {
 	padding-left: 30px;
 }
 
+.header-logo:hover {
+	text-decoration: line-through;
+	color: #6b4bde;
+}
+
 .header-btn {
 	padding-top: 40px;
 	padding-right: 30px;
@@ -207,6 +212,157 @@ footer {
 .sign-link:hover {
 	color: #fff;
 	text-decoration: none;
+}
+
+
+/* home.jsp */
+.content {
+	width: 1000px;
+}
+
+.sidebar {
+	width: 200px;
+	height: 600px;
+	position: sticky;
+	top: 0;
+	border-right: 1px solid;
+	border-bottom: 1px solid;
+	border-color: #6b4bde;
+}
+
+.nav-link {
+	color: #fff;
+}
+
+.nav-icon {
+	font-size: 20px;
+	color: #6b4bde;
+	margin-right: 5px;
+}
+
+.nav-link:hover {
+	color: #fff;
+	background-color: #38324d;
+	text-decoration: none;
+}
+
+.content-header {
+	width: 1000px;
+	height: 70px;
+	background-color: #000;
+	top: 0;
+	padding-left: 30px;
+	padding-right: 30px;
+	position: sticky;
+}
+
+.page-name {
+	font-size: 30px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.profile-link-icon {
+	color: #6b4bde;
+	font-size: 40px;
+}
+
+.profile-link-icon:hover {
+	color: #6b4bde;
+	text-decoration: none;
+}
+
+.content-section {
+	padding-left: 30px;
+	padding-right: 30px;
+}
+
+.modal-content {
+	background-color: #111;
+	border: 1px solid #6b4bde;
+}
+
+.modal-text {
+	height: 46px;
+	font-size: 25px;
+	font-weight: bold;
+	color: #6b4bde;
+	border-bottom: 1px solid #6b4bde;
+	
+}
+
+.modal-link {
+	color: #fff;
+	font-weight: bold;
+}
+
+.modal-link:hover {
+	color: #fff;
+}
+
+.top-box {
+	width: 313px;
+}
+
+.home-subtitle {
+	font-size: 25px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.home-subtitle:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.top-content {
+	width: 300px;
+	height: 200px;
+	margin-top: 10px;
+}
+
+.top10-box {
+	width: 150px;
+	margin-top: 15px;
+}
+
+.top10-bookImg {
+	width: 120px;
+	height: 150px;
+	margin-left: 10px;
+}
+
+.top10-bookTitle {
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.wish-bookImg {
+	width: 130px;
+	height: 160px;
+}
+
+.author-box {
+	width: 150px;
+	height: 150px;
+	border: 1px solid #6b4bde;
+	background-color: #111;
+	border-radius: 50%;
+	margin-top: 10px;
+	margin-right: 25px;
+}
+
+.author-name {
+	height: 30px;
+	color: #fff;
+	font-weight: bold;
+	font-size: 20px;
+}
+
+.arrow-icon {
+	font-size: 50px;
+	color: #6b4bde;
 }
 
 
