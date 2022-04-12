@@ -66,176 +66,81 @@
 							</div>
 						</div>
 					</div>
+					
+					<!-- 오늘의 10가지 소설 --> 
 					<div class="content-top10 mt-5">
 						<div><a href="#" class="home-subtitle">오늘의 10가지 소설</a></div>
 						<div class="d-flex">
-							<div class="prev arrow-icon mt-5">
+							<div class="top10-prev arrow-icon mt-5">
 								<i class="bi bi-caret-left-fill"></i>
 							</div>
-							<div class="slide-wrapper">
-								<div class="slides">
+							<div class="top10-slide-wrapper">
+								<div class="top10-slides">
+								<c:forEach var="i" begin="0" end="9" varStatus="status">
 									<div class="top10-box d-flex">
-										<div class="home-subtitle">1</div>
+										<div class="home-subtitle">${ status.count }</div>
 										<div>
 											<div class="top10-bookImg bg-info"></div>
 											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
 										</div>
 									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">2</div>
-										<div>
-											<div class="top10-bookImg bg-warning"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">3</div>
-										<div>
-											<div class="top10-bookImg bg-danger"></div>
-											<div class="top10-bookTitle pl-3 mt-1">아주아주긴책제목12자제한</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">4</div>
-										<div>
-											<div class="top10-bookImg bg-secondary"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">5</div>
-										<div>
-											<div class="top10-bookImg bg-primary"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">6</div>
-										<div>
-											<div class="top10-bookImg bg-dark"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">7</div>
-										<div>
-											<div class="top10-bookImg bg-white"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">8</div>
-										<div>
-											<div class="top10-bookImg bg-success"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">9</div>
-										<div>
-											<div class="top10-bookImg bg-warning"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
-									<div class="top10-box d-flex">
-										<div class="home-subtitle">10</div>
-										<div>
-											<div class="top10-bookImg bg-danger"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
-										</div>
-									</div>
+								</c:forEach>
 								</div>
 							</div>
-							<div class="next arrow-icon mt-5">
+							<div class="top10-next arrow-icon mt-5">
 								<i class="bi bi-caret-right-fill"></i>
 							</div>
 						</div>
 					</div>
+					
+					<!-- 읽어볼까 한 소설 --> 
 					<div class="content-wishlist mt-5">
 						<div><a href="#" class="home-subtitle">읽어볼까 한 소설</a></div>
 						<div class="d-flex mt-2">
-							<div class="mr-3">
-								<div class="wish-bookImg bg-danger"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
+						<c:forEach var="i" begin="0" end="5" varStatus="status">	
 							<div class="mr-3">
 								<div class="wish-bookImg bg-warning"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
+								<div class="top10-bookTitle mt-1">책 제목${ status.count }</div>
 							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-white"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-info"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-dark"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-success"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
+						</c:forEach>
 							<div class="d-flex justify-content-center align-items-center">
 								<a href="#" class="more-text">더보기</a>
 							</div>
 						</div>
 					</div>
+					
+					<!-- 서재 속 작가들 -->
 					<div class="content-author mt-5">
 						<div><a href="#" class="home-subtitle">서재 속 작가들</a></div>
 						<div class="d-flex">
-							<div class="arrow-icon d-flex align-items-center">
+							<div class="author-prev arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-left-fill"></i>
 							</div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
-								<div class="author-name">작가명1</div>
+							<div class="author-slide-wrapper">
+								<div class="author-slides">
+								<c:forEach var="i" begin="0" end="8" varStatus="status">
+									<div OnClick="location.href='#'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
+										<div class="author-name">작가명${ status.count }</div>
+									</div>
+								</c:forEach>
+								</div>
 							</div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
-								<div class="author-name">작가명2</div>
-							</div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
-								<div class="author-name">작가명2</div>
-							</div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
-								<div class="author-name">작가명2</div>
-							</div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
-								<div class="author-name">작가명2</div>
-							</div>
-							<div class="arrow-icon d-flex align-items-center">
+							<div class="author-next arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-right-fill"></i>
 							</div>
 						</div>
 					</div>
+					
+					<!-- 드라마/영화/애니메이션 원작 소설 -->
 					<div class="content-media mt-5">
 						<div><a href="#" class="home-subtitle">드라마/영화/애니메이션 원작 소설</a></div>
 						<div class="d-flex mt-2">
+						<c:forEach var="i" begin="0" end="5" varStatus="status">	
 							<div class="mr-3">
-								<div class="wish-bookImg bg-primary"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
+								<div class="wish-bookImg bg-danger"></div>
+								<div class="top10-bookTitle mt-1">책 제목${ status.count }</div>
 							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-primary"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-primary"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-primary"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-primary"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
-							<div class="mr-3">
-								<div class="wish-bookImg bg-primary"></div>
-								<div class="top10-bookTitle mt-1">책 제목</div>
-							</div>
+						</c:forEach>
 							<div class="d-flex justify-content-center align-items-center">
 								<a href="#" class="more-text">더보기</a>
 							</div>
@@ -276,39 +181,75 @@
 	
 	<script>
 		
-		var slides = document.querySelector('.slides'),
-			slide = document.querySelectorAll('.slides .top10-box'),
-			currentIndex = 0,
-			slideCount = slide.length,
-			slideWidth = 170,
-			slideMargin = 30,
-			prevBtn = document.querySelector('.prev'),
-			nextBtn = document.querySelector('.next');
+		// top10 멀티 슬라이드
+		var top10Slides = document.querySelector('.top10-slides'),
+			top10Slide = document.querySelectorAll('.top10-slides .top10-box'),
+			top10CurrentIndex = 0,
+			top10SlideCount = top10Slide.length,
+			top10SlideWidth = 170,
+			top10SlideMargin = 30,
+			top10PrevBtn = document.querySelector('.top10-prev'),
+			top10NextBtn = document.querySelector('.top10-next');
 		
-			slides.style.width = (slideWidth + slideMargin) * slideCount - slideMargin + 'px';
+			top10Slides.style.width = (top10SlideWidth + top10SlideMargin) * top10SlideCount - top10SlideMargin + 'px';
 			
-			function moveSlide(num) {
-				slides.style.left = -num * (slideWidth + slideMargin) + 'px';
-				currentIndex = num;
+			function top10MoveSlide(top10Num) {
+				top10Slides.style.left = -top10Num * (top10SlideWidth + top10SlideMargin) + 'px';
+				top10CurrentIndex = top10Num;
 			}
 			
-			nextBtn.addEventListener('click', function(){
-				if (currentIndex < (slideCount - 5)) {
-					moveSlide(currentIndex + 1);
+			top10NextBtn.addEventListener('click', function(){
+				if (top10CurrentIndex < (top10SlideCount - 5)) {
+					top10MoveSlide(top10CurrentIndex + 1);
 				} else {
-					moveSlide(0);
+					top10MoveSlide(0);
 				}
 			});
 			
-			prevBtn.addEventListener('click', function(){
-				if (currentIndex > 0) {
-					moveSlide(currentIndex - 1);
+			top10PrevBtn.addEventListener('click', function(){
+				if (top10CurrentIndex > 0) {
+					top10MoveSlide(top10CurrentIndex - 1);
 				} else {
-					moveSlide(slideCount - 5);
+					top10MoveSlide(top10SlideCount - 5);
 				}
 			});
 			
 			
+		// 서재 속 작가들 멀티 슬라이드
+		var authorSlides = document.querySelector('.author-slides'),
+			authorSlide = document.querySelectorAll('.author-slides .author-box'),
+			authorCurrentIndex = 0,
+			authorSlideCount = authorSlide.length,
+			authorSlideWidth = 170,
+			authorSlideMargin = 15,
+			authorPrevBtn = document.querySelector('.author-prev'),
+			authorNextBtn = document.querySelector('.author-next');
+		
+			authorSlides.style.width = (authorSlideWidth + authorSlideMargin) * authorSlideCount - authorSlideMargin + 'px';
+			
+			function authorMoveSlide(num) {
+				authorSlides.style.left = -num * (authorSlideWidth + authorSlideMargin) + 'px';
+				authorCurrentIndex = num;
+			}
+			
+			authorNextBtn.addEventListener('click', function(){
+				if (authorCurrentIndex < (authorSlideCount - 4)) {
+					authorMoveSlide(authorCurrentIndex + 1);
+				} else {
+					authorMoveSlide(0);
+				}
+			});
+			
+			authorPrevBtn.addEventListener('click', function(){
+				if (authorCurrentIndex > 0) {
+					authorMoveSlide(authorCurrentIndex - 1);
+				} else {
+					authorMoveSlide(authorSlideCount - 4);
+				}
+			});
+			
+		
+		
 			
 		
 			

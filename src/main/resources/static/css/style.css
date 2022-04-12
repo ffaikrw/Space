@@ -399,7 +399,7 @@ footer {
 	color: #6b4bde;
 }
 
-.slide-wrapper {
+.top10-slide-wrapper {
 	position: relative;
 	width: 800px;
 	height: 250px;
@@ -407,18 +407,76 @@ footer {
 	overflow: hidden;
 }
 
-.slides {
+.top10-slides {
 	position: absolute;
 	left: 0;
 	top: 0;
 	transition: left 0.5s ease-out;
 }
 
-.slides .top10-box:not(:last-child) {
+.top10-slides .top10-box:not(:last-child) {
 	float: left;
 	margin-right: 30px;
 }
 
+.author-slide-wrapper {
+	position: relative;
+	width: 800px;
+	height: 180px;
+	margin: 0 auto;
+	overflow: hidden;
+}
+
+.author-slides {
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: left 0.5s ease-out;
+}
+
+.author-slides .author-box:not(:last-child) {
+	float: left;
+	margin-right: 15px;
+}
+
+
+.book-box {
+	width: 150px;
+	height: 250px;
+}
+
+.book-img-box {
+	width: 150px;
+	height: 134px;
+}
+
+.book-img {
+	width: 110px;
+	height: 134px;
+}
+
+.book-title {
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.book-author {
+	color: #fff;
+	font-size: 12px;
+	font-weight: bold;
+}
+
+.recommend-icon {
+	color: #6b4bde;
+	font-size: 12px;
+}
+
+.book-recommend {
+	color: #6b4bde;
+	font-size: 12px;
+	margin-top: 6px;
+}
 
 
 
