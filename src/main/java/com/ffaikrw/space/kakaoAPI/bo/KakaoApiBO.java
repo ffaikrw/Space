@@ -11,19 +11,28 @@ import com.ffaikrw.space.kakaoAPI.model.KakaoResponse;
 @Service
 public class KakaoApiBO {
 	
-	RestTemplate restTemplate = new RestTemplate();
 	
 	private final String key = "5170fc7c6355db5c1438e9b2e64d78bb";
-	private final String kakaoApiUrl = "https://dapi.kakao.com/v3/search/book?query=히가시노게이고&target=author";
+	private final String kakaoApiUrl = "https://dapi.kakao.com/v3/search/book?query={author}&target={target}&size={size}";
 	
-	public KakaoResponse getAuthor() {
+	public KakaoResponse getAuthor(String author, String target, int size) {
+		
+		RestTemplate restTemplate = new RestTemplate();
 		
 		HttpHeaders header = new HttpHeaders();
-		header.set("key", key);
+		header.set("Authorization", "KakaoAK " + key);
 		
 		HttpEntity<String> entity = new HttpEntity<>(header);
 		
-		return restTemplate.exchange(kakaoApiUrl, HttpMethod.GET, entity, KakaoResponse.class).getBody();
+		return restTemplate.exchange(
+				kakaoApiUrl
+				, HttpMethod.GET
+				, entity
+				, KakaoResponse.class
+				, author
+				, target
+				, size
+				).getBody();
 		
 		
 	}

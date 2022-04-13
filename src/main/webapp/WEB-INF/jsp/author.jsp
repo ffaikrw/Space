@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -32,7 +33,7 @@
 			
 			<div class="content">
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">'저자명' 작가의 소설</div>
+					<div class="page-name">'작가명' 작가의 소설</div>
 					<div class="result font-weight-bold text-white"></div>
 					
 					<div class="profile-icon">
@@ -50,12 +51,31 @@
 				</div>
 				
 				<div class="content-section d-flex flex-wrap">
-					<div class="book-box bg-dark mt-3">
-						<div class="book-img-box d-flex justify-content-center">
-							<div class="book-img"></div>
+				<c:forEach var="authorInfo" items="${ author.authorInfo.documents }">
+					<div class="book-box mt-3">
+						<div class="book-img-box d-flex">
+						<c:choose>
+							<c:when test="${ authorInfo.thumbnail ne null && authorInfo.thumbnail ne '' }">
+								<img src="${ authorInfo.thumbnail }">
+							</c:when>
+							<c:otherwise>
+								<div class="thumbnail-box d-flex justify-content-center align-items-center">
+									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+								</div>
+							</c:otherwise>
+						</c:choose>
 						</div>
-						<div class="book-title text-center"></div>
-						<div class="book-author text-center"></div>
+						<div class="book-title text-center">
+							${ fn:substring(authorInfo.title, 0, 13 ) }
+							<c:if test="${fn:length(authorInfo.title) > 12}">
+							...
+							</c:if>
+						</div>
+						<div class="book-author text-center">
+						<c:forEach var="author" items="${ authorInfo.authors }">
+							${ author }
+						</c:forEach>
+						</div>
 						<div class="d-flex justify-content-center">
 							<div class="">
 								<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
@@ -63,9 +83,11 @@
 							<div class="book-recommend ml-1">441</div>
 						</div>
 					</div>
+				</c:forEach>
 					
 				</div>
-					
+				
+				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	
 					
 			</div>
 		</div>	
@@ -90,30 +112,6 @@
 		</div>
 	</div>
 	
-	
-	<script>
-	
-		$(document).ready(function(){
-			
-			$.ajax({
-				method: "get"
-				, url: "/author_booklist"
-				, dataType: "json"
-				, contentType:'application/json; charset=utf-8'
-				, success:function(data){
-					
-					alert(JSON.stringify(data));
-					
-				}
-				, error:function(){
-					alert("api 연결 통신 에러");
-				}
-			});
-			
-			
-		});
-	
-	</script>
 	
 </body>
 </html>
