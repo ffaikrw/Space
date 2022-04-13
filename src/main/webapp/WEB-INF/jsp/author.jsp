@@ -95,26 +95,14 @@
 	
 		$(document).ready(function(){
 			
-			var author = "히가시노 게이고";
-			
 			$.ajax({
 				method: "get"
-				, url: "https://dapi.kakao.com/v3/search/book?target=person"
-				, data: {query:author}
-				, headers: {Authorization: "KakaoAK 5170fc7c6355db5c1438e9b2e64d78bb"}
+				, url: "/author_booklist"
+				, dataType: "json"
+				, contentType:'application/json; charset=utf-8'
 				, success:function(data){
 					
-						$(".result").append(data.documents.length);
-					
-					for(var i = 0; i < 2; i++) {
-						
-						
-						$(".book-img").append("<img src='" + data.documents[i].thumbnail + "' />");
-						$(".book-title").append(data.documents[i].title + "<br>");
-						$(".book-author").append(data.documents[i].authors + "<br>");
-						
-					}
-					
+					alert(JSON.stringify(data));
 					
 				}
 				, error:function(){
