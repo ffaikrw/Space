@@ -33,7 +33,7 @@
 			
 			<div class="content">
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">'작가명' 작가의 소설</div>
+					<div class="page-name">'<%= request.getParameter("author") %>' 작가의 소설</div>
 					<div class="result font-weight-bold text-white"></div>
 					
 					<div class="profile-icon">
@@ -52,7 +52,7 @@
 				
 				<div class="content-section d-flex flex-wrap">
 				<c:forEach var="authorInfo" items="${ author.authorInfo.documents }">
-					<div class="book-box mt-3">
+					<div class="book-box">
 						<div class="book-img-box d-flex">
 						<c:choose>
 							<c:when test="${ authorInfo.thumbnail ne null && authorInfo.thumbnail ne '' }">
@@ -72,9 +72,16 @@
 							</c:if>
 						</div>
 						<div class="book-author text-center">
-						<c:forEach var="author" items="${ authorInfo.authors }">
-							${ author }
-						</c:forEach>
+						<c:choose>
+							<c:when test="${ fn:length(authorInfo.authors) < 3 } ">
+								<c:forEach var="author" items="${ authorInfo.authors }">
+									${ author }
+								</c:forEach>
+							</c:when>
+							<c:otherwise>
+								${ authorInfo.authors[0] }, ${ authorInfo.authors[1] }, ${ authorInfo.authors[2] } ...
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="d-flex justify-content-center">
 							<div class="">
