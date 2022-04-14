@@ -11,6 +11,8 @@ public class AladinItem {
 	private String isbn;
 	private String isbn13;
 	private String cover;
+	private int categoryId;
+	private String categoryName;
 	private String publisher;
 	private boolean adult;
 	private String bestDuration;
@@ -38,6 +40,9 @@ public class AladinItem {
 	}
 	public String getCover() {
 		return cover;
+	}
+	public String getCategoryName() {
+		return categoryName;
 	}
 	public String getPublisher() {
 		return publisher;
@@ -75,6 +80,9 @@ public class AladinItem {
 	public void setCover(String cover) {
 		this.cover = cover;
 	}
+	public void setCategoryName(String categoryName) {
+		this.categoryName = categoryName;
+	}
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
@@ -90,5 +98,13 @@ public class AladinItem {
 	public void setSeriesInfo(AladinSeriesInfo seriesInfo) {
 		this.seriesInfo = seriesInfo;
 	}
+	public int getCategoryId() {
+		return categoryId;
+	}
+	public void setCategoryId(int categoryId) {
+		this.categoryId = categoryId;
+	}
+	
+	
 		
 }

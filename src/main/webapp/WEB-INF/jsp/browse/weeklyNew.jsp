@@ -55,20 +55,34 @@
 					<div class="weeklyNew-box">
 						<div class="d-flex">
 							<div class="weeklyNew-img-box d-flex">
-								<div class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
-									<img src="${ weeklyNew.cover }">
-									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+								<div class="d-flex justify-content-center align-items-center">
+								<c:choose>
+									<c:when test="${ weeklyNew.cover ne null && weeklyNew.cover ne '' }">
+										<img src="${ weeklyNew.cover }">
+									</c:when>
+									<c:otherwise>
+										<div class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
+											<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+										</div>
+									</c:otherwise>
+								</c:choose>
 								</div>
 							</div>
 							<div>
 								<div class="weeklyNew-title">
-									${ weeklyNew.author }
+									${ weeklyNew.title }
 								</div>
 								<div class="weeklyNew-author">
-									저자명
+									${ weeklyNew.author }
 								</div>
 								<div class="weeklyNew-description">
 									${ weeklyNew.description }
+								</div>
+								<div class="weeklyNew-description">
+									isbn: ${ weeklyNew.isbn13 }
+								</div>
+								<div class="weeklyNew-description">
+									${ weeklyNew.categoryId } ${ weeklyNew.categoryName }
 								</div>
 							</div>
 						</div>	
@@ -79,7 +93,7 @@
 				</c:forEach>	
 				</div>
 				
-				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	
+				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
 					
 			</div>
 		</div>	

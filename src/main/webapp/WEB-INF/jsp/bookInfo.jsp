@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>서재 속 작가들</title>
+<title>도서 상세 정보</title>
 
 	<!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -27,15 +27,15 @@
 <body>
 	
 	<div id="wrap">
-	
+		
 		<div class="contents d-flex">
 		
 			<c:import url="/WEB-INF/jsp/include/nav.jsp" />
 			
 			<div class="content">
+			
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">'<%= request.getParameter("author") %>' 작가의 저서</div>
-					<div class="result font-weight-bold text-white"></div>
+					<div class="page-name">도서 정보</div>
 					
 					<div class="profile-icon">
 						<c:choose>
@@ -52,60 +52,29 @@
 				</div>
 				
 				<div class="content-section d-flex flex-wrap">
-				<c:forEach var="authorInfo" items="${ author.authorInfo.documents }">
-					<div class="book-box">
-						<div class="book-img-box d-flex">
-						<c:choose>
-							<c:when test="${ authorInfo.thumbnail ne null && authorInfo.thumbnail ne '' }">
-								<a href="#" class="thumbnail-link"><img src="${ authorInfo.thumbnail }"></a>
-							</c:when>
-							<c:otherwise>
-								<div OnClick="location.href='#'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
-									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
-								</div>
-							</c:otherwise>
-						</c:choose>
+				
+					<div class="bookInfo-box d-flex align-items-center">
+						<div class="book-bg d-flex justify-content-center">
+							<div class="bookInfo-img"></div>
 						</div>
-						<div class="book-title text-center">
-							<a href="#" class="title-link">
-							${ fn:substring(authorInfo.title, 0, 13 ) }
-							<c:if test="${fn:length(authorInfo.title) > 12}">
-							...
-							</c:if>
-							</a>
-						</div>
-						<div class="book-author text-center">
-						
-						<fmt:parseNumber value="${ fn:length(authorInfo.authors) }" var="authorLength"></fmt:parseNumber>
-						<c:choose>
-							<c:when test="${ authorLength <= 3 }">
-								<c:forEach var="authorList" items="${ authorInfo.authors }">
-									<a href="/author?author=${ authorList }" class="">${ authorList }</a>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<c:forEach var="authorList" items="${ authorInfo.authors }" end="2">
-									<a href="/author?author=${ authorList }" class="">${ authorList }</a>
-								</c:forEach>
-								등
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="d-flex justify-content-center">
-							<div class="">
-								<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
-							</div>
-							<div class="book-recommend ml-1">441</div>
+						<div class="ml-3">
+							<div class="bookInfo-subject">제목</div>
+							<div class="bookInfo-title">캑터스 The Cactus</div>
+							<div class="bookInfo-subject">저자</div>
+							<div class="bookInfo-author">사라 헤이우드</div>
+							<div class="bookInfo-subject">장르</div>
+							<div class="bookInfo-category">영미소설, 드라마/영화 원작</div>
 						</div>
 					</div>
-				</c:forEach>
-					
+				
+				
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	
-					
+			
 			</div>
-		</div>	
+			
+		</div>
 		
 	</div>
 	
@@ -126,6 +95,7 @@
 		    </div>
 		</div>
 	</div>
+	
 	
 	
 </body>

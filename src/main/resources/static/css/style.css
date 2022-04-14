@@ -457,6 +457,19 @@ footer {
 	background-color: #6b4bde;
 }
 
+.thumbnail-link:hover {
+	text-decoration: none;
+}
+
+.title-link {
+	color: #fff;
+}
+
+.title-link:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
 .thumbnail-icon {
 	font-size: 30px;
 }
@@ -533,5 +546,51 @@ footer {
 	width: 150px;
 	height: 190px;
 	background-color: #6b4bde;
+}
+
+
+/* bookInfo.jsp */
+
+.bookInfo-box {
+	margin-top: 40px;
+}
+
+.book-bg {
+	width: 230px;
+	border: 1px solid #6b4bde;
+	background-color: #312f38;
+}
+
+.bookInfo-img {
+	width: 200px;
+	height: 250px;
+	background-color: #6b4bde;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.bookInfo-subject {
+	color: #888;
+	font-size: 14px;
+}
+
+.bookInfo-title {
+	color: #fff;
+	font-size: 40px;
+	font-weight: bold;
+	margin-bottom: 15px;
+}
+
+.bookInfo-author {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	margin-bottom: 20px;
+}
+
+.bookInfo-category {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
 }
 

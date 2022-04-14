@@ -48,8 +48,8 @@
 				<div class="content-section">
 					<div class="content-top d-flex mt-5">
 						<div class="top-box">
-							<div><a href="#" class="home-subtitle">4월 둘째 주 신작</a></div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="top-content bg-warning">
+							<div><a href="/browse/weekly_new" class="home-subtitle">이번 주 신작</a></div>
+							<div OnClick="location.href='/browse/weekly_new'" style="cursor:pointer;" class="top-content bg-warning">
 							
 							</div>
 						</div>
