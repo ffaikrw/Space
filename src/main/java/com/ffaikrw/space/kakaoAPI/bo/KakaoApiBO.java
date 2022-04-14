@@ -13,9 +13,12 @@ public class KakaoApiBO {
 	
 	
 	private final String key = "5170fc7c6355db5c1438e9b2e64d78bb";
-	private final String kakaoApiUrl = "https://dapi.kakao.com/v3/search/book?query={author}&target={target}&size={size}";
+	private final String kakaoApiUrl = "https://dapi.kakao.com/v3/search/book?query={query}&target={target}&size={size}";
 	
-	public KakaoResponse getAuthor(String author, String target, int size) {
+	
+	
+	// 작가의 저서 리스트
+	public KakaoResponse getAuthor(String query, String target, int size) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -29,11 +32,10 @@ public class KakaoApiBO {
 				, HttpMethod.GET
 				, entity
 				, KakaoResponse.class
-				, author
+				, query
 				, target
 				, size
 				).getBody();
-		
 		
 	}
 	

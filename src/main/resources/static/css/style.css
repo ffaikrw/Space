@@ -455,7 +455,6 @@ footer {
 	width: 130px;
 	height: 170px;
 	background-color: #6b4bde;
-	opacity: 80%;
 }
 
 .thumbnail-icon {
@@ -488,4 +487,51 @@ footer {
 }
 
 
+/* weeklyNew.jsp */
+
+.go-to-wishlist {
+	color: #6b4bde;
+	font-size: 16px;
+	margin-top: 5px;
+	font-weight: bold;
+}
+
+.go-to-wishlist:hover {
+	color: #6b4bde;
+	text-decoration: none;
+}
+
+.weeklyNew-box {
+	width: 800px;
+	margin-top: 40px;
+	margin-left: 10px;
+}
+
+.weeklyNew-title {
+	color: #fff;
+	font-size: 25px;
+}
+
+.weeklyNew-author {
+	color: #fff;
+	font-size: 18px;
+	margin-top: 5px;
+}
+
+.weeklyNew-description {
+	color: #fff;
+	font-size: 16px;
+	margin-top: 15px;
+}
+
+.weeklyNew-img-box {
+	width: 150px;
+	margin-right: 15px;
+}
+
+.weeklyNew-thumbnail-box {
+	width: 150px;
+	height: 190px;
+	background-color: #6b4bde;
+}
 

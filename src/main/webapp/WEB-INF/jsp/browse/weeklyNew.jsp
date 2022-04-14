@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>서재 속 작가들</title>
+<title>이번 주 신작</title>
 
 	<!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -25,7 +25,7 @@
 
 </head>
 <body>
-	
+
 	<div id="wrap">
 	
 		<div class="contents d-flex">
@@ -34,8 +34,7 @@
 			
 			<div class="content">
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">'<%= request.getParameter("author") %>' 작가의 저서</div>
-					<div class="result font-weight-bold text-white"></div>
+					<div class="page-name">이번 주 신작</div>
 					
 					<div class="profile-icon">
 						<c:choose>
@@ -52,51 +51,32 @@
 				</div>
 				
 				<div class="content-section d-flex flex-wrap">
-				<c:forEach var="authorInfo" items="${ author.authorInfo.documents }">
-					<div class="book-box">
-						<div class="book-img-box d-flex">
-						<c:choose>
-							<c:when test="${ authorInfo.thumbnail ne null && authorInfo.thumbnail ne '' }">
-								<img src="${ authorInfo.thumbnail }">
-							</c:when>
-							<c:otherwise>
-								<div class="thumbnail-box d-flex justify-content-center align-items-center">
+				<c:forEach var="weeklyNew" items="${ weeklyNew.weeklyNew.item }">
+					<div class="weeklyNew-box">
+						<div class="d-flex">
+							<div class="weeklyNew-img-box d-flex">
+								<div class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
+									<img src="${ weeklyNew.cover }">
 									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
 								</div>
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="book-title text-center">
-							${ fn:substring(authorInfo.title, 0, 13 ) }
-							<c:if test="${fn:length(authorInfo.title) > 12}">
-							...
-							</c:if>
-						</div>
-						<div class="book-author text-center">
-						<fmt:parseNumber value="${ fn:length(authorInfo.authors) }" var="authorLength"></fmt:parseNumber>
-						<c:choose>
-							<c:when test="${ authorLength <= 3 }">
-								<c:forEach var="authorList" items="${ authorInfo.authors }">
-									${ authorList } 
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<c:forEach var="authorList" items="${ authorInfo.authors }" end="2">
-									${ authorList } 
-								</c:forEach>
-								등
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="d-flex justify-content-center">
-							<div class="">
-								<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
 							</div>
-							<div class="book-recommend ml-1">441</div>
+							<div>
+								<div class="weeklyNew-title">
+									${ weeklyNew.author }
+								</div>
+								<div class="weeklyNew-author">
+									저자명
+								</div>
+								<div class="weeklyNew-description">
+									${ weeklyNew.description }
+								</div>
+							</div>
+						</div>	
+						<div class="d-flex">
+							<a href="#" class="go-to-wishlist">읽어볼까? <i class="bi bi-heart"></i></a>
 						</div>
 					</div>
-				</c:forEach>
-					
+				</c:forEach>	
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	
@@ -124,6 +104,6 @@
 		</div>
 	</div>
 	
-	
+
 </body>
 </html>

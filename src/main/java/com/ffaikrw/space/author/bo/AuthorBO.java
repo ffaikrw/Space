@@ -12,11 +12,11 @@ public class AuthorBO {
 	@Autowired
 	private KakaoApiBO kakaoApiBO;
 	
-	public AuthorInfo getAuthor(String author, String target, int size) {
+	public AuthorInfo getAuthor(String query, String target, int size) {
 		
 		AuthorInfo authorInfo = new AuthorInfo();
 		
-		authorInfo.setAuthorInfo(kakaoApiBO.getAuthor(author, target, size));
+		authorInfo.setAuthorInfo(kakaoApiBO.getAuthor(query, target, size));
 		
 		return authorInfo;
 		

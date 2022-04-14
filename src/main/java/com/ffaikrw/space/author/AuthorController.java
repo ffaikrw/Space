@@ -19,13 +19,13 @@ public class AuthorController {
 	// 작가의 저서 화면
 	@GetMapping("/author")
 	public String authorView(
-			@RequestParam("author") String author,
+			@RequestParam("author") String query,
 			Model model) {
 		
 		String target = "author";
 		int size = 50;
 		
-		AuthorInfo authorInfo = authorBO.getAuthor(author, target, size);
+		AuthorInfo authorInfo = authorBO.getAuthor(query, target, size);
 		model.addAttribute("author", authorInfo);
 		
 		return "author";
