@@ -53,15 +53,15 @@
 				<div class="content-section d-flex flex-wrap">
 				<c:forEach var="weeklyNew" items="${ weeklyNew.weeklyNew.item }">
 					<div class="weeklyNew-box">
-						<div class="d-flex">
+						<div class="d-flex align-items-center">
 							<div class="weeklyNew-img-box d-flex">
 								<div class="d-flex justify-content-center align-items-center">
 								<c:choose>
 									<c:when test="${ weeklyNew.cover ne null && weeklyNew.cover ne '' }">
-										<img src="${ weeklyNew.cover }">
+										<a href="/book_info?isbn13=${ weeklyNew.isbn13 }"><img src="${ weeklyNew.cover }"></a>
 									</c:when>
 									<c:otherwise>
-										<div class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
+										<div OnClick="location.href='/book_info?isbn13=${ weeklyNew.isbn13 }'" style="cursor:pointer;" class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
 											<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
 										</div>
 									</c:otherwise>
@@ -69,8 +69,8 @@
 								</div>
 							</div>
 							<div>
-								<div class="weeklyNew-title">
-									${ weeklyNew.title }
+								<div>
+									<a href="/book_info?isbn13=${ weeklyNew.isbn13 }" class="weeklyNew-title">${ weeklyNew.title }</a>
 								</div>
 								<div class="weeklyNew-author">
 									${ weeklyNew.author }
@@ -78,16 +78,11 @@
 								<div class="weeklyNew-description">
 									${ weeklyNew.description }
 								</div>
-								<div class="weeklyNew-description">
-									isbn: ${ weeklyNew.isbn13 }
-								</div>
-								<div class="weeklyNew-description">
-									${ weeklyNew.categoryId } ${ weeklyNew.categoryName }
-								</div>
 							</div>
 						</div>	
-						<div class="d-flex">
-							<a href="#" class="go-to-wishlist">읽어볼까? <i class="bi bi-heart"></i></a>
+						<div>
+							<a href="#" data-isbn-id="${ weeklyNew.isbn13 }" class="add-wishlist">읽어볼까? <i class="bi bi-heart"></i></a>
+							<a href="#" data-isbn-id="${ weeklyNew.isbn13 }" class="delete-wishlist">읽어볼까에 담겼습니다! <i class="bi bi-heart-fill"></i></a>
 						</div>
 					</div>
 				</c:forEach>	
@@ -117,6 +112,77 @@
 		    </div>
 		</div>
 	</div>
+	
+	
+	<script>
+	
+		$(document).ready(function(){
+			
+			// 읽어볼까에 추가
+			$(".add-wishlist").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/wishlist/addBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("읽어볼까에 담겼습니다!");
+						} else {
+							alert("읽어볼까에 담지 못했습니다:(");
+						}
+						
+					}
+					, error:function(){
+						alert("wishlist 추가 통신 에러");
+					}
+					
+				});
+				
+			});
+				
+			
+			// 읽어볼까에서 삭제
+			$(".delete-wishlist").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/wishlist/deleteBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("읽어볼까에서 삭제되었습니다.");
+						} else {
+							alert("읽어볼까에서 삭제하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("wishlist 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+			
+				
+				
+		});
+	
+	</script>
 	
 
 </body>

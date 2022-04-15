@@ -6,7 +6,7 @@ public class AladinItem {
 	
 	private String title;
 	private String author;
-	private Date pubdate;
+	private Date pubDate;
 	private String description;
 	private String isbn;
 	private String isbn13;
@@ -26,8 +26,8 @@ public class AladinItem {
 	public String getAuthor() {
 		return author;
 	}
-	public Date getPubdate() {
-		return pubdate;
+	public Date getPubDate() {
+		return pubDate;
 	}
 	public String getDescription() {
 		return description;
@@ -65,8 +65,8 @@ public class AladinItem {
 	public void setAuthor(String author) {
 		this.author = author;
 	}
-	public void setPubdate(Date pubdate) {
-		this.pubdate = pubdate;
+	public void setPubDate(Date pubDate) {
+		this.pubDate = pubDate;
 	}
 	public void setDescription(String description) {
 		this.description = description;

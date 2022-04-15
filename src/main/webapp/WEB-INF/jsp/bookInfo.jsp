@@ -51,22 +51,54 @@
 					</div>
 				</div>
 				
-				<div class="content-section d-flex flex-wrap">
+				<div class="content-section">
 				
 					<div class="bookInfo-box d-flex align-items-center">
 						<div class="book-bg d-flex justify-content-center">
-							<div class="bookInfo-img"></div>
+						<c:choose>
+							<c:when test="${ bookInfo.bookInfo.item[0].cover ne null && bookInfo.bookInfo.item[0].cover ne '' }">
+								<img src="${ bookInfo.bookInfo.item[0].cover }">
+							</c:when>
+							<c:otherwise>
+								<div class="bookInfo-img d-flex justify-content-center align-items-center">
+									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+								</div>
+							</c:otherwise>
+						</c:choose>
 						</div>
 						<div class="ml-3">
 							<div class="bookInfo-subject">제목</div>
-							<div class="bookInfo-title">캑터스 The Cactus</div>
+							<div class="bookInfo-title">${ bookInfo.bookInfo.item[0].title }</div>
 							<div class="bookInfo-subject">저자</div>
-							<div class="bookInfo-author">사라 헤이우드</div>
+							<div class="bookInfo-author">${ bookInfo.bookInfo.item[0].author }</div>
 							<div class="bookInfo-subject">장르</div>
-							<div class="bookInfo-category">영미소설, 드라마/영화 원작</div>
+							<div class="bookInfo-category">${ bookInfo.bookInfo.item[0].categoryName }</div>
 						</div>
 					</div>
-				
+					<div class="mt-3">
+						<a href="#" class="bookInfo-wish">읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i> <i class="bookInfo-wish-icon bi bi-heart-fill"></i></a>
+						<a href="#" class="bookInfo-library">내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i></a>
+					</div>
+					
+					<div class="bookInfo-subtitle">한 줄 평</div>
+					<div class="mt-1">
+						<div class="comment-box"></div>
+					</div>
+					<div class="write-comment-box">
+						<input type="text" id="commentInput" placeholder="한 줄 평 작성하기">
+						<button id="commentBtn">작성</button>
+					</div>
+					
+					<div class="bookInfo-subtitle d-flex">책 소개</div>
+					<div class="bookInfo-description">
+						${ bookInfo.bookInfo.item[0].description }
+					</div>
+					
+					<div class="bookInfo-subtitle d-flex">기타 정보</div>
+					<div class="bookInfo-description">
+						<p><b>출판사</b> ${ bookInfo.bookInfo.item[0].publisher }</p>
+						<p><b>출간일</b> <fmt:formatDate value="${ bookInfo.bookInfo.item[0].pubDate }" pattern="yyyy년 M월 d일" /></p>
+					</div>
 				
 				</div>
 				

@@ -1,5 +1,8 @@
 package com.ffaikrw.space.browse;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,13 +29,19 @@ public class BrowseController {
 	
 	// 이번 주 신작 화면
 	@GetMapping("/weekly_new")
-	public String weeklyNew(Model model) {
+	public String weeklyNew(
+			HttpServletRequest request
+			, Model model) {
 		
 		String query = "ItemNewAll";
 		int maxResults = 100;
 		String coverSize = "MidBig";
 		
-		WeeklyNew weeklyNew = browseBO.getWeeklyNew(query, maxResults, coverSize);
+		HttpSession session = request.getSession();
+		
+		int userId = (Integer)session.getAttribute("userId");
+		
+		WeeklyNew weeklyNew = browseBO.getWeeklyNewItems(userId, isbn13, query, maxResults, coverSize);
 		model.addAttribute("weeklyNew", weeklyNew);
 		
 		return "/browse/weeklyNew";
