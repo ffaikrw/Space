@@ -21,20 +21,29 @@ public class BrowseBO {
 	
 	
 	// 이번 주 신간
-	public List<WeeklyNew> getWeeklyNewItems(int userId, String isbn13, String query, int maxResults, String coverSize) {
+	public List<WeeklyNew> getWeeklyNewItems(int userId) {
 		
-		aladinApiBO.getItemNewAll(query, maxResults, coverSize);
+		String query = "ItemNewAll";
+		int maxResults = 100;
+		String coverSize = "MidBig";
 		
 		WeeklyNew weeklyNew = new WeeklyNew();
+		weeklyNew.setWeeklyNewResponse(aladinApiBO.getItemNewAll(query, maxResults, coverSize));
 		
-		weeklyNew.setWeeklyNew(aladinApiBO.getItemNewAll(query, maxResults, coverSize));
+		weeklyNew.setWeeklyNewList(null);
 		
+		List<WeeklyNew> weeklyNewItemList = weeklyNew.getWeeklyNewList();
+		
+		for() {
+			
+		}
+		
+
 		if (userId != null) {
 			
-			boolean userLikeDuplicate = wishBO.wishIdDuplicate(userId, isbn13);
+			boolean wishIdDuplicate = wishBO.wishIdDuplicate(userId, isbn13);
 			
-			postDetail.setUserLikeDuplicate(userLikeDuplicate);
-			
+			weeklyNew.setWishIsDuplicate(wishIdDuplicate);
 		}
 		
 		

@@ -33,15 +33,11 @@ public class BrowseController {
 			HttpServletRequest request
 			, Model model) {
 		
-		String query = "ItemNewAll";
-		int maxResults = 100;
-		String coverSize = "MidBig";
-		
 		HttpSession session = request.getSession();
 		
 		int userId = (Integer)session.getAttribute("userId");
 		
-		WeeklyNew weeklyNew = browseBO.getWeeklyNewItems(userId, isbn13, query, maxResults, coverSize);
+		WeeklyNew weeklyNew = browseBO.getWeeklyNewItems(userId);
 		model.addAttribute("weeklyNew", weeklyNew);
 		
 		return "/browse/weeklyNew";

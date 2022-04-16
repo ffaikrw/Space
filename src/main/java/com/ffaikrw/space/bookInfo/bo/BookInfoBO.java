@@ -17,7 +17,7 @@ public class BookInfoBO {
 		
 		BookInfo bookInfo = new BookInfo();
 		
-		bookInfo.setBookInfo(aladinApiBO.getitemLookUp(isbn13));
+		bookInfo.setBookInfo(aladinApiBO.getItemLookUp(isbn13));
 		
 		return bookInfo;
 	}

@@ -26,7 +26,7 @@ public class AladinApiBO {
 	
 	
 	
-	// 이번 주 신작
+	// 이번 주 신작 리스트
 	public AladinResponse getItemNewAll(String query, int maxResults, String coverSize) {
 		
 		RestTemplate restTemplate = new RestTemplate();
@@ -49,7 +49,7 @@ public class AladinApiBO {
 	
 	
 	// 도서 상세 정보
-	public AladinResponse getitemLookUp(String isbn13) {
+	public AladinResponse getItemLookUp(String isbn13) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
