@@ -54,14 +54,14 @@
 							</div>
 						</div>
 						<div class="top-box">
-							<div><a href="#" class="home-subtitle">베스트셀러</a></div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="top-content bg-success">
+							<div><a href="/browse/bestseller" class="home-subtitle">이번 주 베스트셀러</a></div>
+							<div OnClick="location.href='/browse/bestseller'" style="cursor:pointer;" class="top-content bg-success">
 							
 							</div>
 						</div>
 						<div class="top-box">
-							<div><a href="#" class="home-subtitle">오늘의 추천 소설</a></div>
-							<div OnClick="location.href='#'" style="cursor:pointer;" class="top-content bg-primary">
+							<div><a href="/browse/editor_recommend" class="home-subtitle">편집자 추천 소설</a></div>
+							<div OnClick="location.href='/browse/editor_recommend'" style="cursor:pointer;" class="top-content bg-primary">
 							
 							</div>
 						</div>

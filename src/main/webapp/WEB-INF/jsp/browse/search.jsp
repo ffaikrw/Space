@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서 상세 정보</title>
+<title>도서 검색</title>
 
 	<!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -27,7 +27,7 @@
 <body>
 	
 	<div id="wrap">
-		
+	
 		<div class="contents d-flex">
 		
 			<c:import url="/WEB-INF/jsp/include/nav.jsp" />
@@ -35,8 +35,15 @@
 			<div class="content">
 			
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">도서 정보</div>
-					
+					<div class="d-flex align-items-center">
+						<div class="page-name">검색</div>
+						<form id="searchForm">
+							<input type="text" id="searchInput" class="search-input" placeholder="도서명, 작가명, 출판사명으로 검색">
+							<button type="submit" id="searchBtn" class="search-btn">
+								<i class="bi bi-search"></i>
+							</button>
+						</form>
+					</div>
 					<div class="profile-icon">
 						<c:choose>
 							<c:when test="${ userProfileImg ne null and userProfileImg ne ''}">
@@ -51,68 +58,59 @@
 					</div>
 				</div>
 				
-				<div class="content-section">
+				<!-- 검색창 -->
+				<div>
+					
+				</div>
 				
-					<div class="bookInfo-box d-flex align-items-center">
-						<div class="book-bg d-flex justify-content-center">
-						<c:choose>
-							<c:when test="${ bookInfo.bookInfo.item[0].cover ne null && bookInfo.bookInfo.item[0].cover ne '' }">
-								<img src="${ bookInfo.bookInfo.item[0].cover }">
-							</c:when>
-							<c:otherwise>
-								<div class="bookInfo-img d-flex justify-content-center align-items-center">
-									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
-								</div>
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="ml-3">
-							<div class="bookInfo-subject">제목</div>
-							<div class="bookInfo-title">${ bookInfo.bookInfo.item[0].title }</div>
-							<div class="bookInfo-subject">저자</div>
-							<div class="bookInfo-author">${ bookInfo.bookInfo.item[0].author }</div>
-							<div class="bookInfo-subject">장르</div>
-							<div class="bookInfo-category">
-							<c:set var="genres" value="${ fn:split(bookInfo.bookInfo.item[0].categoryName, '>') }" />
-							<c:forEach var="genre" items="${ genres }" begin="2">
-								${ genre }.
-							</c:forEach>
+				
+				<!-- 주목할만한 신간 리스트 -->
+				<div class="outstanding">주목할만한 신간</div>
+				
+				<div class="outstanding-box d-flex flex-wrap">
+				<c:forEach var="outstanding" items="${ outstandingBook.outstandingBook.item }">
+					<div class="outstanding-book d-flex justify-content-center align-items-center">
+						<div>
+							<div>
+							<c:choose>
+								<c:when test="${ outstanding.cover ne null && outstanding.cover ne '' }">
+									<a href="/book_info?isbn13=${ outstanding.isbn13 }">
+										<img src="${ outstanding.cover }">
+									</a>
+								</c:when>
+								<c:otherwise>
+									<div OnClick="location.href='/book_info?isbn13=${ outstanding.isbn13 }'" style="cursor:pointer;" class="outstanding-thumbnail"></div>
+								</c:otherwise>
+							</c:choose>
+							</div>
+							<div class="outstanding-title">
+								<a href="/book_info?isbn13=${ outstanding.isbn13 }" class="outstanding-title">
+									${ fn:substring(outstanding.title, 0, 12 ) }
+									<c:if test="${fn:length(outstanding.title) > 12}">
+									...
+									</c:if>
+								</a>
+							</div>
+							<div>
+								<a href="/book_info?isbn13=${ outstanding.isbn13 }" class="outstanding-author">
+									${ fn:substring(outstanding.author, 0, 8 ) }
+									<c:if test="${fn:length(outstanding.author) > 8}">
+									...
+									</c:if>
+								</a>
 							</div>
 						</div>
 					</div>
-					<div class="mt-3">
-						<a href="#" class="bookInfo-wish">읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i> <i class="bookInfo-wish-icon bi bi-heart-fill"></i></a>
-						<a href="#" class="bookInfo-library">내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i></a>
-					</div>
-					
-					<div class="bookInfo-subtitle">한 줄 평</div>
-					<div class="mt-1">
-						<div class="comment-box"></div>
-					</div>
-					<div class="write-comment-box">
-						<input type="text" id="commentInput" placeholder="한 줄 평 작성하기">
-						<button id="commentBtn">작성</button>
-					</div>
-					
-					<div class="bookInfo-subtitle d-flex">책 소개</div>
-					<div class="bookInfo-description">
-						${ bookInfo.bookInfo.item[0].description }
-					</div>
-					
-					<div class="bookInfo-subtitle d-flex">기타 정보</div>
-					<div class="bookInfo-description">
-						<p><b>출판사</b> ${ bookInfo.bookInfo.item[0].publisher }</p>
-						<p><b>출간일</b> <fmt:formatDate value="${ bookInfo.bookInfo.item[0].pubDate }" pattern="yyyy년 M월 d일" /></p>
-					</div>
-				
+				</c:forEach>
 				</div>
 				
-				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	
-			
+				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+				
 			</div>
 			
-		</div>
-		
+			
+		</div>	
+	
 	</div>
 	
 	<!-- Modal -->
@@ -133,7 +131,33 @@
 		</div>
 	</div>
 	
+	<script>
 	
+		$(document).ready(function(){
+			
+			
+			// 검색 버튼
+			$("#searchForm").on("submit", function(e){
+				
+				e.preventDefault();
+				
+				let search = $("#searchInput").val().trim();
+				
+				// 유효성 검사
+				if (search == "") {
+					alert("검색어를 입력하세요.");
+					return;
+				}
+				
+				location.href="/browse/search_result?search=" + search;
+				
+			});
+			
+			
+			
+		});
+	
+	</script>
 	
 </body>
 </html>

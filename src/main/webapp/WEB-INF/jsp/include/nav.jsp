@@ -13,7 +13,7 @@
 	    		</a>
 	    	</li>
 	    	<li class="nav-item font-weight-bold">
-	    		<a href="#" class="nav-link">
+	    		<a href="/browse/search" class="nav-link">
 	    			<i class="nav-icon bi bi-search"></i>검색
 	    		</a>
 	    	</li>

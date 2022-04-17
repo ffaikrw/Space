@@ -441,7 +441,7 @@ footer {
 
 
 .book-box {
-	width: 130px;
+	width: 150px;
 	margin-top: 40px;
 	margin-left: 10px;
 	margin-right: 10px;
@@ -452,7 +452,7 @@ footer {
 }
 
 .thumbnail-box {
-	width: 130px;
+	width: 150px;
 	height: 170px;
 	background-color: #6b4bde;
 }
@@ -478,14 +478,19 @@ footer {
 	color: #fff;
 	font-size: 16px;
 	font-weight: bold;
-	width: 130px;
-	margin-top: 10px;
+	width: 150px;
+	margin-top: 15px;
 }
 
 .book-author {
-	color: #fff;
+	color: #999;
 	font-size: 12px;
-	font-weight: bold;
+	margin-top: 5px;
+}
+
+.book-author:hover {
+	color: #999;
+	text-decoration: none;
 }
 
 .recommend-icon {
@@ -496,7 +501,7 @@ footer {
 .book-recommend {
 	color: #6b4bde;
 	font-size: 12px;
-	margin-top: 6px;
+	margin-top: 5px;
 }
 
 
@@ -579,14 +584,14 @@ footer {
 	background-color: #1d1c21;
 	padding-top: 15px;
 	padding-bottom: 15px;
+	padding-left: 15px;
+	padding-right: 15px;
 }
 
 .bookInfo-img {
 	width: 200px;
 	height: 250px;
 	background-color: #6b4bde;
-	margin-top: 15px;
-	margin-bottom: 15px;
 }
 
 .bookInfo-subject {
@@ -694,5 +699,100 @@ footer {
 	color: #fff;
 	font-size: 16px;
 	margin-top: 20px;
+}
+
+
+/* search.jsp */
+
+.search-input {
+	width: 400px;
+	height: 30px;
+	border: 1px solid;
+	border-radius: 3px;
+	border-color: #6b4bde;
+	background-color: #333;
+	color: #fff;
+	font-size: 14px;
+	padding-left: 10px;
+	margin-left: 30px;
+}
+
+.search-input::placeholder {
+	color: #777;
+	font-weight: 500;
+}
+
+.search-btn {
+	color: #6b4bde;
+	border: 0;
+	background-color: #000;
+	font-size: 20px;
+	margin-left: 1px;
+}
+
+.outstanding {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+	margin-left: 30px;
+	margin-top: 40px;
+}
+
+.outstanding-box {
+	width: 900px;
+	margin-top: 30px;
+	margin-left: 15px;
+}
+
+.outstanding-book {
+	width: 90px;
+	margin-left: 10px;
+	margin-right: 10px;
+	margin-bottom: 30px;
+}
+
+.outstanding-thumbnail {
+	width: 85px;
+	height: 100px;
+	background-color: #6b4bde;
+}
+
+.outstanding-title {
+	color: #fff;
+	font-weight: bold;
+	font-size: 14px;
+	margin-top: 10px;
+}
+
+.outstanding-title:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.outstanding-author {
+	color: #999;
+	font-size: 10px;
+}
+
+.outstanding-author:hover {
+	color: #999;
+	text-decoration: none;
+}
+
+.search-result-none {
+	width: 900px;
+	height: 430px;
+	color: #999;
+	font-size: 36px;
+	font-weight: bold;
+	margin-top: 30px;
+	margin-left: 30px;
+}
+
+.bestseller-rank {
+	color: #fff;
+	font-weight: bold;
+	font-size: 30px;
+	margin-bottom: 5px;
 }
 
