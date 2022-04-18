@@ -10,7 +10,6 @@ import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
-import com.ffaikrw.space.browse.model.Search;
 import com.ffaikrw.space.wish.bo.WishBO;
 
 @Service
@@ -65,15 +64,34 @@ public class BrowseBO {
 	
 	
 	// 도서 검색
-	public Search getSearchResult(String search) {
+	public List<BookInfo> getSearchResult(String search, String keyword, String sort) {
 		
-		String sort = "Accuracy";
+		AladinResponse aladinResponse = aladinApiBO.getItemSearch(search, keyword, sort);
+		List<AladinItem> aladinItemList = aladinResponse.getItem();
 		
-		Search searchResult = new Search();
+		List<BookInfo> bookInfoList = new ArrayList<>();
 		
-		searchResult.setSearchResult(aladinApiBO.getItemSearch(search, sort));
+		for (AladinItem aladinItem : aladinItemList) {
+			
+			BookInfo bookInfo = new BookInfo();
+			
+			bookInfo.setTitle(aladinItem.getTitle());
+			bookInfo.setAuthor(aladinItem.getAuthor());
+			bookInfo.setPubDate(aladinItem.getPubDate());
+			bookInfo.setDescription(aladinItem.getDescription());
+			bookInfo.setIsbn13(aladinItem.getIsbn13());
+			bookInfo.setCover(aladinItem.getCover());
+			bookInfo.setCategoryId(aladinItem.getCategoryId());
+			bookInfo.setCategoryName(aladinItem.getCategoryName());
+			bookInfo.setPublisher(aladinItem.getPublisher());
+			bookInfo.setAdult(aladinItem.isAdult());
+			bookInfo.setBestRank(aladinItem.getBestRank());
+			bookInfo.setSeriesInfo(aladinItem.getSeriesInfo());
+			
+			bookInfoList.add(bookInfo);
+		}
 		
-		return searchResult;
+		return bookInfoList;
 	}
 	
 	

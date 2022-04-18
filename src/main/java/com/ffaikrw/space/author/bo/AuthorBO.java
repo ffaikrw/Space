@@ -4,22 +4,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffaikrw.space.author.model.AuthorInfo;
-import com.ffaikrw.space.kakaoAPI.bo.KakaoApiBO;
+import com.ffaikrw.space.browse.bo.BrowseBO;
 
 @Service
 public class AuthorBO {
 	
 	@Autowired
-	private KakaoApiBO kakaoApiBO;
+	private BrowseBO browseBO;
 	
-	public AuthorInfo getAuthor(String query, String target, int size) {
+	
+	public AuthorInfo getAuthorInfo(String search) {
+		
+		String keyword = "Author";
+		String sort = "Accuracy";
 		
 		AuthorInfo authorInfo = new AuthorInfo();
-		
-		authorInfo.setAuthorInfo(kakaoApiBO.getAuthor(query, target, size));
+		authorInfo.setAuthorInfo(browseBO.getSearchResult(search, keyword, sort));
 		
 		return authorInfo;
-		
 	}
 	
 }

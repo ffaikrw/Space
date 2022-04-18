@@ -61,8 +61,8 @@
 				
 				<div class="content-section d-flex flex-wrap">
 				<c:choose>
-					<c:when test="${ !empty search.searchResult.item }">
-						<c:forEach var="searchResult" items="${ search.searchResult.item }">
+					<c:when test="${ !empty search }">
+						<c:forEach var="searchResult" items="${ search }">
 							<div class="book-box d-flex align-items-center">
 							<div>	
 								<div class="book-img-box d-flex">

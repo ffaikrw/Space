@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ffaikrw.space.bookInfo.bo.BookInfoBO;
 
 @Controller
-public class BookInfoController {
+public class BookDetailController {
 	
 	@Autowired
 	private BookInfoBO bookInfoBO;

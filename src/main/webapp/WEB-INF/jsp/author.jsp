@@ -52,12 +52,12 @@
 				</div>
 				
 				<div class="content-section d-flex flex-wrap">
-				<c:forEach var="authorInfo" items="${ author.authorInfo.documents }">
+				<c:forEach var="authorInfo" items="${ author.authorInfo }">
 					<div class="book-box">
 						<div class="book-img-box d-flex">
 						<c:choose>
-							<c:when test="${ authorInfo.thumbnail ne null && authorInfo.thumbnail ne '' }">
-								<a href="#" class="thumbnail-link"><img src="${ authorInfo.thumbnail }"></a>
+							<c:when test="${ authorInfo.cover ne null && authorInfo.cover ne '' }">
+								<a href="#" class="thumbnail-link"><img src="${ authorInfo.cover }"></a>
 							</c:when>
 							<c:otherwise>
 								<div OnClick="location.href='#'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
@@ -66,30 +66,21 @@
 							</c:otherwise>
 						</c:choose>
 						</div>
-						<div class="book-title text-center">
-							<a href="#" class="title-link">
+						<div class="book-title">
+							<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="title-link">
 							${ fn:substring(authorInfo.title, 0, 13 ) }
 							<c:if test="${fn:length(authorInfo.title) > 12}">
 							...
 							</c:if>
 							</a>
 						</div>
-						<div class="book-author text-center">
-						
-						<fmt:parseNumber value="${ fn:length(authorInfo.authors) }" var="authorLength"></fmt:parseNumber>
-						<c:choose>
-							<c:when test="${ authorLength <= 3 }">
-								<c:forEach var="authorList" items="${ authorInfo.authors }">
-									<a href="/author?author=${ authorList }" class="">${ authorList }</a>
-								</c:forEach>
-							</c:when>
-							<c:otherwise>
-								<c:forEach var="authorList" items="${ authorInfo.authors }" end="2">
-									<a href="/author?author=${ authorList }" class="">${ authorList }</a>
-								</c:forEach>
-								등
-							</c:otherwise>
-						</c:choose>
+						<div class="book-author">
+							<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="book-author">
+								${ fn:substring(authorInfo.author, 0, 12 ) }
+								<c:if test="${fn:length(authorInfo.author) > 12}">
+								...
+								</c:if>
+							</a>
 						</div>
 						<div class="d-flex justify-content-center">
 							<div class="">

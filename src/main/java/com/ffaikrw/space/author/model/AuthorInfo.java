@@ -1,18 +1,19 @@
 package com.ffaikrw.space.author.model;
 
-import com.ffaikrw.space.kakaoAPI.model.KakaoResponse;
+import java.util.List;
+
+import com.ffaikrw.space.browse.model.BookInfo;
 
 public class AuthorInfo {
 	
-	private KakaoResponse AuthorInfo;
+	private List<BookInfo> AuthorInfo;
 
-	public KakaoResponse getAuthorInfo() {
+	public List<BookInfo> getAuthorInfo() {
 		return AuthorInfo;
 	}
 
-	public void setAuthorInfo(KakaoResponse authorInfo) {
+	public void setAuthorInfo(List<BookInfo> authorInfo) {
 		AuthorInfo = authorInfo;
 	}
-
-
+	
 }

@@ -23,6 +23,7 @@ public class AladinApiBO {
 	private final String itemSearchUrl = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx"
 			+ "?ttbkey=" + key
 			+ "&Query={search}"
+			+ "&QueryType={keyword}"
 			+ "&SearchTarget=Book"
 			+ "&MaxResults=50"
 			+ "&Start=1"
@@ -89,7 +90,7 @@ public class AladinApiBO {
 	
 	
 	// 도서 검색
-	public AladinResponse getItemSearch(String search, String sort) {
+	public AladinResponse getItemSearch(String search, String keyword, String sort) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -103,6 +104,7 @@ public class AladinApiBO {
 				, entity
 				, AladinResponse.class
 				, search
+				, keyword
 				, sort
 				).getBody();
 	}

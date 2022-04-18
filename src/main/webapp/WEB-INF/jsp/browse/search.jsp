@@ -37,6 +37,7 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="d-flex align-items-center">
 						<div class="page-name">검색</div>
+						<!-- 검색창 -->
 						<form id="searchForm">
 							<input type="text" id="searchInput" class="search-input" placeholder="도서명, 작가명, 출판사명으로 검색">
 							<button type="submit" id="searchBtn" class="search-btn">
@@ -57,12 +58,6 @@
 						</c:choose>
 					</div>
 				</div>
-				
-				<!-- 검색창 -->
-				<div>
-					
-				</div>
-				
 				
 				<!-- 주목할만한 신간 리스트 -->
 				<div class="outstanding">주목할만한 신간</div>
