@@ -1,11 +1,15 @@
 package com.ffaikrw.space.browse.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
-import com.ffaikrw.space.browse.model.Bestseller;
-import com.ffaikrw.space.browse.model.EditorRecommend;
+import com.ffaikrw.space.aladinAPI.model.AladinItem;
+import com.ffaikrw.space.aladinAPI.model.AladinResponse;
+import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.Outstanding;
 import com.ffaikrw.space.browse.model.Search;
 import com.ffaikrw.space.wish.bo.WishBO;
@@ -22,67 +26,41 @@ public class BrowseBO {
 	
 	
 	// 이번 주 신간
-//	public List<WeeklyNew> getWeeklyNewItems(int userId) {
-//		
-//		String itemListType = "ItemNewAll";
-//		String coverSize = "MidBig";
-//		
-//		aladinApiBO.getItemList(itemListType, coverSize);
-//		
-//		List<WeeklyNewItem> weeklyNewItemList = new ArrayList<>();
-//		
-//		for (WeeklyNewItem newItem : weeklyNewItemList) {
-//			
-//			
-//			
-//			
-//		}
-//		
-//		weeklyNew.setWeeklyNewList(null);
-//		
-//		List<WeeklyNew> weeklyNewItemList = weeklyNew.getWeeklyNewList();
-//		
-//		for() {
-//			
-//		}
-//		
-//
-//		if (userId != null) {
-//			
-//			boolean wishIdDuplicate = wishBO.wishIdDuplicate(userId, isbn13);
-//			
-//			weeklyNew.setWishIsDuplicate(wishIdDuplicate);
-//		}
-//		
-//		
-//		return weeklyNew;
-//		
-//	}
-	
-	
-	// 베스트셀러
-	public Bestseller getBestseller() {
+	public List<BookInfo> getBookList(Integer userId, String itemListType, String coverSize) {
 		
-		String itemListType = "Bestseller";
-		String coverSize = "MidBig";
+		AladinResponse aladinResponse = aladinApiBO.getItemList(itemListType, coverSize);
+		List<AladinItem> aladinItemList = aladinResponse.getItem();
 		
-		Bestseller bestseller = new Bestseller();
-		bestseller.setBestseller(aladinApiBO.getItemList(itemListType, coverSize));
+		List<BookInfo> bookInfoList = new ArrayList<>();
 		
-		return bestseller;
-	}
-	
-	
-	// 편집자 추천 도서
-	public EditorRecommend getEditorRecommend() {
-		
-		String itemListType = "ItemEditorChoice";
-		String coverSize = "MidBig";
-		
-		EditorRecommend editorRecommend = new EditorRecommend();
-		editorRecommend.setEditorRecommend(aladinApiBO.getItemList(itemListType, coverSize));
-		
-		return editorRecommend;
+		for (AladinItem aladinItem : aladinItemList) {
+			
+			BookInfo bookInfo = new BookInfo();
+			
+			bookInfo.setTitle(aladinItem.getTitle());
+			bookInfo.setAuthor(aladinItem.getAuthor());
+			bookInfo.setPubDate(aladinItem.getPubDate());
+			bookInfo.setDescription(aladinItem.getDescription());
+			bookInfo.setIsbn13(aladinItem.getIsbn13());
+			bookInfo.setCover(aladinItem.getCover());
+			bookInfo.setCategoryId(aladinItem.getCategoryId());
+			bookInfo.setCategoryName(aladinItem.getCategoryName());
+			bookInfo.setPublisher(aladinItem.getPublisher());
+			bookInfo.setAdult(aladinItem.isAdult());
+			bookInfo.setBestRank(aladinItem.getBestRank());
+			bookInfo.setSeriesInfo(aladinItem.getSeriesInfo());
+			
+			if (userId != null) {
+				
+				boolean wishIdDuplicate = wishBO.wishIdDuplicate(userId, aladinItem.getIsbn13());
+				
+				bookInfo.setWishIsDuplicate(wishIdDuplicate);
+			}
+			
+			bookInfoList.add(bookInfo);
+		}
+
+		return bookInfoList;
 	}
 	
 	

@@ -1,5 +1,10 @@
 package com.ffaikrw.space.browse;
 
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ffaikrw.space.browse.bo.BrowseBO;
 import com.ffaikrw.space.browse.model.Bestseller;
+import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.EditorRecommend;
 import com.ffaikrw.space.browse.model.Outstanding;
 import com.ffaikrw.space.browse.model.Search;
@@ -29,28 +35,41 @@ public class BrowseController {
 	
 	
 	// 이번 주 신작 화면
-//	@GetMapping("/weekly_new")
-//	public String weeklyNew(
-//			HttpServletRequest request
-//			, Model model) {
-//		
-//		HttpSession session = request.getSession();
-//		
-//		int userId = (Integer)session.getAttribute("userId");
-//		
-//		WeeklyNew weeklyNew = browseBO.getWeeklyNewItems(userId);
-//		model.addAttribute("weeklyNew", weeklyNew);
-//		
-//		return "/browse/weeklyNew";
-//	}
+	@GetMapping("/weekly_new")
+	public String weeklyNew(
+			HttpServletRequest request
+			, Model model) {
+		
+		HttpSession session = request.getSession();
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		String itemListType = "ItemNewAll";
+		String coverSize = "MidBig";
+		
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, coverSize);
+		model.addAttribute("weeklyNew", bookInfoList);
+		
+		return "/browse/weeklyNew";
+	}
 	
 	
 	// 베스트셀러 화면
 	@GetMapping("/bestseller")
-	public String bestsellerView(Model model) {
+	public String bestsellerView(
+			HttpServletRequest request
+			, Model model
+			) {
 		
-		Bestseller bestsellerList = browseBO.getBestseller();
-		model.addAttribute("bestsellerList", bestsellerList);
+		HttpSession session = request.getSession();
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		String itemListType = "Bestseller";
+		String coverSize = "MidBig";
+		
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, coverSize);
+		model.addAttribute("bestseller", bookInfoList);
 		
 		return "/browse/bestseller";
 	}
@@ -58,10 +77,19 @@ public class BrowseController {
 	
 	// 편집자 추천 소설 화면
 	@GetMapping("/editor_recommend")
-	public String editorRecommendView(Model model) {
+	public String editorRecommendView(
+			HttpServletRequest request
+			, Model model) {
 		
-		EditorRecommend editorRecommendList = browseBO.getEditorRecommend();
-		model.addAttribute("editorRecommendList", editorRecommendList);
+		HttpSession session = request.getSession();
+		
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		String itemListType = "ItemEditorChoice";
+		String coverSize = "MidBig";
+		
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, coverSize);
+		model.addAttribute("editorRecommend", bookInfoList);
 		
 		return "/browse/editorRecommend";
 	}

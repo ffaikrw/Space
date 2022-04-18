@@ -67,6 +67,7 @@ public class AladinApiBO {
 	}
 	
 	
+	
 	// 도서 상세 정보
 	public AladinResponse getItemLookUp(String isbn13) {
 		

@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
-import com.ffaikrw.space.bookInfo.model.BookInfo;
 
 @Service
 public class BookInfoBO {
@@ -13,13 +12,13 @@ public class BookInfoBO {
 	private AladinApiBO aladinApiBO;
 	
 	
-	public BookInfo getBookInfo(String isbn13) {
-		
-		BookInfo bookInfo = new BookInfo();
-		
-		bookInfo.setBookInfo(aladinApiBO.getItemLookUp(isbn13));
-		
-		return bookInfo;
-	}
+//	public BookInfo getBookInfo(String isbn13) {
+//		
+//		BookInfo bookInfo = new BookInfo();
+//		
+//		bookInfo.setBookInfo(aladinApiBO.getItemLookUp(isbn13));
+//		
+//		return bookInfo;
+//	}
 	
 }

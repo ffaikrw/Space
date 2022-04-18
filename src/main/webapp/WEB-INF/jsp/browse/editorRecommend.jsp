@@ -51,7 +51,7 @@
 				</div>
 				
 				<div class="content-section d-flex flex-wrap">
-				<c:forEach var="editorRecommend" items="${ editorRecommendList.editorRecommend.item }">
+				<c:forEach var="editorRecommend" items="${ editorRecommend }">
 					<div class="weeklyNew-box">
 						<div class="d-flex align-items-center">
 							<div class="weeklyNew-img-box d-flex">
@@ -82,9 +82,15 @@
 								</div>
 							</div>
 						</div>
-						<div>
-							<a href="#" data-isbn-id="${ editorRecommend.isbn13 }" class="add-wishlist">읽어볼까? <i class="bi bi-heart"></i></a>
-							<a href="#" data-isbn-id="${ editorRecommend.isbn13 }" class="delete-wishlist">읽어볼까에 담겼습니다! <i class="bi bi-heart-fill"></i></a>
+						<div class="mt-1">
+						<c:choose>
+							<c:when test="${ editorRecommend.wishIsDuplicate }">
+								<a href="#" data-isbn-id="${ editorRecommend.isbn13 }" class="delete-wishlist">읽어볼까에 담겼습니다! <i class="bi bi-heart-fill"></i></a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" data-isbn-id="${ editorRecommend.isbn13 }" class="add-wishlist">읽어볼까? <i class="bi bi-heart"></i></a>
+							</c:otherwise>
+						</c:choose>	
 						</div>
 					</div>
 				</c:forEach>	
@@ -114,7 +120,76 @@
 		    </div>
 		</div>
 	</div>
+
+
+	<script>
 	
+		$(document).ready(function(){
+			
+			// 읽어볼까에 추가
+			$(".add-wishlist").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/wishlist/addBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							location.reload();
+						} else {
+							alert("읽어볼까에 담지 못했습니다:(");
+						}
+						
+					}
+					, error:function(){
+						alert("wishlist 추가 통신 에러");
+					}
+					
+				});
+				
+			});
+				
+			
+			// 읽어볼까에서 삭제
+			$(".delete-wishlist").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/wishlist/deleteBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							location.reload();
+						} else {
+							alert("읽어볼까에서 삭제하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("wishlist 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+		});
+	
+	</script>
+	
+		
 	
 </body>
 </html>
