@@ -17,7 +17,7 @@ public class AladinApiBO {
 			+ "?ttbkey=" + key
 			+ "&itemIdType=ISBN13"
 			+ "&ItemId={isbn13}"
-			+ "&Cover=big"
+			+ "&Cover={coverSize}"
 			+ "&output=js&Version=20131101";
 	
 	private final String itemSearchUrl = "http://www.aladin.co.kr/ttb/api/ItemSearch.aspx"
@@ -70,7 +70,7 @@ public class AladinApiBO {
 	
 	
 	// 도서 상세 정보
-	public AladinResponse getItemLookUp(String isbn13) {
+	public AladinResponse getItemLookUp(String isbn13, String coverSize) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -84,6 +84,7 @@ public class AladinApiBO {
 				, entity
 				, AladinResponse.class
 				, isbn13
+				, coverSize
 				).getBody();
 	}
 	

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>도서 상세 정보</title>
+<title>읽어볼까?</title>
 
 	<!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -27,15 +27,14 @@
 <body>
 	
 	<div id="wrap">
-		
+	
 		<div class="contents d-flex">
 		
 			<c:import url="/WEB-INF/jsp/include/nav.jsp" />
 			
 			<div class="content">
-			
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">도서 정보</div>
+					<div class="page-name">읽어볼까?</div>
 					
 					<div class="profile-icon">
 						<c:choose>
@@ -51,68 +50,57 @@
 					</div>
 				</div>
 				
-				<div class="content-section">
-				
-					<div class="bookInfo-box d-flex align-items-center">
-						<div class="book-bg d-flex justify-content-center">
-						<c:choose>
-							<c:when test="${ bookInfo.bookInfo.item[0].cover ne null && bookInfo.bookInfo.item[0].cover ne '' }">
-								<img src="${ bookInfo.bookInfo.item[0].cover }">
-							</c:when>
-							<c:otherwise>
-								<div class="bookInfo-img d-flex justify-content-center align-items-center">
-									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+				<div class="content-section d-flex flex-wrap">
+				<c:forEach var="wishlist" items="${ wishlist }">
+					<div class="d-flex align-items-center">
+						<div class="book-box">
+							<div class="book-img-box d-flex">
+							<c:choose>
+								<c:when test="${ wishlist.cover ne null && wishlist.cover ne '' }">
+									<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="thumbnail-link">
+										<img src="${ wishlist.cover }">
+									</a>
+								</c:when>
+								<c:otherwise>
+									<div OnClick="location.href='/book_info?isbn13=${ wishlist.isbn13 }'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
+										<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							</div>
+							<div class="book-title">
+								<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="title-link">
+								${ fn:substring(wishlist.title, 0, 13 ) }
+								<c:if test="${fn:length(wishlist.title) > 13}">
+								...
+								</c:if>
+								</a>
+							</div>
+							<div class="book-author">
+								<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="book-author">
+									${ fn:substring(wishlist.author, 0, 12 ) }
+									<c:if test="${fn:length(wishlist.author) > 12}">
+									...
+									</c:if>
+								</a>
+							</div>
+							<div class="d-flex">
+								<div>
+									<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
 								</div>
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="ml-3">
-							<div class="bookInfo-subject">제목</div>
-							<div class="bookInfo-title">${ bookInfo.bookInfo.item[0].title }</div>
-							<div class="bookInfo-subject">저자</div>
-							<div class="bookInfo-author">${ bookInfo.bookInfo.item[0].author }</div>
-							<div class="bookInfo-subject">장르</div>
-							<div class="bookInfo-category">
-							<c:set var="genres" value="${ fn:split(bookInfo.bookInfo.item[0].categoryName, '>') }" />
-							<c:forEach var="genre" items="${ genres }" begin="2">
-								${ genre }.
-							</c:forEach>
+								<div class="book-recommend ml-1">441</div>
 							</div>
 						</div>
 					</div>
-					<div class="mt-3">
-						<a href="#" class="bookInfo-wish">읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i> <i class="bookInfo-wish-icon bi bi-heart-fill"></i></a>
-						<a href="#" class="bookInfo-library">내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i></a>
-					</div>
+				</c:forEach>
 					
-					<div class="bookInfo-subtitle">한 줄 평</div>
-					<div class="mt-1">
-						<div class="comment-box"></div>
-					</div>
-					<div class="write-comment-box">
-						<input type="text" id="commentInput" placeholder="한 줄 평 작성하기">
-						<button id="commentBtn">작성</button>
-					</div>
-					
-					<div class="bookInfo-subtitle d-flex">책 소개</div>
-					<div class="bookInfo-description">
-						${ bookInfo.bookInfo.item[0].description }
-					</div>
-					
-					<div class="bookInfo-subtitle d-flex">기타 정보</div>
-					<div class="bookInfo-description">
-						<p><b>출판사</b> ${ bookInfo.bookInfo.item[0].publisher }</p>
-						<p><b>출간일</b> <fmt:formatDate value="${ bookInfo.bookInfo.item[0].pubDate }" pattern="yyyy년 M월 d일" /></p>
-					</div>
-				
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	
-			
+					
 			</div>
-			
 		</div>
-		
+	
 	</div>
 	
 	<!-- Modal -->
@@ -132,8 +120,6 @@
 		    </div>
 		</div>
 	</div>
-	
-	
 	
 </body>
 </html>

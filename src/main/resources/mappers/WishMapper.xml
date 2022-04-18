@@ -44,5 +44,19 @@
 			and `isbn` = #{isbn}
 	
 	</select>
+	
+	<select id="selectWishlist" parameterType="int" resultType="com.ffaikrw.space.wish.model.Wish">
+		
+		select
+			`id`
+			, `userId`
+			, `isbn`
+			, `createdAt`
+		from
+			`wish`
+		where
+			`userId` = #{userId}
+		
+	</select>
 
 </mapper>

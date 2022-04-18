@@ -9,6 +9,7 @@ import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
+import com.ffaikrw.space.wish.bo.WishBO;
 
 @Service
 public class BookDetailBO {
@@ -16,26 +17,38 @@ public class BookDetailBO {
 	@Autowired
 	private AladinApiBO aladinApiBO;
 	
+	@Autowired
+	private WishBO wishBO;
 	
-	public BookInfo getBookInfo(String isbn13) {
+	
+	public BookInfo getBookDetail(Integer userId, String isbn13) {
 		
-		AladinResponse aladinResponse = aladinApiBO.getItemLookUp(isbn13);
+		String coverSize = "big";
+		
+		AladinResponse aladinResponse = aladinApiBO.getItemLookUp(isbn13, coverSize);
 		List<AladinItem> aladinItem = aladinResponse.getItem();
 		
 		BookInfo bookInfo = new BookInfo();
 		
-		bookInfo.setTitle(aladinItem.getTitle());
-		bookInfo.setAuthor(aladinItem.getAuthor());
-		bookInfo.setPubDate(aladinItem.getPubDate());
-		bookInfo.setDescription(aladinItem.getDescription());
-		bookInfo.setIsbn13(aladinItem.getIsbn13());
-		bookInfo.setCover(aladinItem.getCover());
-		bookInfo.setCategoryId(aladinItem.getCategoryId());
-		bookInfo.setCategoryName(aladinItem.getCategoryName());
-		bookInfo.setPublisher(aladinItem.getPublisher());
-		bookInfo.setAdult(aladinItem.isAdult());
-		bookInfo.setBestRank(aladinItem.getBestRank());
-		bookInfo.setSeriesInfo(aladinItem.getSeriesInfo());
+		bookInfo.setTitle(aladinItem.get(0).getTitle());
+		bookInfo.setAuthor(aladinItem.get(0).getAuthor());
+		bookInfo.setPubDate(aladinItem.get(0).getPubDate());
+		bookInfo.setDescription(aladinItem.get(0).getDescription());
+		bookInfo.setIsbn13(aladinItem.get(0).getIsbn13());
+		bookInfo.setCover(aladinItem.get(0).getCover());
+		bookInfo.setCategoryId(aladinItem.get(0).getCategoryId());
+		bookInfo.setCategoryName(aladinItem.get(0).getCategoryName());
+		bookInfo.setPublisher(aladinItem.get(0).getPublisher());
+		bookInfo.setAdult(aladinItem.get(0).isAdult());
+		bookInfo.setBestRank(aladinItem.get(0).getBestRank());
+		bookInfo.setSeriesInfo(aladinItem.get(0).getSeriesInfo());
+		
+		if (userId != null) {
+			
+			boolean wishIdDuplicate = wishBO.wishIdDuplicate(userId, aladinItem.get(0).getIsbn13());
+			
+			bookInfo.setWishIsDuplicate(wishIdDuplicate);
+		}
 		
 		return bookInfo;
 	}

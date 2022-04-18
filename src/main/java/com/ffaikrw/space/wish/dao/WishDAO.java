@@ -1,7 +1,11 @@
 package com.ffaikrw.space.wish.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
+import com.ffaikrw.space.wish.model.Wish;
 
 @Repository
 public interface WishDAO {
@@ -26,5 +30,8 @@ public interface WishDAO {
 			, @Param("isbn") String isbn13
 			);
 	
+	
+	// 모든 읽어볼까 리스트 가져오기
+	public List<Wish> selectWishlist(@Param("userId") int userId);
 	
 }

@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>이번 주 베스트셀러</title>
+<title>도서 상세 정보</title>
 
 	<!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
@@ -27,14 +27,15 @@
 <body>
 	
 	<div id="wrap">
-	
+		
 		<div class="contents d-flex">
 		
 			<c:import url="/WEB-INF/jsp/include/nav.jsp" />
 			
 			<div class="content">
+			
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">이번 주 베스트셀러</div>
+					<div class="page-name">도서 정보</div>
 					
 					<div class="profile-icon">
 						<c:choose>
@@ -50,57 +51,74 @@
 					</div>
 				</div>
 				
-				<div class="content-section d-flex flex-wrap">
-				<c:forEach var="bestseller" items="${ bestseller }" varStatus="status">
-					<div class="weeklyNew-box">
-						<div class="bestseller-rank">${ status.count }</div>
-						<div class="d-flex align-items-center">
-							<div class="weeklyNew-img-box d-flex">
-								<div class="d-flex justify-content-center align-items-center">
-								<c:choose>
-									<c:when test="${ bestseller.cover ne null && bestseller.cover ne '' }">
-										<a href="/book_info?isbn13=${ bestseller.isbn13 }"><img src="${ bestseller.cover }"></a>
-									</c:when>
-									<c:otherwise>
-										<div OnClick="location.href='/book_info?isbn13=${ bestseller.isbn13 }'" style="cursor:pointer;" class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
-											<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
-										</div>
-									</c:otherwise>
-								</c:choose>
-								</div>
-							</div>
-							<div>
-								<div>
-									<a href="/book_info?isbn13=${ bestseller.isbn13 }" class="weeklyNew-title">
-										<b>${ bestseller.title }</b>
-									</a>
-								</div>
-								<div class="weeklyNew-author">
-									${ bestseller.author }
-								</div>
-								<div class="weeklyNew-description">
-									${ bestseller.description }
-								</div>
-							</div>
-						</div>	
-						<div class="mt-1">
+				<div class="content-section">
+				
+					<div class="bookInfo-box d-flex align-items-center">
+						<div class="book-bg d-flex justify-content-center">
 						<c:choose>
-							<c:when test="${ bestseller.wishIsDuplicate }">
-								<a href="#" data-isbn-id="${ bestseller.isbn13 }" class="delete-wishlist">읽어볼 책 <i class="bi bi-heart-fill"></i></a>
+							<c:when test="${ bookDetail.cover ne null && bookDetail.cover ne '' }">
+								<img src="${ bookDetail.cover }">
 							</c:when>
 							<c:otherwise>
-								<a href="#" data-isbn-id="${ bestseller.isbn13 }" class="add-wishlist">읽어볼까? <i class="bi bi-heart"></i></a>
+								<div class="bookInfo-img d-flex justify-content-center align-items-center">
+									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+								</div>
 							</c:otherwise>
-						</c:choose>	
+						</c:choose>
+						</div>
+						<div class="ml-3">
+							<div class="bookInfo-subject">제목</div>
+							<div class="bookInfo-title">${ bookDetail.title }</div>
+							<div class="bookInfo-subject">저자</div>
+							<div class="bookInfo-author">${ bookDetail.author }</div>
+							<div class="bookInfo-subject">장르</div>
+							<div class="bookInfo-category">
+							<c:set var="genres" value="${ fn:split(bookDetail.categoryName, '>') }" />
+							<c:forEach var="genre" items="${ genres }" begin="2">
+								${ genre }.
+							</c:forEach>
+							</div>
 						</div>
 					</div>
-				</c:forEach>	
+					<div class="mt-3">
+					<c:choose>
+						<c:when test="${ bookDetail.wishIsDuplicate }">
+							<a href="#" id="deleteWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">읽어볼 책 <i class="bookInfo-wish-icon bi bi-heart-fill"></i></a>
+						</c:when>
+						<c:otherwise>
+							<a href="#" id="addWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i></a>
+						</c:otherwise>
+					</c:choose>
+						<a href="#" class="bookInfo-library">내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i></a>
+					</div>
+					
+					<div class="bookInfo-subtitle">한 줄 평</div>
+					<div class="mt-1">
+						<div class="comment-box"></div>
+					</div>
+					<div class="write-comment-box">
+						<input type="text" id="commentInput" placeholder="한 줄 평 작성하기">
+						<button id="commentBtn">작성</button>
+					</div>
+					
+					<div class="bookInfo-subtitle d-flex">책 소개</div>
+					<div class="bookInfo-description">
+						${ bookDetail.description }
+					</div>
+					
+					<div class="bookInfo-subtitle d-flex">기타 정보</div>
+					<div class="bookInfo-description">
+						<p><b>출판사</b> ${ bookDetail.publisher }</p>
+						<p><b>출간일</b> <fmt:formatDate value="${ bookDetail.pubDate }" pattern="yyyy년 M월 d일" /></p>
+					</div>
+				
 				</div>
 				
-				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
-					
+				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	
+			
 			</div>
-		</div>	
+			
+		</div>
 		
 	</div>
 	
@@ -122,13 +140,12 @@
 		</div>
 	</div>
 	
-	
 	<script>
 	
 		$(document).ready(function(){
 			
 			// 읽어볼까에 추가
-			$(".add-wishlist").on("click", function(e){
+			$("#addWish").on("click", function(e){
 				
 				e.preventDefault();
 				
@@ -158,7 +175,7 @@
 				
 			
 			// 읽어볼까에서 삭제
-			$(".delete-wishlist").on("click", function(e){
+			$("#deleteWish").on("click", function(e){
 				
 				e.preventDefault();
 				
@@ -189,8 +206,7 @@
 		});
 	
 	</script>
-	
-	
+		
 	
 </body>
 </html>

@@ -35,7 +35,6 @@
 			<div class="content">
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">'<%= request.getParameter("author") %>' 작가의 저서</div>
-					<div class="result font-weight-bold text-white"></div>
 					
 					<div class="profile-icon">
 						<c:choose>
@@ -53,40 +52,44 @@
 				
 				<div class="content-section d-flex flex-wrap">
 				<c:forEach var="authorInfo" items="${ author.authorInfo }">
-					<div class="book-box">
-						<div class="book-img-box d-flex">
-						<c:choose>
-							<c:when test="${ authorInfo.cover ne null && authorInfo.cover ne '' }">
-								<a href="#" class="thumbnail-link"><img src="${ authorInfo.cover }"></a>
-							</c:when>
-							<c:otherwise>
-								<div OnClick="location.href='#'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
-									<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
-								</div>
-							</c:otherwise>
-						</c:choose>
-						</div>
-						<div class="book-title">
-							<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="title-link">
-							${ fn:substring(authorInfo.title, 0, 13 ) }
-							<c:if test="${fn:length(authorInfo.title) > 12}">
-							...
-							</c:if>
-							</a>
-						</div>
-						<div class="book-author">
-							<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="book-author">
-								${ fn:substring(authorInfo.author, 0, 12 ) }
-								<c:if test="${fn:length(authorInfo.author) > 12}">
+					<div class="d-flex align-items-center">
+						<div class="book-box">
+							<div class="book-img-box d-flex">
+							<c:choose>
+								<c:when test="${ authorInfo.cover ne null && authorInfo.cover ne '' }">
+									<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="thumbnail-link">
+										<img src="${ authorInfo.cover }">
+									</a>
+								</c:when>
+								<c:otherwise>
+									<div OnClick="location.href='/book_info?isbn13=${ authorInfo.isbn13 }'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
+										<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+									</div>
+								</c:otherwise>
+							</c:choose>
+							</div>
+							<div class="book-title">
+								<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="title-link">
+								${ fn:substring(authorInfo.title, 0, 13 ) }
+								<c:if test="${fn:length(authorInfo.title) > 13}">
 								...
 								</c:if>
-							</a>
-						</div>
-						<div class="d-flex justify-content-center">
-							<div class="">
-								<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+								</a>
 							</div>
-							<div class="book-recommend ml-1">441</div>
+							<div class="book-author">
+								<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="book-author">
+									${ fn:substring(authorInfo.author, 0, 12 ) }
+									<c:if test="${fn:length(authorInfo.author) > 12}">
+									...
+									</c:if>
+								</a>
+							</div>
+							<div class="d-flex">
+								<div>
+									<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+								</div>
+								<div class="book-recommend ml-1">441</div>
+							</div>
 						</div>
 					</div>
 				</c:forEach>

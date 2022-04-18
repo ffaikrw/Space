@@ -23,7 +23,7 @@
 	     	</a>
 	     	</li>
 	    	<li class="nav-item font-weight-bold">
-	    		<a href="#" class="nav-link">
+	    		<a href="/wishlist" class="nav-link">
 	    			<i class="nav-icon bi bi-heart-fill"></i>읽어볼까?
 	    		</a>
 	    	</li>
