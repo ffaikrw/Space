@@ -10,7 +10,6 @@ import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
-import com.ffaikrw.space.browse.model.Outstanding;
 import com.ffaikrw.space.browse.model.Search;
 import com.ffaikrw.space.wish.bo.WishBO;
 
@@ -25,7 +24,7 @@ public class BrowseBO {
 	
 	
 	
-	// 이번 주 신간
+	// 도서 리스트
 	public List<BookInfo> getBookList(Integer userId, String itemListType, String coverSize) {
 		
 		AladinResponse aladinResponse = aladinApiBO.getItemList(itemListType, coverSize);
@@ -77,20 +76,6 @@ public class BrowseBO {
 		return searchResult;
 	}
 	
-	
-	
-	// 주목할만한 신간 리스트
-	public Outstanding getOutstandinBook() {
-		
-		String itemListType = "ItemNewSpecial";
-		String coverSize = "Mid";
-		
-		Outstanding outstandingBook = new Outstanding();
-		
-		outstandingBook.setOutstandingBook(aladinApiBO.getItemList(itemListType, coverSize));
-		
-		return outstandingBook;
-	}
 	
 	
 }

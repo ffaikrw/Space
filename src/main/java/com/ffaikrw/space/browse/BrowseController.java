@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ffaikrw.space.browse.bo.BrowseBO;
 import com.ffaikrw.space.browse.model.BookInfo;
-import com.ffaikrw.space.browse.model.Outstanding;
 import com.ffaikrw.space.browse.model.Search;
 
 @Controller
@@ -94,13 +93,21 @@ public class BrowseController {
 	
 	
 	
-	// 검색 화면
+	// 검색 및 주목할만한 신작 화면
 	@GetMapping("/search")
-	public String searchView(Model model) {
+	public String searchView(
+			HttpServletRequest request
+			, Model model) {
 		
-		Outstanding outstandingBook = browseBO.getOutstandinBook();
-		model.addAttribute("outstandingBook", outstandingBook);
+		HttpSession session = request.getSession();
 		
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		String itemListType = "ItemNewSpecial";
+		String coverSize = "Mid";
+		
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, coverSize);
+		model.addAttribute("outstandingBook", bookInfoList);
 		
 		return "/browse/search";
 	}

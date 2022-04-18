@@ -68,7 +68,7 @@
 				<div class="outstanding">주목할만한 신간</div>
 				
 				<div class="outstanding-box d-flex flex-wrap">
-				<c:forEach var="outstanding" items="${ outstandingBook.outstandingBook.item }">
+				<c:forEach var="outstanding" items="${ outstandingBook }">
 					<div class="outstanding-book d-flex justify-content-center align-items-center">
 						<div>
 							<div>
