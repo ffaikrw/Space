@@ -13,9 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ffaikrw.space.browse.bo.BrowseBO;
-import com.ffaikrw.space.browse.model.Bestseller;
 import com.ffaikrw.space.browse.model.BookInfo;
-import com.ffaikrw.space.browse.model.EditorRecommend;
 import com.ffaikrw.space.browse.model.Outstanding;
 import com.ffaikrw.space.browse.model.Search;
 
