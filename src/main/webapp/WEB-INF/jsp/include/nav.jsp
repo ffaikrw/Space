@@ -18,7 +18,7 @@
 	    		</a>
 	    	</li>
 	    	<li class="nav-item font-weight-bold">
-	     	<a href="#" class="nav-link">
+	     	<a href="/library" class="nav-link">
 	     		<i class="nav-icon bi bi-book-fill"></i>내 서재
 	     	</a>
 	     	</li>

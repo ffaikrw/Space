@@ -83,13 +83,19 @@
 					<div class="mt-3">
 					<c:choose>
 						<c:when test="${ bookDetail.wishIsDuplicate }">
-							<a href="#" id="deleteWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">읽어볼 책 <i class="bookInfo-wish-icon bi bi-heart-fill"></i></a>
+							<a href="#" id="deleteWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">
+								읽어볼 책 <i class="bookInfo-wish-icon bi bi-heart-fill"></i>
+							</a>
 						</c:when>
 						<c:otherwise>
-							<a href="#" id="addWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i></a>
+							<a href="#" id="addWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">
+								읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i>
+							</a>
 						</c:otherwise>
 					</c:choose>
-						<a href="#" class="bookInfo-library">내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i></a>
+						<a href="#" id="addLibrary" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-library">
+							내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i>
+						</a>
 					</div>
 					
 					<div class="bookInfo-subtitle">한 줄 평</div>
@@ -197,6 +203,36 @@
 					}
 					, error:function(){
 						alert("wishlist 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+			
+			// 내 서재에 추가
+			$("#addLibrary").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/library/addBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("내 서재에 담았습니다.");
+						} else {
+							alert("내 서재에 담지 못했습니다:(");
+						}
+						
+					}
+					, error:function(){
+						alert("library 추가 통신 에러");
 					}
 					
 				});

@@ -19,6 +19,8 @@ public class BookInfo {
 	private int bestRank;
 	private AladinSeriesInfo seriesInfo;
 	private boolean wishIsDuplicate;
+	private Date readDate;
+	private boolean recommendIsDuplicate;
 	
 	
 	public String getTitle() {
@@ -99,6 +101,17 @@ public class BookInfo {
 	public void setWishIsDuplicate(boolean wishIsDuplicate) {
 		this.wishIsDuplicate = wishIsDuplicate;
 	}
-	
+	public Date getReadDate() {
+		return readDate;
+	}
+	public void setReadDate(Date readDate) {
+		this.readDate = readDate;
+	}
+	public boolean isRecommendIsDuplicate() {
+		return recommendIsDuplicate;
+	}
+	public void setRecommendIsDuplicate(boolean recommendIsDuplicate) {
+		this.recommendIsDuplicate = recommendIsDuplicate;
+	}
 	
 }

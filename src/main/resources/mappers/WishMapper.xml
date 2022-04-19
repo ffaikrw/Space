@@ -56,6 +56,8 @@
 			`wish`
 		where
 			`userId` = #{userId}
+		order by
+			`id` desc
 		
 	</select>
 
