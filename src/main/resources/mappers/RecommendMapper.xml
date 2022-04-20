@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ffaikrw.space.library.recommend.dao.RecommendDAO">
+
+	<insert id="insertRecommend" parameterType="map">
+	
+		insert into `recommend`
+		(
+			`userId`
+			, `isbn`
+			, `createdAt`
+		)
+		value
+		(
+			#{userId}
+			, #{isbn}
+			, now()
+		)
+	
+	</insert>
+	
+	
+	<delete id="deleteRecommend" parameterType="map">
+		
+		delete from `recommend`
+		where
+			userId = #{userId}
+			and isbn = #{isbn}
+		
+	</delete>
+	
+	
+	<select id="selectRecommendCount" parameterType="map" resultType="int">
+	
+		select
+			count(*)
+		from
+			`recommend`
+		where
+			userId = #{userId}
+			and isbn = #{isbn}
+	
+	</select>
+
+
+</mapper>

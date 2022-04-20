@@ -28,5 +28,12 @@ public interface LibraryDAO {
 	// 내 서재의 모든 도서 가져오기
 	public List<Library> selectLibrary(@Param("userId") int userId);
 	
+	
+	// 완독 날짜 수정
+	public int updateReadDate(
+			@Param("userId") int userId
+			, @Param("isbn") String isbn13
+			, @Param("readDate") String readDate
+			);
 	 
 }

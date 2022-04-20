@@ -45,7 +45,7 @@ public class BookDetailBO {
 		
 		if (userId != null) {
 			
-			boolean wishIdDuplicate = wishBO.wishIdDuplicate(userId, aladinItem.get(0).getIsbn13());
+			boolean wishIdDuplicate = wishBO.wishIsDuplicate(userId, aladinItem.get(0).getIsbn13());
 			
 			bookInfo.setWishIsDuplicate(wishIdDuplicate);
 		}

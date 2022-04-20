@@ -53,5 +53,17 @@
 			`id` desc
 	
 	</select>
+	
+	
+	<update id="updateReadDate">
+		
+		update `library`
+		set
+			`readDate` = #{readDate}
+		where
+			`userId` = #{userId}
+			and `isbn` = #{isbn}
+		
+	</update>
 
 </mapper>

@@ -12,6 +12,7 @@ import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.library.dao.LibraryDAO;
 import com.ffaikrw.space.library.model.Library;
+import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 
 @Service
 public class LibraryBO {
@@ -21,6 +22,9 @@ public class LibraryBO {
 	
 	@Autowired
 	private AladinApiBO aladinApiBO;
+	
+	@Autowired
+	private RecommendBO recommendBO;
 	
 	
 	// 내 서재에 담기
@@ -36,7 +40,7 @@ public class LibraryBO {
 	
 	
 	// 내 서재의 모든 도서 가져오기
-	public List<BookInfo> getLibrary(int userId) {
+	public List<BookInfo> getLibrary(Integer userId) {
 		
 		String coverSize = "MidBig";
 		
@@ -48,6 +52,10 @@ public class LibraryBO {
 			
 			AladinResponse aladinResponse = aladinApiBO.getItemLookUp(library.getIsbn(), coverSize);
 			List<AladinItem> aladinItem = aladinResponse.getItem();
+			
+			if (aladinItem == null) {
+				continue;
+			}
 			
 			BookInfo bookInfo = new BookInfo();
 			
@@ -65,10 +73,23 @@ public class LibraryBO {
 			bookInfo.setSeriesInfo(aladinItem.get(0).getSeriesInfo());
 			bookInfo.setReadDate(library.getReadDate());
 			
+			if (userId != null) {
+				
+				boolean recommendIdDuplicate = recommendBO.recommendIsDuplicate(userId, aladinItem.get(0).getIsbn13());
+				
+				bookInfo.setRecommendIsDuplicate(recommendIdDuplicate);
+			}
+			
 			bookInfoList.add(bookInfo);
 		}
 		
 		return bookInfoList;
+	}
+	
+	
+	// 완독 날짜 수정
+	public int editReadDate(int userId, String isbn13, String readDate) {
+		return libraryDAO.updateReadDate(userId, isbn13, readDate);
 	}
 	
 	

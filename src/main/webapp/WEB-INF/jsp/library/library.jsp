@@ -50,58 +50,85 @@
 					</div>
 				</div>
 				
-				<div class="content-section d-flex">
-					<div class="d-flex flex-wrap">
-					<c:forEach var="library" items="${ library }">
-						<div class="library-box">
-							<div class="d-flex align-items-center">
-								<!-- 책 표지 -->
-								<c:choose>
-									<c:when test="${ library.cover ne null && library.cover ne '' }">
-										<a href="/book_info?isbn13=${ library.isbn13 }">
-											<img src="${ library.cover }">
-										</a>
-									</c:when>
-									<c:otherwise>
-										<div OnClick="location.href='/book_info?isbn13=${ library.isbn13 }'" style="cursor:pointer;" class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
-											<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+				<div class="content-section">
+				<c:choose>
+					<c:when test="${ !empty library }">
+						<div class="d-flex flex-wrap">
+						<c:forEach var="library" items="${ library }">
+							<div class="library-box">
+								<div class="d-flex align-items-center">
+									<!-- 책 표지 -->
+									<c:choose>
+										<c:when test="${ library.cover ne null && library.cover ne '' }">
+											<a href="/book_info?isbn13=${ library.isbn13 }">
+												<img src="${ library.cover }">
+											</a>
+										</c:when>
+										<c:otherwise>
+											<div OnClick="location.href='/book_info?isbn13=${ library.isbn13 }'" style="cursor:pointer;" class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
+												<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+											</div>
+										</c:otherwise>
+									</c:choose>
+									
+									<!-- 책 정보 -->
+									<div class="ml-3">
+										<div class="library-subject">제목</div>
+										<div>
+											<a href="/book_info?isbn13=${ library.isbn13 }" class="library-title">
+											 	${ library.title }
+											</a>
 										</div>
-									</c:otherwise>
-								</c:choose>
-								
-								<!-- 책 정보 -->
-								<div class="ml-3">
-									<div class="library-subject">제목</div>
-									<div>
-										<a href="#" class="library-title">
-										 	${ library.title }
-										</a>
-									</div>
-									<div class="library-subject">작가</div>
-									<div>
-										<a href="#" class="library-author">
-											${ library.author }
-										</a>
-									</div>
-									<div class="library-subject">완독 날짜</div>
-									<div class="library-readDate">
-										<fmt:formatDate value="${ library.readDate }" pattern="yyyy년 M월 d일"/>
-									</div>
-									<div class="library-subject">나의 추천</div>
-									<div class="d-flex">
-										<div class="recommend-icon">
-											<i class=" bi bi-hand-thumbs-up-fill"></i> <span class="library-recommend">추천해요!</span>
+										<div class="library-subject">작가</div>
+										<div>
+											<a href="/book_info?isbn13=${ library.isbn13 }" class="library-author">
+												${ library.author }
+											</a>
+										</div>
+										<div class="library-subject">완독 날짜</div>
+										<div class="library-readDate">
+											<fmt:formatDate var="readDate" value="${ library.readDate }" pattern="yyyy년 M월 d일"/>
+											<input type="text" placeholder="${ readDate }" class="library-readDate-input datepicker">
+											
+										</div>
+										<div class="library-subject">나의 추천</div>
+										<div>
+											<div>
+											<c:choose>
+												<c:when test="${ library.recommendIsDuplicate }">
+													<a href="#" data-isbn-id="${ library.isbn13 }" class="delete-recommend">
+														<i class="bi bi-hand-thumbs-up-fill"></i> <span>추천하는 소설입니다!</span>
+													</a>
+												</c:when>
+												<c:otherwise>
+													<a href="#" data-isbn-id="${ library.isbn13 }" class="add-recommend">
+														<i class="bi bi-hand-thumbs-up"></i> <span>추천하기</span>
+													</a>
+												</c:otherwise>	
+											</c:choose>
+											</div>
+											<div>
+												
+											</div>
 										</div>
 									</div>
 								</div>
+								<div class="mt-1">
+									<a href="#" class="go-to-bookReport">독서노트 쓰러 가기</a>
+								</div>
 							</div>
-							<div class="mt-1">
-								<a href="#" class="go-to-bookReport">독서노트 쓰러 가기</a>
+						</c:forEach>	
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div class="library-isEmpty-box d-flex align-items-center">
+							<div class="library-isEmpty text-center">
+								<i class="library-isEmpty-icon bi bi-bookshelf"></i><br>
+								내 서재가 비어있습니다.
 							</div>
 						</div>
-					</c:forEach>	
-					</div>
-					
+					</c:otherwise>
+				</c:choose>	
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
@@ -128,6 +155,93 @@
 		    </div>
 		</div>
 	</div>
+	
+	
+	<script>
+	
+		$(document).ready(function(){
+			
+			$.datepicker.setDefaults({
+                dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
+                , dateFormat: 'yy년 M월 d일'
+            });
+			
+			// 완독 날짜 수정
+			$(".library-readDate-input").datepicker({
+				
+				showButtonPanel: true 
+				, changeMonth: true
+                , changeYear: true
+                , showAnim: "clip"
+				
+			});
+			
+			
+			
+			// 추천하기
+			$(".add-recommend").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/library/recommend_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("추천되었습니다.");
+							location.reload();
+						} else {
+							alert("추천을 누르지 못했습니다:(");
+						}
+						
+					}
+					, error:function(){
+						alert("recommend 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+			
+			// 추천해제
+			$(".delete-recommend").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/library/deleteRecommend_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("추천을 취소했습니다.");
+							location.reload();
+						} else {
+							alert("추천을 취소하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("recommend 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+		});
+	
+	</script>
 	
 	
 </body>

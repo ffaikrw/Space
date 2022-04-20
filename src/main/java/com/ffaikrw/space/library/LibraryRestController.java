@@ -71,6 +71,30 @@ public class LibraryRestController {
 	}
 	
 	
+	// 완독 날짜 수정
+	@GetMapping("/update_readDate")
+	public Map<String, String> editReadDate(
+			@RequestParam("isbn13") String isbn13
+			, @RequestParam("readDate") String readDate
+			, HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = libraryBO.editReadDate(userId, isbn13, readDate);
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if (count == 1) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
+	
 	
 	
 	

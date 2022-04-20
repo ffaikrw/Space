@@ -839,9 +839,23 @@ footer {
 	font-size: 14px;
 }
 
-.library-recommend {
+.add-recommend {
 	color: #6b4bde;
-	font-size: 11px;
+	font-size: 12px;
+}
+
+.add-recommend:hover {
+	color: #6b4bde;
+}
+
+.delete-recommend {
+	color: #6b4bde;
+	font-size: 12px;
+}
+
+.delete-recommend:hover {
+	color: #6b4bde;
+	text-decoration: none;
 }
 
 .go-to-bookReport {
@@ -853,6 +867,40 @@ footer {
 	color: #6b4bde;
 }
 
+.library-isEmpty-box {
+	width: 900px;
+	height: 400px;
+}
+
+.library-isEmpty-icon {
+	width: 900px;
+	color: #716f75;
+	font-size: 80px;
+}
+
+.library-isEmpty {
+	width: 900px;
+	color: #716f75;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+.edit-readDate-icon {
+	color: #6b4bde;
+	font-size: 12px;
+}
+
+.library-readDate-input {
+	border: none;
+	background-color: #000;
+	color: #fff;
+	font-size: 14px;
+}
+
+.library-readDate-input::placeholder {
+	color: #fff;
+	font-size: 14px;
+}
 
 
 

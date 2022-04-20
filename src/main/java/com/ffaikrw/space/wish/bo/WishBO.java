@@ -36,7 +36,7 @@ public class WishBO {
 	
 	
 	// 읽어볼까 여부 확인
-	public boolean wishIdDuplicate(int userId, String isbn13) {
+	public boolean wishIsDuplicate(int userId, String isbn13) {
 		
 		int count = wishDAO.selectWishCount(userId, isbn13);
 		
@@ -57,6 +57,10 @@ public class WishBO {
 			
 			AladinResponse aladinResponse = aladinApiBO.getItemLookUp(wish.getIsbn(), coverSize);
 			List<AladinItem> aladinItem = aladinResponse.getItem();
+			
+			if (aladinItem == null) {
+				continue;
+			}
 			
 			BookInfo bookInfo = new BookInfo();
 			
