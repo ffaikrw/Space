@@ -11,6 +11,7 @@
 
 	<!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!-- bootstrap CDN link -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -88,7 +89,8 @@
 										<div class="library-subject">완독 날짜</div>
 										<div class="library-readDate">
 											<fmt:formatDate var="readDate" value="${ library.readDate }" pattern="yyyy년 M월 d일"/>
-											<input type="text" placeholder="${ readDate }" class="library-readDate-input datepicker">
+											<input type="text" id="readDateInput${ library.isbn13 }" placeholder="${ readDate }" class="library-readDate-input datepicker">
+											<button type="submit" data-readDate-id="${ library.isbn13 }" class="edit-readDate-btn"></button>
 											
 										</div>
 										<div class="library-subject">나의 추천</div>
@@ -166,13 +168,50 @@
                 , dateFormat: 'yy년 M월 d일'
             });
 			
-			// 완독 날짜 수정
+			// 완독 날짜 선택
 			$(".library-readDate-input").datepicker({
 				
 				showButtonPanel: true 
 				, changeMonth: true
                 , changeYear: true
                 , showAnim: "clip"
+				
+			});
+			
+			
+			// 완독 날짜 수정
+			$(".edit-readDate-btn").on("submit", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("readDate-id");
+				let readDate = $("#readDateInput" + isbn13).value().trim();
+				
+				if (readDate == '') {
+					alert("완독 날짜를 입력해주세요.");
+				}
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/library/update_readDate"
+					, data:{"isbn13":isbn13, "readDate":readDate}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("완독 날짜가 수정되었습니다.");
+							location.reload();
+						} else {
+							alert("완독 날짜를 수정하지 못했습니다:(");
+						}
+						
+					}
+					, error:function(){
+						alert("readDate 통신 에러");
+					}
+					
+				});
+				
 				
 			});
 			
