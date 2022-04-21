@@ -41,9 +41,16 @@ public class NoteController {
 		
 		Note note = noteBO.getNote(userId, isbn13);
 		
-		model.addAttribute("result", note);
+		model.addAttribute("note", note);
 		
-		return "library/createNote";
+		return "library/noteView";
+	}
+	
+	
+	// 독서노트 수정
+	@GetMapping("/edit_note")
+	public String editNoteView() {
+		return "library/editNote";
 	}
 	
 	

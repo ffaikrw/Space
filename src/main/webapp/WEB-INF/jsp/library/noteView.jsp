@@ -63,6 +63,19 @@
 				</div>
 				
 				<div class="content-section">
+					<div class="note-box">
+						<div class="d-flex justify-content-between">
+							<a href="#" id="deleteNote" data-isbn-id="<%= request.getParameter("isbn13") %>">
+								<i class="bi bi-trash"></i>
+							</a>
+							<a href="#" id="editNote">
+								<i class="bi bi-pencil-square"></i>
+							</a>
+						</div>
+						<div class="note-content">
+							${ note.content }
+						</div>
+					</div>
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
@@ -73,6 +86,64 @@
 		</div>
 	
 	</div>
+	
+	<!-- Modal -->
+	<div class="modal fade" id="profileModal" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+		    <div class="modal-content">
+		    	<div class="text-center modal-text">
+		    		${ userNickname } 님
+		    		<hr>
+		    	</div>
+			    <div class="modal-body text-center">
+			    	<a href="#" class="modal-link">프로필 관리</a>
+			    </div>
+			    <div class="logout-modal modal-body text-center">
+			    	<a href="/user/sign_out" class="modal-link">로그아웃</a>
+			    </div>
+		    </div>
+		</div>
+	</div>
+	
+	
+	<script>
+	
+		$(document).ready(function(){
+			
+			// 독서노트 삭제
+			$("#deleteNote").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/library/deleteNote_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("독서노트를 삭제했습니다.");
+							location.href = "/library";
+						} else {
+							alert("독서노트를 삭제하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("readingNote 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+		});
+	
+	
+	</script>
 
 </body>
 </html>

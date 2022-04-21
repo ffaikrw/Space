@@ -886,7 +886,7 @@ footer {
 }
 
 .edit-readDate-icon {
-	color: #6b4bde;
+	color: #fff;
 	font-size: 12px;
 }
 
@@ -953,6 +953,46 @@ footer {
 	margin-bottom: 40px;
 }
 
+.note-box {
+	width: 900px;
+	border: 1px solid #6b4bde;
+	background-color: #1d1c21;
+	padding-top: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 20px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+}
 
+.note-content {
+	color: #fff;
+	white-space: pre-wrap;
+}
 
+.write-note-icon {
+	font-size: 11px;
+}
+
+.see-note-icon {
+	font-size: 18px;
+}
+
+#editNote {
+	color: #6b4bde;
+	font-size: 20px;
+}
+
+#editNote:hover {
+	text-decoration: none;
+}
+
+#deleteNote {
+	color: #6b4bde;
+	font-size: 20px;
+}
+
+#deleteNote:hover {
+	text-decoration: none;
+}
 

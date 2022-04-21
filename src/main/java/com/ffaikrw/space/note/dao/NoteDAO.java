@@ -16,8 +16,30 @@ public interface NoteDAO {
 			);
 	
 	
+	// 독서노트 삭제
+	public int deleteNote(
+			@Param("userId") int userId
+			, @Param("isbn") String isbn13
+			);
+	
+	
+	// 독서노트 수정
+	public int updateNote(
+			@Param("userId") int userId
+			, @Param("isbn") String isbn13
+			, @Param("content") String content
+			);
+	
+	
 	// 독서노트 보기
 	public Note selectNote(
+			@Param("userId") int userId
+			, @Param("isbn") String isbn13
+			);
+	
+	
+	// 독서노트 작성 여부 확인
+	public int selectNoteCount(
 			@Param("userId") int userId
 			, @Param("isbn") String isbn13
 			);

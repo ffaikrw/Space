@@ -129,8 +129,19 @@
 									</div>
 								</div>
 								<div class="mt-1">
-									<a href="/library/create_note?isbn13=${ library.isbn13 }" class="go-to-bookReport">독서노트 쓰러 가기</a>
-									<a href="/library/note_view?isbn13=${ library.isbn13 }" class="go-to-bookReport">독서노트 보러 가기</a>
+								<c:choose>
+									<c:when test="${ library.noteIsDuplicate }">
+										<a href="/library/note_view?isbn13=${ library.isbn13 }" class="go-to-bookReport">
+										독서노트 보러 가기 <span class="see-note-icon"><i class="bi bi-eyeglasses"></i></span>
+										</a>
+									</c:when>
+									<c:otherwise>
+										<a href="/library/create_note?isbn13=${ library.isbn13 }" class="go-to-bookReport">
+											독서노트 쓰러 가기 <span class="write-note-icon"><i class="bi bi-pencil"></i></span>
+										</a>
+									</c:otherwise>	
+								</c:choose>
+									
 								</div>
 							</div>
 						</c:forEach>	

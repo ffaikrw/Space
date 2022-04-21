@@ -28,6 +28,28 @@
 	</insert>
 	
 	
+	<delete id="deleteNote" parameterType="map">
+	
+		delete from `note`
+		where
+			`userId` = #{userId}
+			and `isbn` = #{isbn}
+	
+	</delete>
+	
+	
+	<update id="updateNote" parameterType="map">
+	
+		update `note`
+		set
+			`content` = #{content}
+		where
+			`userId` = #{userId}
+			and `isbn` = #{isbn}
+	
+	</update>
+	
+	
 	<select id="selectNote" parameterType="map" resultType="com.ffaikrw.space.note.model.Note">
 	
 		select
@@ -36,13 +58,26 @@
 			, `isbn`
 			, `content`
 			, `createdAt`
-			, `updatedAt
+			, `updatedAt`
 		from
 			`note`
 		where
 			`userId` = #{userId}
 			and `isbn` = #{isbn}
 		
+	</select>
+	
+	
+	<select id="selectNoteCount" parameterType="map" resultType="int">
+	
+		select
+			count(*)
+		from
+			`note`
+		where
+			`userId` = #{userId}
+			and `isbn` = #{isbn}
+	
 	</select>
 
 </mapper>

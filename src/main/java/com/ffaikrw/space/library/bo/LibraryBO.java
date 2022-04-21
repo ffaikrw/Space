@@ -13,6 +13,7 @@ import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.library.dao.LibraryDAO;
 import com.ffaikrw.space.library.model.Library;
 import com.ffaikrw.space.library.recommend.bo.RecommendBO;
+import com.ffaikrw.space.note.bo.NoteBO;
 
 @Service
 public class LibraryBO {
@@ -25,6 +26,9 @@ public class LibraryBO {
 	
 	@Autowired
 	private RecommendBO recommendBO;
+	
+	@Autowired
+	private NoteBO noteBO;
 	
 	
 	// 내 서재에 담기
@@ -76,8 +80,10 @@ public class LibraryBO {
 			if (userId != null) {
 				
 				boolean recommendIdDuplicate = recommendBO.recommendIsDuplicate(userId, aladinItem.get(0).getIsbn13());
+				boolean noteIsDuplicate = noteBO.noteIsDuplicate(userId, aladinItem.get(0).getIsbn13());
 				
 				bookInfo.setRecommendIsDuplicate(recommendIdDuplicate);
+				bookInfo.setNoteIsDuplicate(noteIsDuplicate);
 			}
 			
 			bookInfoList.add(bookInfo);
