@@ -11,6 +11,7 @@
 
 	<!-- jquery cdn -->
 	<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 	
 	<!-- bootstrap CDN link -->
@@ -37,6 +38,10 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">내 서재</div>
 					
+					<div OnClick="location.href='#'" style="cursor:pointer;" class="go-to-notelist text-center">
+						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
+					</div>
+						
 					<div class="profile-icon">
 						<c:choose>
 							<c:when test="${ userProfileImg ne null and userProfileImg ne ''}">
@@ -49,9 +54,11 @@
 							</c:otherwise>
 						</c:choose>
 					</div>
+					
 				</div>
 				
 				<div class="content-section">
+					
 				<c:choose>
 					<c:when test="${ !empty library }">
 						<div class="d-flex flex-wrap">
@@ -86,13 +93,19 @@
 												${ library.author }
 											</a>
 										</div>
+										
+										<!--  완독 날짜 -->
 										<div class="library-subject">완독 날짜</div>
 										<div class="library-readDate">
 											<fmt:formatDate var="readDate" value="${ library.readDate }" pattern="yyyy년 M월 d일"/>
-											<input type="text" id="readDateInput${ library.isbn13 }" placeholder="${ readDate }" class="library-readDate-input datepicker">
-											<button type="submit" data-readDate-id="${ library.isbn13 }" class="edit-readDate-btn"></button>
+											<input type="text" id="readDateInput${ library.isbn13 }" placeholder="${ readDate }" class="library-readDate-input">
+											<button type="button" data-isbn-id="${ library.isbn13 }" class="edit-readDate-btn">
+												<span class="edit-readDate-icon"><i class="bi bi-pencil"></i></span>
+											</button>
 											
 										</div>
+										
+										<!-- 추천 -->
 										<div class="library-subject">나의 추천</div>
 										<div>
 											<div>
@@ -116,7 +129,8 @@
 									</div>
 								</div>
 								<div class="mt-1">
-									<a href="#" class="go-to-bookReport">독서노트 쓰러 가기</a>
+									<a href="/library/create_note?isbn13=${ library.isbn13 }" class="go-to-bookReport">독서노트 쓰러 가기</a>
+									<a href="/library/note_view?isbn13=${ library.isbn13 }" class="go-to-bookReport">독서노트 보러 가기</a>
 								</div>
 							</div>
 						</c:forEach>	
@@ -165,7 +179,7 @@
 			
 			$.datepicker.setDefaults({
                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
-                , dateFormat: 'yy년 M월 d일'
+                , dateFormat: 'yy-mm-dd'
             });
 			
 			// 완독 날짜 선택
@@ -177,18 +191,18 @@
                 , showAnim: "clip"
 				
 			});
+
 			
 			
 			// 완독 날짜 수정
-			$(".edit-readDate-btn").on("submit", function(e){
+			$(".edit-readDate-btn").on("click", function(){
 				
-				e.preventDefault();
+				let isbn13 = $(this).data("isbn-id");
+				let readDate = $("#readDateInput" + isbn13).val().trim();
 				
-				let isbn13 = $(this).data("readDate-id");
-				let readDate = $("#readDateInput" + isbn13).value().trim();
-				
-				if (readDate == '') {
-					alert("완독 날짜를 입력해주세요.");
+				if (readDate == "") {
+					alert("완독 날짜란을 선택해 완독 날짜를 입력해주세요.");
+					return;
 				}
 				
 				$.ajax({

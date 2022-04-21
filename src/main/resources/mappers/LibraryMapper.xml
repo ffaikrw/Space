@@ -55,7 +55,7 @@
 	</select>
 	
 	
-	<update id="updateReadDate">
+	<update id="updateReadDate" parameterType="map">
 		
 		update `library`
 		set

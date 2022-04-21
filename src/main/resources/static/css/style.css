@@ -891,6 +891,7 @@ footer {
 }
 
 .library-readDate-input {
+	width: 115px;
 	border: none;
 	background-color: #000;
 	color: #fff;
@@ -905,6 +906,51 @@ footer {
 .edit-readDate-btn {
 	border: none;
 	background-color: #000;
+}
+
+
+.go-to-notelist {
+	width: 200px;
+	height: 40px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: bold;
+	border: 1px solid #6b4bde;
+	border-radius: 10px;
+	margin-right: 20px;
+	padding-top: 5px;
+	padding-bottom: 5px;
+}
+
+
+/* createNote.jsp */
+
+.readingNote-box {
+	width: 900px;
+	border: 1px solid #6b4bde;
+	background-color: #1d1c21;
+}
+
+.create-btn-box {
+	width: 900px;
+	margin-top: 20px;
+}
+
+.create-note-btn {
+	width: 100px;
+	height: 40px;
+	color: #fff;
+	border: 1px solid #6b4bde;
+	border-radius: 10px;
+	background-color: #000;
+}
+
+.editor-box {
+	width: 800px;
+	background-color: #fff;
+	border: none;
+	margin-top: 40px;
+	margin-bottom: 40px;
 }
 
 

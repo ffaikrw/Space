@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ffaikrw.space.note.dao.NoteDAO">
+
+	<insert id="insertNote" parameterType="map">
+	
+		insert into `note`
+		(
+			`userId`
+			, `isbn`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		)
+		value
+		(
+			#{userId}
+			, #{isbn}
+			, #{content}
+			, now()
+			, now()
+		)
+	
+	</insert>
+	
+	
+	<select id="selectNote" parameterType="map" resultType="com.ffaikrw.space.note.model.Note">
+	
+		select
+			`id`
+			, `userId`
+			, `isbn`
+			, `content`
+			, `createdAt`
+			, `updatedAt
+		from
+			`note`
+		where
+			`userId` = #{userId}
+			and `isbn` = #{isbn}
+		
+	</select>
+
+</mapper>
