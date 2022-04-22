@@ -84,12 +84,19 @@
 									</c:if>
 								</a>
 							</div>
-							<div class="d-flex">
-								<div>
-									<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+							<div class="d-flex justify-content-between">
+								<div class="d-flex">
+									<div>
+										<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+									</div>
+									<div class="book-recommend ml-1">441</div>
 								</div>
-								<div class="book-recommend ml-1">441</div>
-							</div>
+								<div>
+									<a href="#" data-isbn-id="${ wishlist.isbn13 }" class="wishlist-delete-icon">
+										<i class="bi bi-trash"></i>
+									</a>
+								</div>
+							</div>	
 						</div>
 					</div>
 				</c:forEach>
@@ -120,6 +127,45 @@
 		    </div>
 		</div>
 	</div>
+	
+	
+	<script>
+	
+		$(document).ready(function(){
+			
+			// 읽어볼까에서 삭제
+			$(".wishlist-delete-icon").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/wishlist/deleteBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("읽어볼까에서 삭제했습니다.");
+							location.reload();
+						} else {
+							alert("읽어볼까에서 삭제하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("wishlist 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+		});
+	
+	</script>
 	
 </body>
 </html>

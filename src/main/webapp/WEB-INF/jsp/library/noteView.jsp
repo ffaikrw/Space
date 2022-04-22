@@ -43,7 +43,7 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">독서노트 보기</div>
 					
-					<div OnClick="location.href='#'" style="cursor:pointer;" class="go-to-notelist text-center">
+					<div OnClick="location.href='/library/notelist'" style="cursor:pointer;" class="go-to-notelist text-center">
 						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
 					</div>
 						
@@ -65,13 +65,27 @@
 				<div class="content-section">
 					<div class="note-box">
 						<div class="d-flex justify-content-between">
+							<!-- 삭제 버튼 -->
 							<a href="#" id="deleteNote" data-isbn-id="<%= request.getParameter("isbn13") %>">
 								<i class="bi bi-trash"></i>
 							</a>
-							<a href="#" id="editNote">
+							<c:choose>
+								<c:when test="${ note.createdAt eq note.updatedAt }">
+									<div class="create-date">작성일 <fmt:formatDate value="${ note.createdAt }" pattern="yyyy년 M월 d일 HH시 mm분" /></div>
+								</c:when>
+								<c:otherwise>
+									<div>
+										<div class="create-date">작성일 <fmt:formatDate value="${ note.createdAt }" pattern="yyyy년 M월 d일 HH시 mm분" /></div>
+										<div class="create-date">수정일 <fmt:formatDate value="${ note.updatedAt }" pattern="yyyy년 M월 d일 HH시 mm분" /></div>
+									</div>	
+								</c:otherwise>
+							</c:choose>
+							<!-- 수정 버튼 -->
+							<a href="/library/edit_note?isbn13=<%= request.getParameter("isbn13") %>" id="editNote">
 								<i class="bi bi-pencil-square"></i>
 							</a>
 						</div>
+						<hr class="hr-tag">
 						<div class="note-content">
 							${ note.content }
 						</div>

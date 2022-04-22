@@ -225,9 +225,7 @@ footer {
 	height: 600px;
 	position: sticky;
 	top: 0;
-	border-right: 1px solid;
-	border-bottom: 1px solid;
-	border-color: #6b4bde;
+	background-color: #1d1c21;
 }
 
 .nav-link {
@@ -242,7 +240,7 @@ footer {
 
 .nav-link:hover {
 	color: #fff;
-	background-color: #38324d;
+	background-color: #000;
 	text-decoration: none;
 }
 
@@ -796,6 +794,15 @@ footer {
 	margin-bottom: 5px;
 }
 
+.wishlist-delete-icon {
+	color: #6b4bde;
+}
+
+.wishlist-delete-icon:hover {
+	color: #6b4bde;
+	text-decoration: none;
+}
+
 
 /* library.jsp */
 
@@ -805,6 +812,19 @@ footer {
 	margin-bottom: 15px;
 	padding-left: 10px;
 	padding-right: 10px;
+}
+
+.library-bookinfo-box {
+	width: 260px;
+}
+
+.library-delete-icon {
+	color: #6b4bde;
+}
+
+.library-delete-icon:hover {
+	color: #6b4bde;
+	text-decoration: none;
 }
 
 .library-subject {
@@ -996,3 +1016,73 @@ footer {
 	text-decoration: none;
 }
 
+.edit-content {
+	white-space: pre-wrap;
+}
+
+.create-date {
+	color: #6b4bde;
+	font-size: 12px;
+	padding-top: 5px;
+}
+
+.hr-tag {
+	width: 200px;
+	background-color: #999;
+	margin-top: 60px;
+}
+
+.notelist-table {
+	width: 900px;
+	background-color: #1d1c21;
+	margin-top: 30px;
+	padding-left: 10px;
+	
+}
+
+.notelist-table th {
+	border: 2px solid #6b4bde;
+	border-left: none;
+	border-right: none;
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.notelist-table td {
+	border: 1px solid #6b4bde;
+	border-top: none;
+	border-left: none;
+	border-right: none;
+	padding-top: 15px;
+	padding-bottom: 15px;
+}
+
+.notelist-cover {
+	width: 130px;
+}
+
+.notelist-title {
+	width: 300px;
+}
+
+.notelist-content {
+	text-align: left;
+	padding-left: 20px;
+	padding-right: 20px;
+}
+
+.notelist-bookinfo-link {
+	color: #fff;
+}
+
+.notelist-bookinfo-link:hover {
+	color: #fff;
+}
+
+.notelist-noteView-link {
+	color: #fff;
+}
+
+.notelist-noteView-link:hover {
+	color: #fff;
+}

@@ -42,7 +42,7 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">독서노트 기록하기</div>
 					
-					<div OnClick="location.href='#'" style="cursor:pointer;" class="go-to-notelist text-center">
+					<div OnClick="location.href='/library/notelist'" style="cursor:pointer;" class="go-to-notelist text-center">
 						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
 					</div>
 						
@@ -64,7 +64,7 @@
 				<div class="content-section">
 					<div class="readingNote-box d-flex justify-content-center align-items-center">
 						<div class="editor-box">
-							<textarea id="contentInput" class="summernote"></textarea>  
+							<textarea id="contentInput" class="summernote"></textarea>
 						</div>
 					</div>
 					
@@ -158,7 +158,7 @@
 						
 						if (data.result == "success") {
 							alert("독서노트가 기록되었습니다.");
-							location.href="/library";
+							location.href="/library/note_view?isbn13=" + isbn13;
 						} else {
 							alert("독서노트를 기록하지 못했습니다:(");
 						}

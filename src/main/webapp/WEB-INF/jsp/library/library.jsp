@@ -38,7 +38,7 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">내 서재</div>
 					
-					<div OnClick="location.href='#'" style="cursor:pointer;" class="go-to-notelist text-center">
+					<div OnClick="location.href='/library/notelist'" style="cursor:pointer;" class="go-to-notelist text-center">
 						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
 					</div>
 						
@@ -65,22 +65,52 @@
 						<c:forEach var="library" items="${ library }">
 							<div class="library-box">
 								<div class="d-flex align-items-center">
-									<!-- 책 표지 -->
-									<c:choose>
-										<c:when test="${ library.cover ne null && library.cover ne '' }">
-											<a href="/book_info?isbn13=${ library.isbn13 }">
-												<img src="${ library.cover }">
+									<div>
+										<!-- 삭제 버튼 -->
+										<div class="mb-1">
+											<a href="#" data-isbn-id="${ library.isbn13 }" class="library-delete-icon">
+												<i class="bi bi-trash"></i>
 											</a>
-										</c:when>
-										<c:otherwise>
-											<div OnClick="location.href='/book_info?isbn13=${ library.isbn13 }'" style="cursor:pointer;" class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
-												<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
-											</div>
-										</c:otherwise>
-									</c:choose>
+										</div>
+									
+										<!-- 책 표지 -->
+										<div class="pt-1">
+											<c:choose>
+												<c:when test="${ library.cover ne null && library.cover ne '' }">
+													<a href="/book_info?isbn13=${ library.isbn13 }">
+														<img src="${ library.cover }">
+													</a>
+												</c:when>
+												<c:otherwise>
+													<div OnClick="location.href='/book_info?isbn13=${ library.isbn13 }'" style="cursor:pointer;" class="weeklyNew-thumbnail-box d-flex justify-content-center align-items-center">
+														<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+													</div>
+												</c:otherwise>
+											</c:choose>
+										</div>	
+										
+										<!-- 독서노트 -->
+										<div class="mt-1">
+										<c:choose>
+											<c:when test="${ library.noteIsDuplicate }">
+												<a href="/library/note_view?isbn13=${ library.isbn13 }" class="go-to-bookReport">
+												독서노트 보러 가기 <span class="see-note-icon"><i class="bi bi-eyeglasses"></i></span>
+												</a>
+											</c:when>
+											<c:otherwise>
+												<a href="/library/create_note?isbn13=${ library.isbn13 }" class="go-to-bookReport">
+													독서노트 쓰러 가기 <span class="write-note-icon"><i class="bi bi-pencil"></i></span>
+												</a>
+											</c:otherwise>	
+										</c:choose>
+										</div>
+									</div>
 									
 									<!-- 책 정보 -->
-									<div class="ml-3">
+									<div class="library-bookinfo-box ml-3">
+										
+										
+										<!-- 책 정보 -->
 										<div class="library-subject">제목</div>
 										<div>
 											<a href="/book_info?isbn13=${ library.isbn13 }" class="library-title">
@@ -128,21 +158,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="mt-1">
-								<c:choose>
-									<c:when test="${ library.noteIsDuplicate }">
-										<a href="/library/note_view?isbn13=${ library.isbn13 }" class="go-to-bookReport">
-										독서노트 보러 가기 <span class="see-note-icon"><i class="bi bi-eyeglasses"></i></span>
-										</a>
-									</c:when>
-									<c:otherwise>
-										<a href="/library/create_note?isbn13=${ library.isbn13 }" class="go-to-bookReport">
-											독서노트 쓰러 가기 <span class="write-note-icon"><i class="bi bi-pencil"></i></span>
-										</a>
-									</c:otherwise>	
-								</c:choose>
-									
-								</div>
+								
 							</div>
 						</c:forEach>	
 						</div>
@@ -303,8 +319,40 @@
 				
 			});
 			
+			
+			// 내 서재에서 삭제
+			$(".library-delete-icon").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/library/deleteBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("내 서재에서 삭제했습니다.");
+							location.reload();
+						} else {
+							alert("내 서재에서 삭제하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("library 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
 		});
-	
+			
+			
 	</script>
 	
 	

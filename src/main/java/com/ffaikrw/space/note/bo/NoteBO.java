@@ -1,16 +1,27 @@
 package com.ffaikrw.space.note.bo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
+import com.ffaikrw.space.aladinAPI.model.AladinItem;
+import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.note.dao.NoteDAO;
 import com.ffaikrw.space.note.model.Note;
+import com.ffaikrw.space.note.model.Notelist;
 
 @Service
 public class NoteBO {
 	
 	@Autowired
 	private NoteDAO noteDAO;
+	
+	@Autowired
+	private AladinApiBO aladinApiBO;
+	
 	
 	
 	// 독서노트 작성
@@ -46,6 +57,49 @@ public class NoteBO {
 	}
 	
 	
+	// 독서노트 모아보기
+	public List<Notelist> getNotelist(int userId) {
+		
+		List<Notelist> notelistList = new ArrayList<>();
+		
+		List<Note> getNotelist = noteDAO.selectNoteByUserId(userId);
+		
+		String coverSize = "Small";
+		
+		for (Note note : getNotelist) {
+			
+			AladinResponse aladinResponse = aladinApiBO.getItemLookUp(note.getIsbn(), coverSize);
+			List<AladinItem> aladinItem = aladinResponse.getItem();
+			
+			if (aladinItem == null) {
+				continue;
+			}
+			
+			Notelist notelist = new Notelist();
+			
+			String content = note.getContent();
+			String tagRemoveContent = content.replaceAll("<(/)?([a-zA-Z]*)(\\s[a-zA-Z]*=[^>]*)?(\\s)*(/)?>", "");
+			
+			String noteContent = "";
+			
+			if (tagRemoveContent.length() > 100) {
+				noteContent = tagRemoveContent.substring(0, 99);
+			} else {
+				noteContent = tagRemoveContent;
+			}
+			
+			notelist.setCover(aladinItem.get(0).getCover());
+			notelist.setTitle(aladinItem.get(0).getTitle());
+			notelist.setIsbn(note.getIsbn());
+			notelist.setContent(noteContent);
+			notelist.setCreatedAt(note.getCreatedAt());
+			notelist.setUpdatedAt(note.getUpdatedAt());
+			
+			notelistList.add(notelist);
+		}
+		
+		return notelistList;
+	}
 	
 	
 }

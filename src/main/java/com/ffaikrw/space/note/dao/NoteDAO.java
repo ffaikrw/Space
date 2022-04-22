@@ -1,5 +1,7 @@
 package com.ffaikrw.space.note.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -43,5 +45,10 @@ public interface NoteDAO {
 			@Param("userId") int userId
 			, @Param("isbn") String isbn13
 			);
+	
+	
+	// 독서노트 모아보기
+	public List<Note> selectNoteByUserId(@Param("userId") int userId);
+	
 	
 }

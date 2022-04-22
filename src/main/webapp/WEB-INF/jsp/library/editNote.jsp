@@ -32,5 +32,118 @@
 </head>
 <body>
 
+	<div id="wrap">
+	
+		<div class="contents d-flex">
+		
+			<c:import url="/WEB-INF/jsp/include/nav.jsp" />
+			
+			<div class="content">
+				<div class="content-header d-flex justify-content-between align-items-center">
+					<div class="page-name">독서노트 수정하기</div>
+					
+					<div OnClick="location.href='#'" style="cursor:pointer;" class="go-to-notelist text-center">
+						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
+					</div>
+						
+					<div class="profile-icon">
+						<c:choose>
+							<c:when test="${ userProfileImg ne null and userProfileImg ne ''}">
+								<a href="#" class="profile-link"><img src=""></a>
+							</c:when>
+							<c:otherwise>
+								<a href="#" class="profile-link-icon" data-toggle="modal" data-target="#profileModal">
+									<i class="bi bi-emoji-smile"></i>
+								</a>
+							</c:otherwise>
+						</c:choose>
+					</div>
+					
+				</div>
+				
+				<div class="content-section">
+					<div class="readingNote-box d-flex justify-content-center align-items-center">
+						<div class="editor-box">
+							<textarea id="contentInput" class="edit-content summernote">${ note.content }</textarea>  
+						</div>
+					</div>
+					
+					<div class="create-btn-box d-flex justify-content-end">
+						<button type="button" id="editBtn" data-isbn-id="<%= request.getParameter("isbn13") %>" class="create-note-btn">수정</button>
+					</div>
+				</div>
+				
+				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
+				
+			</div>	
+				
+		</div>
+	
+	</div>
+	
+	
+	<script>
+	
+		$('.summernote').summernote({
+		  height: 500,
+		  lang: "ko-KR",
+		  focus : true,
+		  toolbar: [
+			    ['fontname', ['fontname']],
+			    ['fontsize', ['fontsize']],
+			    ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+			    ['color', ['forecolor','color']],
+			    ['table', ['table']],
+			    ['para', ['ul', 'ol', 'paragraph']],
+			    ['height', ['height']],
+			    ['insert',['picture','link','video']],
+			    ['view', ['codeview','fullscreen', 'help']]
+			  ],
+			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
+			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+			
+		});
+	
+		$(document).ready(function(){
+			
+			// 수정 버튼
+			$("#editBtn").on("click", function(){
+				
+				let isbn13 = $(this).data("isbn-id");
+				let content = $("#contentInput").val();
+				
+				if (content == "") {
+					alert("노트를 작성해주세요.");
+					return;
+				}
+				
+				$.ajax({
+					
+					type:"post"
+					, url:"/library/updateNote_api"
+					, data:{"isbn13":isbn13, "content":content}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("독서노트가 수정되었습니다.");
+							location.href="/library/note_view?isbn13=" + isbn13;
+						} else {
+							alert("독서노트를 수정하지 못했습니다:(");
+						}
+						
+					}
+					, error:function(){
+						alert("readingNote 통신 에러");
+					}
+					
+				});
+				
+				
+			});
+			
+		});	
+	
+	</script>
+
 </body>
 </html>

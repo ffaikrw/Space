@@ -48,7 +48,7 @@ public class NoteRestController {
 	}
 	
 	
-	// 독서노트 작성
+	// 독서노트 삭제
 	@GetMapping("/deleteNote_api")
 	public Map<String, String> deleteNote(
 			@RequestParam("isbn13") String isbn13
@@ -71,6 +71,30 @@ public class NoteRestController {
 			return resultMap;
 		}
 	
+	
+	// 독서노트 수정
+	@PostMapping("/updateNote_api")
+	public Map<String, String> updateNote(
+			@RequestParam("isbn13") String isbn13
+			, @RequestParam("content") String content
+			, HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = noteBO.updateNote(userId, isbn13, content);
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if (count == 1) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
 	
 	
 }

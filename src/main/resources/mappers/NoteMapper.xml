@@ -43,6 +43,7 @@
 		update `note`
 		set
 			`content` = #{content}
+			, `updatedAt` = now()
 		where
 			`userId` = #{userId}
 			and `isbn` = #{isbn}
@@ -77,6 +78,25 @@
 		where
 			`userId` = #{userId}
 			and `isbn` = #{isbn}
+	
+	</select>
+	
+	
+	<select id="selectNoteByUserId" parameterType="int" resultType="com.ffaikrw.space.note.model.Note">
+	
+		select
+			`id`
+			, `userId`
+			, `isbn`
+			, `content`
+			, `createdAt`
+			, `updatedAt`
+		from
+			`note`
+		where
+			`userId` = #{userId}
+		order by
+			`id` desc
 	
 	</select>
 
