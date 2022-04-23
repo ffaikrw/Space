@@ -216,10 +216,20 @@
 			$.datepicker.setDefaults({
                 dayNamesMin: ['일', '월', '화', '수', '목', '금', '토']
                 , dateFormat: 'yy-mm-dd'
+                , maxDate: 0
             });
 			
 			// 완독 날짜 선택
 			$(".library-readDate-input").datepicker({
+				
+				showButtonPanel: true 
+				, changeMonth: true
+                , changeYear: true
+                , showAnim: "clip"
+				
+			});
+			
+			$(".edit-readDate-input").datepicker({
 				
 				showButtonPanel: true 
 				, changeMonth: true

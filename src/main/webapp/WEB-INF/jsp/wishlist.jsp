@@ -51,55 +51,67 @@
 				</div>
 				
 				<div class="content-section d-flex flex-wrap">
-				<c:forEach var="wishlist" items="${ wishlist }">
-					<div class="d-flex align-items-center">
-						<div class="book-box">
-							<div class="book-img-box d-flex">
-							<c:choose>
-								<c:when test="${ wishlist.cover ne null && wishlist.cover ne '' }">
-									<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="thumbnail-link">
-										<img src="${ wishlist.cover }">
-									</a>
-								</c:when>
-								<c:otherwise>
-									<div OnClick="location.href='/book_info?isbn13=${ wishlist.isbn13 }'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
-										<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+				<c:choose>
+					<c:when test="${ !empty wishlist }">
+						<c:forEach var="wishlist" items="${ wishlist }">
+							<div class="d-flex align-items-center">
+								<div class="book-box">
+									<div class="book-img-box d-flex">
+									<c:choose>
+										<c:when test="${ wishlist.cover ne null && wishlist.cover ne '' }">
+											<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="thumbnail-link">
+												<img src="${ wishlist.cover }">
+											</a>
+										</c:when>
+										<c:otherwise>
+											<div OnClick="location.href='/book_info?isbn13=${ wishlist.isbn13 }'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
+												<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+											</div>
+										</c:otherwise>
+									</c:choose>
 									</div>
-								</c:otherwise>
-							</c:choose>
-							</div>
-							<div class="book-title">
-								<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="title-link">
-								${ fn:substring(wishlist.title, 0, 13 ) }
-								<c:if test="${fn:length(wishlist.title) > 13}">
-								...
-								</c:if>
-								</a>
-							</div>
-							<div class="book-author">
-								<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="book-author">
-									${ fn:substring(wishlist.author, 0, 12 ) }
-									<c:if test="${fn:length(wishlist.author) > 12}">
-									...
-									</c:if>
-								</a>
-							</div>
-							<div class="d-flex justify-content-between">
-								<div class="d-flex">
-									<div>
-										<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+									<div class="book-title">
+										<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="title-link">
+										${ fn:substring(wishlist.title, 0, 13 ) }
+										<c:if test="${fn:length(wishlist.title) > 13}">
+										...
+										</c:if>
+										</a>
 									</div>
-									<div class="book-recommend ml-1">${ wishlist.recommendCount }</div>
+									<div class="book-author">
+										<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="book-author">
+											${ fn:substring(wishlist.author, 0, 12 ) }
+											<c:if test="${fn:length(wishlist.author) > 12}">
+											...
+											</c:if>
+										</a>
+									</div>
+									<div class="d-flex justify-content-between">
+										<div class="d-flex">
+											<div>
+												<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+											</div>
+											<div class="book-recommend ml-1">${ wishlist.recommendCount }</div>
+										</div>
+										<div>
+											<a href="#" data-isbn-id="${ wishlist.isbn13 }" class="wishlist-delete-icon">
+												<i class="bi bi-trash"></i>
+											</a>
+										</div>
+									</div>
 								</div>
-								<div>
-									<a href="#" data-isbn-id="${ wishlist.isbn13 }" class="wishlist-delete-icon">
-										<i class="bi bi-trash"></i>
-									</a>
-								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<div class="library-isEmpty-box d-flex align-items-center">
+							<div class="library-isEmpty text-center">
+								<i class="library-isEmpty-icon bi bi-book"></i><br>
+								읽어볼까에 담은 책이 없습니다.
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:otherwise>
+				</c:choose>
 					
 				</div>
 				
