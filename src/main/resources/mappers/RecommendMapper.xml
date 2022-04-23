@@ -45,6 +45,18 @@
 			and isbn = #{isbn}
 	
 	</select>
+	
+	
+	<select id="selectRecommendCountByIsbn" parameterType="String" resultType="int">
+		
+		select
+			count(*)
+		from
+			`recommend`
+		where
+			isbn = #{isbn}
+		
+	</select>
 
 
 </mapper>

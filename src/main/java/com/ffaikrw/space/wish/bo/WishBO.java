@@ -10,6 +10,7 @@ import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
+import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 import com.ffaikrw.space.wish.dao.WishDAO;
 import com.ffaikrw.space.wish.model.Wish;
 
@@ -21,6 +22,9 @@ public class WishBO {
 	
 	@Autowired
 	private AladinApiBO aladinApiBO;
+	
+	@Autowired
+	private RecommendBO recommendBO;
 	
 	
 	// 읽어볼까 추가
@@ -76,6 +80,7 @@ public class WishBO {
 			bookInfo.setAdult(aladinItem.get(0).isAdult());
 			bookInfo.setBestRank(aladinItem.get(0).getBestRank());
 			bookInfo.setSeriesInfo(aladinItem.get(0).getSeriesInfo());
+			bookInfo.setRecommendCount(recommendBO.getRecommendCount(aladinItem.get(0).getIsbn13()));
 			
 			bookInfoList.add(bookInfo);
 		}

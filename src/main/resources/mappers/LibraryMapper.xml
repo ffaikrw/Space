@@ -20,7 +20,7 @@
 		(
 			#{userId}
 			, #{isbn}
-			, now()
+			, null
 			, now()
 		)
 	

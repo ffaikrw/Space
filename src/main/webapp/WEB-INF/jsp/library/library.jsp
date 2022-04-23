@@ -127,12 +127,21 @@
 										<!--  완독 날짜 -->
 										<div class="library-subject">완독 날짜</div>
 										<div class="library-readDate">
-											<fmt:formatDate var="readDate" value="${ library.readDate }" pattern="yyyy년 M월 d일"/>
-											<input type="text" id="readDateInput${ library.isbn13 }" placeholder="${ readDate }" class="library-readDate-input">
-											<button type="button" data-isbn-id="${ library.isbn13 }" class="edit-readDate-btn">
-												<span class="edit-readDate-icon"><i class="bi bi-pencil"></i></span>
-											</button>
-											
+										<c:choose>
+											<c:when test="${ library.readDate eq null }">
+												<input type="text" id="readDateInput${ library.isbn13 }" placeholder="완독 날짜를 입력해주세요." class="library-readDate-input">
+												<button type="button" data-isbn-id="${ library.isbn13 }" class="edit-readDate-btn">
+													저장
+												</button>
+											</c:when>
+											<c:otherwise>
+												<fmt:formatDate var="readDate" value="${ library.readDate }" pattern="yyyy년 M월 d일"/>
+												<input type="text" id="readDateInput${ library.isbn13 }" placeholder="${ readDate }" class="edit-readDate-input">
+												<button type="button" data-isbn-id="${ library.isbn13 }" class="edit-readDate-btn">
+													수정
+												</button>
+											</c:otherwise>
+										</c:choose>
 										</div>
 										
 										<!-- 추천 -->
@@ -228,7 +237,7 @@
 				let readDate = $("#readDateInput" + isbn13).val().trim();
 				
 				if (readDate == "") {
-					alert("완독 날짜란을 선택해 완독 날짜를 입력해주세요.");
+					alert("완독 날짜란을 선택해 완독 날짜를 수정해주세요.");
 					return;
 				}
 				

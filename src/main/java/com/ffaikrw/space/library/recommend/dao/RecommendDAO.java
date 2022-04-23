@@ -26,4 +26,8 @@ public interface RecommendDAO {
 			, @Param("isbn") String isbn13
 			);
 	
+	
+	// 추천 수
+	public int selectRecommendCountByIsbn(@Param("isbn") String isbn13);
+	
 }

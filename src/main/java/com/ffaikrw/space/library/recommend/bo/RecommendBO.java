@@ -33,5 +33,11 @@ public class RecommendBO {
 	}
 	
 	
+	// 추천 수
+	public int getRecommendCount(String isbn13) {
+		return recommendDAO.selectRecommendCountByIsbn(isbn13);
+	}
+	
+	
 	
 }

@@ -89,14 +89,14 @@
 									<div>
 										<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
 									</div>
-									<div class="book-recommend ml-1">441</div>
+									<div class="book-recommend ml-1">${ wishlist.recommendCount }</div>
 								</div>
 								<div>
 									<a href="#" data-isbn-id="${ wishlist.isbn13 }" class="wishlist-delete-icon">
 										<i class="bi bi-trash"></i>
 									</a>
 								</div>
-							</div>	
+							</div>
 						</div>
 					</div>
 				</c:forEach>

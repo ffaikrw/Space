@@ -22,6 +22,7 @@ public class BookInfo {
 	private Date readDate;
 	private boolean recommendIsDuplicate;
 	private boolean noteIsDuplicate;
+	private int recommendCount;
 	
 	
 	public String getTitle() {
@@ -119,6 +120,12 @@ public class BookInfo {
 	}
 	public void setNoteIsDuplicate(boolean noteIsDuplicate) {
 		this.noteIsDuplicate = noteIsDuplicate;
+	}
+	public int getRecommendCount() {
+		return recommendCount;
+	}
+	public void setRecommendCount(int recommendCount) {
+		this.recommendCount = recommendCount;
 	}
 	
 }
