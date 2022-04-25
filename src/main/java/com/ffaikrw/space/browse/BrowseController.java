@@ -116,12 +116,13 @@ public class BrowseController {
 	@GetMapping("/search_result")
 	public String searchResultView(
 			@RequestParam("search") String search
+			, @RequestParam("startNum") Integer startNum
 			, Model model) {
 		
 		String keyword = "Keyword";
 		String sort = "Accuracy";
 		
-		List<BookInfo> bookInfoList = browseBO.getSearchResult(search, keyword, sort);
+		List<BookInfo> bookInfoList = browseBO.getSearchResult(search, keyword, startNum, sort);
 		model.addAttribute("search", bookInfoList);
 		
 		return "/browse/searchResult";

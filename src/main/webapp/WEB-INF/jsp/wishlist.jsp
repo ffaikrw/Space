@@ -79,12 +79,19 @@
 										</a>
 									</div>
 									<div class="book-author">
-										<a href="/book_info?isbn13=${ wishlist.isbn13 }" class="book-author">
-											${ fn:substring(wishlist.author, 0, 12 ) }
-											<c:if test="${fn:length(wishlist.author) > 12}">
-											...
-											</c:if>
-										</a>
+									<c:choose>
+										<c:when test="${fn:length(wishlist.authorList) > 3}">
+										<c:forEach var="author" items="${ wishlist.authorList }" end="2">
+											<a href="/author?author=${ author }" class="book-author">${ author }</a>
+										</c:forEach>
+										<span class="book-author">...</span>
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="author" items="${ wishlist.authorList }">
+												<a href="/author?author=${ author }" class="book-author">${ author }</a>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
 									</div>
 									<div class="d-flex justify-content-between">
 										<div class="d-flex">

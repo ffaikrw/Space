@@ -87,12 +87,19 @@
 								</a>
 							</div>
 							<div>
-								<a href="/book_info?isbn13=${ outstanding.isbn13 }" class="outstanding-author">
-									${ fn:substring(outstanding.author, 0, 8 ) }
-									<c:if test="${fn:length(outstanding.author) > 8}">
-									...
-									</c:if>
-								</a>
+							<c:choose>
+								<c:when test="${fn:length(outstanding.authorList) > 3}">
+								<c:forEach var="author" items="${ outstanding.authorList }" end="2">
+									<a href="/author?author=${ author }" class="outstanding-author">${ author }</a>
+								</c:forEach>
+								<span class="outstanding-author">...</span>
+								</c:when>
+								<c:otherwise>
+									<c:forEach var="author" items="${ outstanding.authorList }">
+										<a href="/author?author=${ author }" class="outstanding-author">${ author }</a>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 							</div>
 						</div>
 					</div>
@@ -144,7 +151,7 @@
 					return;
 				}
 				
-				location.href="/browse/search_result?search=" + search;
+				location.href="/browse/search_result?search=" + search + "&&startNum=1";
 				
 			});
 			

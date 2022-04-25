@@ -488,7 +488,6 @@ footer {
 
 .book-author:hover {
 	color: #999;
-	text-decoration: none;
 }
 
 .recommend-icon {
@@ -551,6 +550,10 @@ footer {
 	margin-top: 5px;
 }
 
+.weeklyNew-author:hover {
+	color: #fff;
+}
+
 .weeklyNew-description {
 	color: #fff;
 	font-size: 16px;
@@ -609,6 +612,10 @@ footer {
 	font-size: 20px;
 	font-weight: bold;
 	margin-bottom: 20px;
+}
+
+.bookInfo-author:hover {
+	color: #fff;
 }
 
 .bookInfo-category {
@@ -774,6 +781,35 @@ footer {
 
 .outstanding-author:hover {
 	color: #999;
+}
+
+.total-results {
+	width: 900px;
+	color: #6b4bde;
+	font-size: 14px;
+	font-weight: bold;
+	margin-top: 15px;
+	margin-left: 10px;
+	
+}
+
+.page-button {
+	width: 20px;
+	height: 20px;
+	font-size: 14px;
+	background-color: #000;
+	border: 1px solid #6b4bde;
+	border-radius: 10px;
+	margin-left: 3px;
+	margin-right: 3px;
+}
+
+.page-link {
+	color: #fff;
+}
+
+.page-link:hover {
+	color: #fff;
 	text-decoration: none;
 }
 
@@ -851,7 +887,6 @@ footer {
 
 .library-author:hover {
 	color: #fff;
-	text-decoration: none;
 }
 
 .library-readDate {

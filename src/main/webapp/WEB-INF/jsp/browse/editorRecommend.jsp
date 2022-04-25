@@ -75,7 +75,9 @@
 									</a>
 								</div>
 								<div class="weeklyNew-author">
-									${ editorRecommend.author }
+								<c:forEach var="author" items="${ editorRecommend.authorList }">
+									<a href="/author?author=${ author }" class="weeklyNew-author">${ author }</a>
+								</c:forEach>
 								</div>
 								<div class="weeklyNew-description">
 									${ editorRecommend.description }

@@ -1,13 +1,17 @@
 package com.ffaikrw.space.browse.model;
 
 import java.util.Date;
+import java.util.List;
 
 import com.ffaikrw.space.aladinAPI.model.AladinSeriesInfo;
 
 public class BookInfo {
 	
+	private int totalResults;
+	private int startIndex;
+	private int itemsPerPage;
 	private String title;
-	private String author;
+	private List<String> authorList;
 	private Date pubDate;
 	private String description;
 	private String isbn13;
@@ -24,12 +28,26 @@ public class BookInfo {
 	private boolean noteIsDuplicate;
 	private int recommendCount;
 	
-	
+	public int getTotalResults() {
+		return totalResults;
+	}
+	public int getStartIndex() {
+		return startIndex;
+	}
+	public int getItemsPerPage() {
+		return itemsPerPage;
+	}
+	public void setTotalResults(int totalResults) {
+		this.totalResults = totalResults;
+	}
+	public void setStartIndex(int startIndex) {
+		this.startIndex = startIndex;
+	}
+	public void setItemsPerPage(int itemsPerPage) {
+		this.itemsPerPage = itemsPerPage;
+	}
 	public String getTitle() {
 		return title;
-	}
-	public String getAuthor() {
-		return author;
 	}
 	public Date getPubDate() {
 		return pubDate;
@@ -66,9 +84,6 @@ public class BookInfo {
 	}
 	public void setTitle(String title) {
 		this.title = title;
-	}
-	public void setAuthor(String author) {
-		this.author = author;
 	}
 	public void setPubDate(Date pubDate) {
 		this.pubDate = pubDate;
@@ -126,6 +141,12 @@ public class BookInfo {
 	}
 	public void setRecommendCount(int recommendCount) {
 		this.recommendCount = recommendCount;
+	}
+	public List<String> getAuthorList() {
+		return authorList;
+	}
+	public void setAuthorList(List<String> authorList) {
+		this.authorList = authorList;
 	}
 	
 }

@@ -51,49 +51,65 @@
 				</div>
 				
 				<div class="content-section d-flex flex-wrap">
-				<c:forEach var="authorInfo" items="${ author.authorInfo }">
-					<div class="d-flex align-items-center">
-						<div class="book-box">
-							<div class="book-img-box d-flex">
-							<c:choose>
-								<c:when test="${ authorInfo.cover ne null && authorInfo.cover ne '' }">
-									<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="thumbnail-link">
-										<img src="${ authorInfo.cover }">
-									</a>
-								</c:when>
-								<c:otherwise>
-									<div OnClick="location.href='/book_info?isbn13=${ authorInfo.isbn13 }'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
-										<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+				<c:choose>
+					<c:when test="${ !empty author.authorInfo }">
+						<div class="total-results">${ author.authorInfo[0].totalResults }개의 관련 저서</div>
+						<c:forEach var="authorInfo" items="${ author.authorInfo }">
+							<div class="d-flex align-items-center">
+								<div class="book-box">
+									<div class="book-img-box d-flex">
+									<c:choose>
+										<c:when test="${ authorInfo.cover ne null && authorInfo.cover ne '' }">
+											<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="thumbnail-link">
+												<img src="${ authorInfo.cover }">
+											</a>
+										</c:when>
+										<c:otherwise>
+											<div OnClick="location.href='/book_info?isbn13=${ authorInfo.isbn13 }'" style="cursor:pointer;" class="thumbnail-box d-flex justify-content-center align-items-center">
+												<div class="thumbnail-icon text-white"><i class="bi bi-book"></i></div>
+											</div>
+										</c:otherwise>
+									</c:choose>
 									</div>
-								</c:otherwise>
-							</c:choose>
-							</div>
-							<div class="book-title">
-								<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="title-link">
-								${ fn:substring(authorInfo.title, 0, 13 ) }
-								<c:if test="${fn:length(authorInfo.title) > 13}">
-								...
-								</c:if>
-								</a>
-							</div>
-							<div class="book-author">
-								<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="book-author">
-									${ fn:substring(authorInfo.author, 0, 12 ) }
-									<c:if test="${fn:length(authorInfo.author) > 12}">
-									...
-									</c:if>
-								</a>
-							</div>
-							<div class="d-flex">
-								<div>
-									<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+									<div class="book-title">
+										<a href="/book_info?isbn13=${ authorInfo.isbn13 }" class="title-link">
+										${ fn:substring(authorInfo.title, 0, 13 ) }
+										<c:if test="${fn:length(authorInfo.title) > 13}">
+										...
+										</c:if>
+										</a>
+									</div>
+									<div class="book-author">
+									<c:choose>
+										<c:when test="${fn:length(authorInfo.authorList) > 3}">
+										<c:forEach var="author" items="${ authorInfo.authorList }" end="2">
+											<a href="/author?author=${ author }" class="book-author">${ author }</a>
+										</c:forEach>
+										...
+										</c:when>
+										<c:otherwise>
+											<c:forEach var="author" items="${ authorInfo.authorList }">
+												<a href="/author?author=${ author }" class="book-author">${ author }</a>
+											</c:forEach>
+										</c:otherwise>
+									</c:choose>
+									</div>
+									<div class="d-flex">
+										<div>
+											<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
+										</div>
+										<div class="book-recommend ml-1">${ authorInfo.recommendCount }</div>
+									</div>
 								</div>
-								<div class="book-recommend ml-1">441</div>
 							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+						<div class="search-result-none">
+							'<%= request.getParameter("author") %>'의 저서를 찾지 못했습니다.<i class="bi bi-emoji-frown"></i>
 						</div>
-					</div>
-				</c:forEach>
-					
+					</c:otherwise>
+				</c:choose>	
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />	

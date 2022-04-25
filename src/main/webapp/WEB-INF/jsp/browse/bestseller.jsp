@@ -76,7 +76,9 @@
 									</a>
 								</div>
 								<div class="weeklyNew-author">
-									${ bestseller.author }
+								<c:forEach var="author" items="${ bestseller.authorList }">
+									<a href="/author?author=${ author }" class="weeklyNew-author">${ author }</a> 
+								</c:forEach>
 								</div>
 								<div class="weeklyNew-description">
 									${ bestseller.description }

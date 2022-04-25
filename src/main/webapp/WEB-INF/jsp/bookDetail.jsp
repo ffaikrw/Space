@@ -70,7 +70,11 @@
 							<div class="bookInfo-subject">제목</div>
 							<div class="bookInfo-title">${ bookDetail.title }</div>
 							<div class="bookInfo-subject">저자</div>
-							<div class="bookInfo-author">${ bookDetail.author }</div>
+							<div class="bookInfo-author">
+							<c:forEach var="author" items="${ bookDetail.authorList }">
+								<a href="/author?author=${ author }" class="bookInfo-author">${ author }</a> 
+							</c:forEach>
+							</div>
 							<div class="bookInfo-subject">장르</div>
 							<div class="bookInfo-category">
 							<c:set var="genres" value="${ fn:split(bookDetail.categoryName, '>') }" />

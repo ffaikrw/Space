@@ -62,6 +62,7 @@
 				<div class="content-section d-flex flex-wrap">
 				<c:choose>
 					<c:when test="${ !empty search }">
+						<div class="total-results">${ search[0].totalResults }개의 도서가 검색되었습니다.</div>
 						<c:forEach var="searchResult" items="${ search }">
 							<div class="book-box d-flex align-items-center">
 							<div>	
@@ -87,13 +88,20 @@
 										</c:if>
 									</a>
 								</div>
-								<div class="">
-									<a href="/book_info?isbn13=${ searchResult.isbn13 }" class="book-author">
-										${ fn:substring(searchResult.author, 0, 13 ) }
-										<c:if test="${fn:length(searchResult.author) > 12}">
-										...
-										</c:if>
-									</a>
+								<div>
+								<c:choose>
+									<c:when test="${fn:length(searchResult.authorList) > 3}">
+									<c:forEach var="author" items="${ searchResult.authorList }" end="2">
+										<a href="/author?author=${ author }" class="book-author">${ author }</a>
+									</c:forEach>
+									...
+									</c:when>
+									<c:otherwise>
+										<c:forEach var="author" items="${ searchResult.authorList }">
+											<a href="/author?author=${ author }" class="book-author">${ author }</a>
+										</c:forEach>
+									</c:otherwise>
+								</c:choose>
 								</div>
 								<div class="d-flex">
 									<div class="">
@@ -104,6 +112,13 @@
 							</div>
 							</div>
 						</c:forEach>
+						<div class="w-100 mt-5 d-flex justify-content-center">
+						<c:forEach var="page" begin="0" end="3" varStatus="status">
+							<div class="page-button d-flex align-items-center justify-content-center">
+								<a href="/browse/search_result?search=<%= request.getParameter("search") %>&&startNum=${ status.count }" class="page-link">${ status.count }</a>
+							</div>
+						</c:forEach>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="search-result-none">

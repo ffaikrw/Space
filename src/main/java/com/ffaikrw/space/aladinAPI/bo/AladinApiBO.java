@@ -26,7 +26,7 @@ public class AladinApiBO {
 			+ "&QueryType={keyword}"
 			+ "&SearchTarget=Book"
 			+ "&MaxResults=50"
-			+ "&Start=1"
+			+ "&Start={startNum}"
 			+ "&Sort={sort}"
 			+ "&Cover=MidBig"
 			+ "&CategoryId=1"
@@ -91,7 +91,7 @@ public class AladinApiBO {
 	
 	
 	// 도서 검색
-	public AladinResponse getItemSearch(String search, String keyword, String sort) {
+	public AladinResponse getItemSearch(String search, String keyword, Integer startNum, String sort) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -106,6 +106,7 @@ public class AladinApiBO {
 				, AladinResponse.class
 				, search
 				, keyword
+				, startNum
 				, sort
 				).getBody();
 	}

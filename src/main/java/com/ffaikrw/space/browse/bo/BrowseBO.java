@@ -35,8 +35,23 @@ public class BrowseBO {
 			
 			BookInfo bookInfo = new BookInfo();
 			
+			List<String> authorList = new ArrayList<>();
+			String[] authors = aladinItem.getAuthor().split(",");
+			
+			for(String author : authors) {
+				if(author.endsWith("(지은이)")) {
+					author = author.replace("(지은이)", "");
+					authorList.add(author);
+				} else if(author.endsWith("(옮긴이)")) {
+					break;
+				} else {
+					authorList.add(author);
+				}
+			}
+			
+			bookInfo.setAuthorList(authorList);
+			
 			bookInfo.setTitle(aladinItem.getTitle());
-			bookInfo.setAuthor(aladinItem.getAuthor());
 			bookInfo.setPubDate(aladinItem.getPubDate());
 			bookInfo.setDescription(aladinItem.getDescription());
 			bookInfo.setIsbn13(aladinItem.getIsbn13());
@@ -64,9 +79,9 @@ public class BrowseBO {
 	
 	
 	// 도서 검색
-	public List<BookInfo> getSearchResult(String search, String keyword, String sort) {
+	public List<BookInfo> getSearchResult(String search, String keyword, Integer startNum, String sort) {
 		
-		AladinResponse aladinResponse = aladinApiBO.getItemSearch(search, keyword, sort);
+		AladinResponse aladinResponse = aladinApiBO.getItemSearch(search, keyword, startNum, sort);
 		List<AladinItem> aladinItemList = aladinResponse.getItem();
 		
 		List<BookInfo> bookInfoList = new ArrayList<>();
@@ -75,8 +90,24 @@ public class BrowseBO {
 			
 			BookInfo bookInfo = new BookInfo();
 			
+			List<String> authorList = new ArrayList<>();
+			String[] authors = aladinItem.getAuthor().split(",");
+			
+			for(String author : authors) {
+				if(author.endsWith("(지은이)")) {
+					author = author.replace("(지은이)", "");
+					authorList.add(author);
+				} else if(author.endsWith("(옮긴이)")) {
+					break;
+				} else {
+					authorList.add(author);
+				}
+			}
+			
+			bookInfo.setAuthorList(authorList);
+			
+			bookInfo.setTotalResults(aladinResponse.getTotalResults());
 			bookInfo.setTitle(aladinItem.getTitle());
-			bookInfo.setAuthor(aladinItem.getAuthor());
 			bookInfo.setPubDate(aladinItem.getPubDate());
 			bookInfo.setDescription(aladinItem.getDescription());
 			bookInfo.setIsbn13(aladinItem.getIsbn13());

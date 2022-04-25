@@ -63,8 +63,23 @@ public class LibraryBO {
 			
 			BookInfo bookInfo = new BookInfo();
 			
+			List<String> authorList = new ArrayList<>();
+			String[] authors = aladinItem.get(0).getAuthor().split(",");
+			
+			for(String author : authors) {
+				if(author.endsWith("(지은이)")) {
+					author = author.replace("(지은이)", "");
+					authorList.add(author);
+				} else if(author.endsWith("(옮긴이)")) {
+					break;
+				} else {
+					authorList.add(author);
+				}
+			}
+			
+			bookInfo.setAuthorList(authorList);
+			
 			bookInfo.setTitle(aladinItem.get(0).getTitle());
-			bookInfo.setAuthor(aladinItem.get(0).getAuthor());
 			bookInfo.setPubDate(aladinItem.get(0).getPubDate());
 			bookInfo.setDescription(aladinItem.get(0).getDescription());
 			bookInfo.setIsbn13(aladinItem.get(0).getIsbn13());

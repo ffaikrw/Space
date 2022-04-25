@@ -119,9 +119,9 @@
 										</div>
 										<div class="library-subject">작가</div>
 										<div>
-											<a href="/book_info?isbn13=${ library.isbn13 }" class="library-author">
-												${ library.author }
-											</a>
+										<c:forEach var="author" items="${ library.authorList }">
+											<a href="/author?author=${ author }" class="library-author">${ author }</a>
+										</c:forEach>
 										</div>
 										
 										<!--  완독 날짜 -->

@@ -73,7 +73,9 @@
 									<a href="/book_info?isbn13=${ weeklyNew.isbn13 }" class="weeklyNew-title">${ weeklyNew.title }</a>
 								</div>
 								<div class="weeklyNew-author">
-									${ weeklyNew.author }
+								<c:forEach var="author" items="${ weeklyNew.authorList }">
+									<a href="/author?author=${ author }" class="weeklyNew-author">${ author }</a>
+								</c:forEach>
 								</div>
 								<div class="weeklyNew-description">
 									${ weeklyNew.description }
