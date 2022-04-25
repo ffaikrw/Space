@@ -53,7 +53,7 @@
 				<div class="content-section d-flex flex-wrap">
 				<c:choose>
 					<c:when test="${ !empty author.authorInfo }">
-						<div class="total-results">${ author.authorInfo[0].totalResults }개의 관련 저서</div>
+						<div class="total-results">${ author.authorInfo[0].bookResultInfo.totalResult }개의 관련 저서</div>
 						<c:forEach var="authorInfo" items="${ author.authorInfo }">
 							<div class="d-flex align-items-center">
 								<div class="book-box">
@@ -103,6 +103,17 @@
 								</div>
 							</div>
 						</c:forEach>
+						<div class="w-100 mt-5 d-flex justify-content-center">
+						<c:if test="${ sauthor.authorInfo[0].bookResultInfo.endIndex ne 1 }">
+							<c:forEach var="page" begin="1" end="${ author.authorInfo[0].bookResultInfo.endIndex }" varStatus="status">
+								<div class="page-button d-flex align-items-center justify-content-center">
+									<a href="/browse/search_result?search=<%= request.getParameter("author") %>&page=${ status.count }" class="page-number">
+										${ status.count }
+									</a>
+								</div>
+							</c:forEach>
+						</c:if>
+						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="search-result-none">

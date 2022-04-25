@@ -13,13 +13,13 @@ public class AuthorBO {
 	private BrowseBO browseBO;
 	
 	
-	public AuthorInfo getAuthorInfo(String search) {
+	public AuthorInfo getAuthorInfo(String search, Integer startNum) {
 		
 		String keyword = "Author";
 		String sort = "Accuracy";
 		
 		AuthorInfo authorInfo = new AuthorInfo();
-		authorInfo.setAuthorInfo(browseBO.getSearchResult(search, keyword, sort));
+		authorInfo.setAuthorInfo(browseBO.getSearchResult(search, keyword, startNum, sort));
 		
 		return authorInfo;
 	}

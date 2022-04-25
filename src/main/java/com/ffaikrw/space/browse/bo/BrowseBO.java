@@ -10,6 +10,7 @@ import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
+import com.ffaikrw.space.browse.model.BookResultInfo;
 import com.ffaikrw.space.wish.bo.WishBO;
 
 @Service
@@ -86,10 +87,37 @@ public class BrowseBO {
 		
 		List<BookInfo> bookInfoList = new ArrayList<>();
 		
+		BookResultInfo bookResultInfo = new BookResultInfo();
+		
+		// 검색결과 수 구하기
+		if (aladinResponse.getTotalResults() > 200) {
+			bookResultInfo.setTotalResult(200);
+			
+		} else {
+			bookResultInfo.setTotalResult(aladinResponse.getTotalResults());
+		}
+		
+		// 페이지 수 구하기
+		if(aladinResponse.getTotalResults() > 200) {
+			bookResultInfo.setEndIndex(4);
+			
+		} else if(((aladinResponse.getTotalResults() % 50) > 0) && ((aladinResponse.getTotalResults() % 50) < 50)) {
+			bookResultInfo.setEndIndex((aladinResponse.getTotalResults() / 50) + 1);
+			
+		} else if((aladinResponse.getTotalResults() % 50) == 0) {
+			bookResultInfo.setEndIndex(aladinResponse.getTotalResults() / 50);
+			
+		} else {
+			bookResultInfo.setEndIndex(1);
+		}
+		
 		for (AladinItem aladinItem : aladinItemList) {
 			
 			BookInfo bookInfo = new BookInfo();
 			
+			bookInfo.setBookResultInfo(bookResultInfo);
+			
+			// 작가명 리스트에 담기
 			List<String> authorList = new ArrayList<>();
 			String[] authors = aladinItem.getAuthor().split(",");
 			
@@ -106,7 +134,6 @@ public class BrowseBO {
 			
 			bookInfo.setAuthorList(authorList);
 			
-			bookInfo.setTotalResults(aladinResponse.getTotalResults());
 			bookInfo.setTitle(aladinItem.getTitle());
 			bookInfo.setPubDate(aladinItem.getPubDate());
 			bookInfo.setDescription(aladinItem.getDescription());
@@ -125,6 +152,6 @@ public class BrowseBO {
 		return bookInfoList;
 	}
 	
-	
+
 	
 }

@@ -7,9 +7,7 @@ import com.ffaikrw.space.aladinAPI.model.AladinSeriesInfo;
 
 public class BookInfo {
 	
-	private int totalResults;
-	private int startIndex;
-	private int itemsPerPage;
+	private BookResultInfo bookResultInfo;
 	private String title;
 	private List<String> authorList;
 	private Date pubDate;
@@ -28,23 +26,11 @@ public class BookInfo {
 	private boolean noteIsDuplicate;
 	private int recommendCount;
 	
-	public int getTotalResults() {
-		return totalResults;
+	public BookResultInfo getBookResultInfo() {
+		return bookResultInfo;
 	}
-	public int getStartIndex() {
-		return startIndex;
-	}
-	public int getItemsPerPage() {
-		return itemsPerPage;
-	}
-	public void setTotalResults(int totalResults) {
-		this.totalResults = totalResults;
-	}
-	public void setStartIndex(int startIndex) {
-		this.startIndex = startIndex;
-	}
-	public void setItemsPerPage(int itemsPerPage) {
-		this.itemsPerPage = itemsPerPage;
+	public void setBookResultInfo(BookResultInfo bookResultInfo) {
+		this.bookResultInfo = bookResultInfo;
 	}
 	public String getTitle() {
 		return title;

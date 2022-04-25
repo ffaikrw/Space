@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.ffaikrw.space.browse.bo.BrowseBO;
 import com.ffaikrw.space.browse.model.BookInfo;
+import com.ffaikrw.space.browse.model.BookResultInfo;
 
 @Controller
 @RequestMapping("/browse")
@@ -116,14 +117,21 @@ public class BrowseController {
 	@GetMapping("/search_result")
 	public String searchResultView(
 			@RequestParam("search") String search
-			, @RequestParam("startNum") Integer startNum
+			, @RequestParam(value = "page", required = false) Integer startNum
 			, Model model) {
 		
 		String keyword = "Keyword";
 		String sort = "Accuracy";
 		
+		if (startNum == null) {
+			startNum = 1;
+		}
+		
 		List<BookInfo> bookInfoList = browseBO.getSearchResult(search, keyword, startNum, sort);
 		model.addAttribute("search", bookInfoList);
+		
+		BookResultInfo bookResultInfo = new BookResultInfo();
+		model.addAttribute("pageNumber", bookResultInfo);
 		
 		return "/browse/searchResult";
 	}

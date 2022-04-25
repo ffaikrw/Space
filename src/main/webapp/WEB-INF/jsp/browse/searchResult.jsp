@@ -62,7 +62,7 @@
 				<div class="content-section d-flex flex-wrap">
 				<c:choose>
 					<c:when test="${ !empty search }">
-						<div class="total-results">${ search[0].totalResults }개의 도서가 검색되었습니다.</div>
+						<div class="total-results">${ search[0].bookResultInfo.totalResult }개의 도서가 검색되었습니다.</div>
 						<c:forEach var="searchResult" items="${ search }">
 							<div class="book-box d-flex align-items-center">
 							<div>	
@@ -107,17 +107,21 @@
 									<div class="">
 										<i class="recommend-icon bi bi-hand-thumbs-up-fill"></i>
 									</div>
-									<div class="book-recommend ml-1">441</div>
+									<div class="book-recommend ml-1">${ searchResult.recommendCount }</div>
 								</div>
 							</div>
 							</div>
 						</c:forEach>
 						<div class="w-100 mt-5 d-flex justify-content-center">
-						<c:forEach var="page" begin="0" end="3" varStatus="status">
-							<div class="page-button d-flex align-items-center justify-content-center">
-								<a href="/browse/search_result?search=<%= request.getParameter("search") %>&&startNum=${ status.count }" class="page-link">${ status.count }</a>
-							</div>
-						</c:forEach>
+						<c:if test="${ search[0].bookResultInfo.endIndex ne 1 }">
+							<c:forEach var="page" begin="1" end="${ search[0].bookResultInfo.endIndex }" varStatus="status">
+								<div class="page-button d-flex align-items-center justify-content-center">
+									<a href="/browse/search_result?search=<%= request.getParameter("search") %>&page=${ status.count }" class="page-number">
+										${ status.count }
+									</a>
+								</div>
+							</c:forEach>
+						</c:if>
 						</div>
 					</c:when>
 					<c:otherwise>

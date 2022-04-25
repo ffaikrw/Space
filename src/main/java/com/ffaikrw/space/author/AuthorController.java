@@ -20,9 +20,10 @@ public class AuthorController {
 	@GetMapping("/author")
 	public String authorView(
 			@RequestParam("author") String search,
+			@RequestParam(value = "page", required = false) Integer startNum,
 			Model model) {
 		
-		AuthorInfo authorInfo = authorBO.getAuthorInfo(search);
+		AuthorInfo authorInfo = authorBO.getAuthorInfo(search, startNum);
 		model.addAttribute("author", authorInfo);
 		
 		return "author";
