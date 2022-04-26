@@ -47,4 +47,11 @@ public class UserController {
 		
 	}
 	
+	
+	// 프로필 관리
+	@GetMapping("/profile")
+	public String manageProfileView() {
+		return "user/profile";
+	}
+	
 }

@@ -45,20 +45,7 @@
 					<div OnClick="location.href='#'" style="cursor:pointer;" class="go-to-notelist text-center">
 						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
 					</div>
-						
-					<div class="profile-icon">
-						<c:choose>
-							<c:when test="${ userProfileImg ne null and userProfileImg ne ''}">
-								<a href="#" class="profile-link"><img src=""></a>
-							</c:when>
-							<c:otherwise>
-								<a href="#" class="profile-link-icon" data-toggle="modal" data-target="#profileModal">
-									<i class="bi bi-emoji-smile"></i>
-								</a>
-							</c:otherwise>
-						</c:choose>
-					</div>
-					
+					<c:import url="/WEB-INF/jsp/include/profileIcon.jsp" />
 				</div>
 				
 				<div class="content-section">
@@ -80,6 +67,8 @@
 		</div>
 	
 	</div>
+	
+	<c:import url="/WEB-INF/jsp/include/profileModal.jsp" />
 	
 	
 	<script>

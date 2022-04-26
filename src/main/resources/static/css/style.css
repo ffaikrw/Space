@@ -1163,3 +1163,84 @@ footer {
 .notelist-noteView-link:hover {
 	color: #fff;
 }
+
+
+
+/* user/profile.jsp */
+
+.profile-update-btn {
+	border-radius: 30px;
+	border: 0;
+	background-color: #6b4bde;
+	color: #fff;
+	font-size: 15px;
+	font-weight: bold;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	width: 100px;
+	box-shadow: 0;
+}
+
+.profile-image-box {
+	width: 400px;
+	height: 400px;
+}
+
+.profile-nickname-box {
+	width: 400px;
+	height: 400px;
+}
+
+.user-icon-radius {
+	width: 300px;
+	height: 300px;
+	background-color: #222;
+	border: 1px solid #6b4bde;
+	border-radius: 50%;
+}
+
+.user-icon {
+	color: #fff;
+	font-size: 200px;
+	margin-left: 47px;
+}
+
+.edit-profile-image {
+	padding-top: 20px;
+	margin-left: 90px;
+}
+
+#editImage {
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+}
+
+#editImage:hover {
+	color: #fff;
+	text-decoration: none;
+}
+
+.nickname-edit-label {
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.nickname-edit-input {
+	width: 350px;
+	height: 40px;
+	border: 2px solid;
+	border-radius: 5px;
+	border-color: #6b4bde;
+	background-color: #222;
+	color: #fff;
+	font-weight: bold;
+	padding-left: 10px;
+}
+
+.nickname-edit-input::placeholder {
+	color: #fff;
+}
+
