@@ -37,7 +37,7 @@ public class AladinApiBO {
 			+ "?ttbkey=" + key
 			+ "&QueryType={itemListType}"
 			+ "&MaxResults=50"
-			+ "&start=1"
+			+ "&start={startNum}"
 			+ "&CategoryId=1"
 			+ "&Cover={coverSize}"
 			+ "&SearchTarget=Book"
@@ -48,7 +48,7 @@ public class AladinApiBO {
 	
 	
 	// 도서 리스트
-	public AladinResponse getItemList(String itemListType, String coverSize) {
+	public AladinResponse getItemList(String itemListType, Integer startNum, String coverSize) {
 		
 		RestTemplate restTemplate = new RestTemplate();
 		
@@ -62,6 +62,7 @@ public class AladinApiBO {
 				, entity
 				, AladinResponse.class
 				, itemListType
+				, startNum
 				, coverSize
 				).getBody();
 		

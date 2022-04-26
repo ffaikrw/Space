@@ -65,5 +65,18 @@
 			and `isbn` = #{isbn}
 		
 	</update>
+	
+	
+	<select id="selectLibraryCountByIsbn" parameterType="map" resultType="int">
+	
+		select
+			count(*)
+		from
+			`library`
+		where
+			`userId` = #{userId}
+			and `isbn` = #{isbn}
+	
+	</select>
 
 </mapper>

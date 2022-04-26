@@ -26,7 +26,7 @@ public class WishController {
 			, Model model) {
 		
 		HttpSession session = request.getSession();
-		int userId = (Integer)session.getAttribute("userId");
+		Integer userId = (Integer)session.getAttribute("userId");
 		
 		List<BookInfo> bookInfo = wishBO.getWishlist(userId);
 		model.addAttribute("wishlist", bookInfo);

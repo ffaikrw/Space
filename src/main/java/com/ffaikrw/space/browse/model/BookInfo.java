@@ -21,6 +21,7 @@ public class BookInfo {
 	private int bestRank;
 	private AladinSeriesInfo seriesInfo;
 	private boolean wishIsDuplicate;
+	private boolean libraryIsDuplicate;
 	private Date readDate;
 	private boolean recommendIsDuplicate;
 	private boolean noteIsDuplicate;
@@ -103,6 +104,13 @@ public class BookInfo {
 	}
 	public void setWishIsDuplicate(boolean wishIsDuplicate) {
 		this.wishIsDuplicate = wishIsDuplicate;
+	}
+	
+	public boolean isLibraryIsDuplicate() {
+		return libraryIsDuplicate;
+	}
+	public void setLibraryIsDuplicate(boolean libraryIsDuplicate) {
+		this.libraryIsDuplicate = libraryIsDuplicate;
 	}
 	public Date getReadDate() {
 		return readDate;

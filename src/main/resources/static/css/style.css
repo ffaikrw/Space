@@ -504,6 +504,13 @@ footer {
 
 /* weeklyNew.jsp */
 
+.in-library {
+	color: #6b4bde;
+	font-size: 16px;
+	margin-top: 5px;
+	font-weight: bold;
+}
+
 .add-wishlist {
 	color: #6b4bde;
 	font-size: 16px;
@@ -653,6 +660,17 @@ footer {
 }
 
 .bookInfo-library-icon {
+	color: #6b4bde;
+	font-size: 24px;
+}
+
+.bookInfo-in-library {
+	color: #fff;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.bookInfo-in-library-icon {
 	color: #6b4bde;
 	font-size: 24px;
 }
@@ -834,6 +852,15 @@ footer {
 }
 
 .wishlist-delete-icon:hover {
+	color: #6b4bde;
+	text-decoration: none;
+}
+
+.move-to-library {
+	color: #6b4bde;
+}
+
+.move-to-library:hover {
 	color: #6b4bde;
 	text-decoration: none;
 }

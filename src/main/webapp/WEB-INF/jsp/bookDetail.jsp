@@ -86,20 +86,27 @@
 					</div>
 					<div class="mt-3">
 					<c:choose>
-						<c:when test="${ bookDetail.wishIsDuplicate }">
-							<a href="#" id="deleteWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">
-								읽어볼 책 <i class="bookInfo-wish-icon bi bi-heart-fill"></i>
-							</a>
+						<c:when test="${ bookDetail.libraryIsDuplicate }">
+							<span class="bookInfo-in-library">내 서재의 책 <i class="bookInfo-in-library-icon bi bi-book-fill"></i></span>
 						</c:when>
 						<c:otherwise>
-							<a href="#" id="addWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">
-								읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i>
-							</a>
+							<c:choose>
+								<c:when test="${ bookDetail.wishIsDuplicate }">
+									<a href="#" id="deleteWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">
+										읽어볼 책 <i class="bookInfo-wish-icon bi bi-heart-fill"></i>
+									</a>
+								</c:when>
+								<c:otherwise>
+									<a href="#" id="addWish" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-wish">
+										읽어볼까? <i class="bookInfo-wish-icon bi bi-heart"></i>
+									</a>
+								</c:otherwise>
+							</c:choose>
+								<a href="#" id="addLibrary" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-library">
+									내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i>
+								</a>
 						</c:otherwise>
 					</c:choose>
-						<a href="#" id="addLibrary" data-isbn-id="${ bookDetail.isbn13 }" class="bookInfo-library">
-							내 서재에 담기 <i class="bookInfo-library-icon bi bi-book"></i>
-						</a>
 					</div>
 					
 					<div class="bookInfo-subtitle">한 줄 평</div>
@@ -229,7 +236,7 @@
 					, success:function(data){
 						
 						if (data.result == "success") {
-							alert("내 서재에 담았습니다.");
+							location.reload();
 						} else {
 							alert("내 서재에 담지 못했습니다:(");
 						}

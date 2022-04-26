@@ -35,5 +35,13 @@ public interface LibraryDAO {
 			, @Param("isbn") String isbn13
 			, @Param("readDate") String readDate
 			);
+	
+	
+	// 내 서재에 있는 도서인지 확인
+	public int selectLibraryCountByIsbn(
+			@Param("userId") int userId
+			, @Param("isbn") String isbn13
+			);
+	
 	 
 }

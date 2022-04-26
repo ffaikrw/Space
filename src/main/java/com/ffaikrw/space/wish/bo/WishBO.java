@@ -10,6 +10,7 @@ import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
+import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 import com.ffaikrw.space.wish.dao.WishDAO;
 import com.ffaikrw.space.wish.model.Wish;
@@ -25,6 +26,9 @@ public class WishBO {
 	
 	@Autowired
 	private RecommendBO recommendBO;
+	
+	@Autowired
+	private LibraryBO libraryBO;
 	
 	
 	// 읽어볼까 추가
@@ -49,7 +53,7 @@ public class WishBO {
 	
 	
 	// 사용자의 모든 읽어볼까 도서 가져오기
-	public List<BookInfo> getWishlist(int userId) {
+	public List<BookInfo> getWishlist(Integer userId) {
 		
 		String coverSize = "MidBig";
 		
@@ -59,10 +63,16 @@ public class WishBO {
 		
 		for (Wish wish : wishlist) {
 			
+			if (libraryBO.libraryIsDuplicate(userId, wish.getIsbn())) {
+				this.deleteWish(userId, wish.getIsbn());
+				continue;
+			}
+			
 			AladinResponse aladinResponse = aladinApiBO.getItemLookUp(wish.getIsbn(), coverSize);
 			List<AladinItem> aladinItem = aladinResponse.getItem();
 			
 			if (aladinItem == null) {
+				this.deleteWish(userId, wish.getIsbn());
 				continue;
 			}
 			

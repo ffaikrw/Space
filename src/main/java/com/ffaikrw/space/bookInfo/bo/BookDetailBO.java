@@ -10,6 +10,7 @@ import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
+import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.wish.bo.WishBO;
 
 @Service
@@ -20,6 +21,9 @@ public class BookDetailBO {
 	
 	@Autowired
 	private WishBO wishBO;
+	
+	@Autowired
+	private LibraryBO libraryBO;
 	
 	
 	public BookInfo getBookDetail(Integer userId, String isbn13) {
@@ -60,8 +64,10 @@ public class BookDetailBO {
 		if (userId != null) {
 			
 			boolean wishIdDuplicate = wishBO.wishIsDuplicate(userId, aladinItem.get(0).getIsbn13());
+			boolean libraryIsDuplicate = libraryBO.libraryIsDuplicate(userId, aladinItem.get(0).getIsbn13());
 			
 			bookInfo.setWishIsDuplicate(wishIdDuplicate);
+			bookInfo.setLibraryIsDuplicate(libraryIsDuplicate);
 		}
 		
 		return bookInfo;

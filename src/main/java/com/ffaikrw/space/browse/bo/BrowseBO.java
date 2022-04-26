@@ -11,6 +11,7 @@ import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.BookResultInfo;
+import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.wish.bo.WishBO;
 
 @Service
@@ -22,20 +23,51 @@ public class BrowseBO {
 	@Autowired
 	private WishBO wishBO;
 	
+	@Autowired
+	private LibraryBO libraryBO;
+	
 	
 	
 	// 도서 리스트
-	public List<BookInfo> getBookList(Integer userId, String itemListType, String coverSize) {
+	public List<BookInfo> getBookList(Integer userId, String itemListType, Integer startNum, String coverSize) {
 		
-		AladinResponse aladinResponse = aladinApiBO.getItemList(itemListType, coverSize);
+		AladinResponse aladinResponse = aladinApiBO.getItemList(itemListType, startNum, coverSize);
 		List<AladinItem> aladinItemList = aladinResponse.getItem();
 		
 		List<BookInfo> bookInfoList = new ArrayList<>();
+		
+		BookResultInfo bookResultInfo = new BookResultInfo();
+		
+		// 검색결과 수 구하기
+		if (aladinResponse.getTotalResults() > 200) {
+			bookResultInfo.setTotalResult(200);
+			
+		} else {
+			bookResultInfo.setTotalResult(aladinResponse.getTotalResults());
+		}
+		
+		// 페이지 수 구하기
+		if(aladinResponse.getTotalResults() > 200) {
+			bookResultInfo.setEndIndex(4);
+			
+		} else if(((aladinResponse.getTotalResults() % 50) > 0) && ((aladinResponse.getTotalResults() % 50) < 50)) {
+			bookResultInfo.setEndIndex((aladinResponse.getTotalResults() / 50) + 1);
+			
+		} else if((aladinResponse.getTotalResults() % 50) == 0) {
+			bookResultInfo.setEndIndex(aladinResponse.getTotalResults() / 50);
+			
+		} else {
+			bookResultInfo.setEndIndex(1);
+		}
+		
 		
 		for (AladinItem aladinItem : aladinItemList) {
 			
 			BookInfo bookInfo = new BookInfo();
 			
+			bookInfo.setBookResultInfo(bookResultInfo);
+			
+			// 작가명 잘라서 리스트에 담기
 			List<String> authorList = new ArrayList<>();
 			String[] authors = aladinItem.getAuthor().split(",");
 			
@@ -67,8 +99,10 @@ public class BrowseBO {
 			if (userId != null) {
 				
 				boolean wishIdDuplicate = wishBO.wishIsDuplicate(userId, aladinItem.getIsbn13());
+				boolean libraryIsDuplicate = libraryBO.libraryIsDuplicate(userId, aladinItem.getIsbn13());
 				
 				bookInfo.setWishIsDuplicate(wishIdDuplicate);
+				bookInfo.setLibraryIsDuplicate(libraryIsDuplicate);
 			}
 			
 			bookInfoList.add(bookInfo);

@@ -53,7 +53,7 @@
 				<div class="content-section d-flex flex-wrap">
 				<c:forEach var="bestseller" items="${ bestseller }" varStatus="status">
 					<div class="weeklyNew-box">
-						<div class="bestseller-rank">${ status.count }</div>
+						<div class="bestseller-rank">${ bestseller.bestRank }</div>
 						<div class="d-flex align-items-center">
 							<div class="weeklyNew-img-box d-flex">
 								<div class="d-flex justify-content-center align-items-center">
@@ -87,6 +87,9 @@
 						</div>	
 						<div class="mt-1">
 						<c:choose>
+							<c:when test="${ bestseller.libraryIsDuplicate }">
+								<span class="in-library">내 서재의 책 <i class="bi bi-book-fill"></i></span>
+							</c:when>
 							<c:when test="${ bestseller.wishIsDuplicate }">
 								<a href="#" data-isbn-id="${ bestseller.isbn13 }" class="delete-wishlist">읽어볼 책 <i class="bi bi-heart-fill"></i></a>
 							</c:when>
@@ -97,6 +100,18 @@
 						</div>
 					</div>
 				</c:forEach>	
+				</div>
+				
+				<div class="w-100 mt-5 d-flex justify-content-center">
+				<c:if test="${ bestseller[0].bookResultInfo.endIndex ne 1 }">
+					<c:forEach var="page" begin="1" end="${ bestseller[0].bookResultInfo.endIndex }" varStatus="status">
+						<div class="page-button d-flex align-items-center justify-content-center">
+							<a href="/browse/bestseller?page=${ status.count }" class="page-number">
+								${ status.count }
+							</a>
+						</div>
+					</c:forEach>
+				</c:if>
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />

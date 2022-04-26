@@ -114,4 +114,12 @@ public class LibraryBO {
 	}
 	
 	
+	// 내 서재에 있는 도서인지 확인
+	public boolean libraryIsDuplicate(int userId, String isbn13) {
+		
+		int count = libraryDAO.selectLibraryCountByIsbn(userId, isbn13);
+		
+		return (count != 0);
+	}
+	
 }

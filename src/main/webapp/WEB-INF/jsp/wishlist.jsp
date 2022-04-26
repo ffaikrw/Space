@@ -101,6 +101,9 @@
 											<div class="book-recommend ml-1">${ wishlist.recommendCount }</div>
 										</div>
 										<div>
+											<a href="#" data-isbn-id="${ wishlist.isbn13 }" class="move-to-library">
+												<i class="bi bi-book"></i>
+											</a>
 											<a href="#" data-isbn-id="${ wishlist.isbn13 }" class="wishlist-delete-icon">
 												<i class="bi bi-trash"></i>
 											</a>
@@ -176,6 +179,37 @@
 					}
 					, error:function(){
 						alert("wishlist 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+			
+			// 내 서재로 이동
+			$(".move-to-library").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let isbn13 = $(this).data("isbn-id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/library/addBook_api"
+					, data:{"isbn13":isbn13}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("내 서재로 이동했습니다.");
+							location.reload();
+						} else {
+							alert("내 서재로 이동하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("library 통신 에러");
 					}
 					
 				});
