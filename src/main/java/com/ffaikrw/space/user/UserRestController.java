@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ffaikrw.space.user.bo.UserBO;
 import com.ffaikrw.space.user.model.User;
@@ -48,7 +49,9 @@ public class UserRestController {
 	
 	// 닉네임 중복확인 API
 	@GetMapping("/duplicate_nickname")
-	public Map<String, Boolean> nicknameIsDuplicate(@RequestParam("nickname") String nickname) {
+	public Map<String, Boolean> nicknameIsDuplicate(
+			@RequestParam("nickname") String nickname
+			) {
 		
 		boolean isDuplicate = userBO.nicknameIsDuplicate(nickname);
 		
@@ -101,6 +104,33 @@ public class UserRestController {
 		
 		return resultMap;
 	}
+	
+	
+	// 프로필 관리 API
+	@PostMapping("/manage_profile")
+	public Map<String, String> manageProfile(
+			@RequestParam("nickname") String nickname
+			, @RequestParam("file") MultipartFile file
+			, HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		int count = userBO.editProfile(userId, nickname, file);
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if (count == 1) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		
+		return resultMap;
+	}
+	
+	
 	
 	
 

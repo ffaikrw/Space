@@ -2,8 +2,10 @@ package com.ffaikrw.space.user.bo;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.ffaikrw.space.common.EncryptUtils;
+import com.ffaikrw.space.common.FileManagerService;
 import com.ffaikrw.space.user.dao.UserDAO;
 import com.ffaikrw.space.user.model.User;
 
@@ -34,7 +36,7 @@ public class UserBO {
 	// 닉네임 중복확인 API
 	public boolean nicknameIsDuplicate(String nickname) {
 		
-		int count = userDAO.selectNicknameCount(nickname);
+		int count = userDAO.selectNicknameCount(nickname);;
 		
 		return !(count == 0);
 	}
@@ -58,5 +60,19 @@ public class UserBO {
 		
 	}
 	
+	
+	// 프로필 수정
+	public int editProfile(int userId, String nickname, MultipartFile file) {
+		
+		String profileImage = FileManagerService.saveFile(userId, file);
+		
+		return userDAO.updateProfile(userId, nickname, profileImage);
+	}
+	
+	
+	// 프로필 정보 가져오기
+	public User getProfile(int userId) {
+		return userDAO.selectProfile(userId);
+	}
 	
 }

@@ -72,5 +72,34 @@
 			and `password` = #{password}
 	
 	</select>
+	
+	
+	<update id="updateProfile" parameterType="int">
+		
+		update
+			`user`
+		set
+			`nickname` = #{nickname}
+			, `profileImage` = #{profileImage}
+			, `updatedAt` = now()
+		where
+			`id` = #{id}
+	
+	</update>
+	
+	
+	<select id="selectProfile" parameterType="int" resultType="com.ffaikrw.space.user.model.User">
+	
+		select
+			`id`
+			, `nickname`
+			, `profileImage`
+		from
+			`user`
+		where
+			`id` = #{id}
+	
+	</select>
+
 
 </mapper>

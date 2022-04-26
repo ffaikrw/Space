@@ -58,7 +58,10 @@
 					<div class="profile-nickname-box d-flex justify-content-center align-items-center">
 						<div>
 							<div class="nickname-edit-label">닉네임 수정</div>
-							<input type="text" id="editNickname" class="nickname-edit-input" value="${ userNickname }">
+							<input type="text" id="editNickname" class="nickname-edit-input" placeholder="${ userNickname }">
+							<span id="availableNicknameIcon" class="validation-icon text-success d-none"><i class="bi bi-check"></i></span>
+							<span id="duplicateNicknameIcon" class="validation-icon text-danger d-none"><i class="bi bi-x"></i></span>
+							<div id="duplicateNicknameText" class="validation-text text-danger d-none mr-5">사용 중인 닉네임입니다.</div>
 						</div>	
 					</div>
 				
@@ -79,11 +82,66 @@
 	
 		$(document).ready(function(){
 			
+			// 닉네임 중복 여부 저장 변수
+			var nicknameIsDuplicate = true;
+			
+			// 수정한 닉네임 중복 확인
+			$("#editNickname").focusout(function(){
+				
+				let nickname = $("#editNickname").val().trim();
+				
+				if (nickname == "") {
+					// 입력란이 비어있으면 기존 닉네임으로 저장
+				}
+
+				$.ajax({
+					
+					type:"get"
+					, url:"/user/duplicate_nickname"
+					, data:{"nickname":nickname}
+					, success:function(data){
+						
+						$("#availableNicknameIcon").addClass("d-none");
+						$("#duplicateNicknameIcon").addClass("d-none");
+						$("#duplicateNicknameText").addClass("d-none");
+						
+						if(data.is_duplicate) {
+							$("#duplicateNicknameIcon").removeClass("d-none");
+							$("#duplicateNicknameText").removeClass("d-none");
+						} else {
+							$("#availableNicknameIcon").removeClass("d-none");
+						}
+						
+						nicknameIsDuplicate = data.is_duplicate;
+						
+					}
+					, error:function(){
+						alert("닉네임 중복확인 통신 에러");
+					}
+					
+				});
+				
+				// 닉네임 중복확인 초기화
+				$("#nickname").on("input", function(){
+					
+					nicknameIsDuplicate = true;
+					
+					$("#availableNicknameIcon").addClass("d-none");
+					$("#duplicateNicknameIcon").addClass("d-none");
+					$("#duplicateNicknameText").addClass("d-none");
+					
+				});
+				
+				
+			});
+			
+			
+			
 			$("#editProfileBtn").on("click", function(){
 				
 				let nickname = $("#editNickname").val().trim();
 				
-				// 수정한 닉네임이 중복되었는지 확인
+				
 				
 				
 				// 이미지 파일 업로드

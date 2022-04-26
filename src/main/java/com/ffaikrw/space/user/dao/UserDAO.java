@@ -30,6 +30,17 @@ public interface UserDAO {
 			@Param("email") String email,
 			@Param("password") String password
 			);
+	
+	
+	// 프로필 관리
+	public int updateProfile(
+			@Param("id") int userId
+			, @Param("nickname") String nickname
+			, @Param("profileImage") String profileImage
+			);
 		
+	
+	// 프로필 정보 가져오기
+	public User selectProfile(@Param("id") int userId);
 		
 }
