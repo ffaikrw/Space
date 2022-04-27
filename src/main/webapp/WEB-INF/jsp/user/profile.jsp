@@ -44,21 +44,28 @@
 				
 					<div class="profile-image-box d-flex justify-content-center align-items-center">
 						<div>
-							<div class="user-icon-radius">
-								<div class="user-icon">
-									<i class="bi bi-person-fill"></i>
+						<c:choose>
+							<c:when test="${ userInfo.profileImage eq null || userInfo.profileImage eq '' }">
+								<div class="user-icon-radius">
+									<div class="user-icon">
+										<i class="bi bi-person-fill"></i>
+									</div>
 								</div>
-							</div>
+							</c:when>
+							<c:otherwise>
+								<img src="" width="300px" height="300px">
+							</c:otherwise>
+						</c:choose>
 							<div class="edit-profile-image">
 								<a href="#" id="editImage"><i class="bi bi-image-fill"></i> 프로필 사진 수정</a>
 								<input type="file" id="fileInput" class="d-none">
 							</div>
 						</div>	
 					</div>
-					<div class="profile-nickname-box d-flex justify-content-center align-items-center">
+					<div class="profile-nickname-box d-flex align-items-center">
 						<div>
 							<div class="nickname-edit-label">닉네임 수정</div>
-							<input type="text" id="editNickname" class="nickname-edit-input" placeholder="${ userNickname }">
+							<input type="text" id="editNickname" data-value="${ userNickname }" class="nickname-edit-input" placeholder="${ userNickname }">
 							<span id="availableNicknameIcon" class="validation-icon text-success d-none"><i class="bi bi-check"></i></span>
 							<span id="duplicateNicknameIcon" class="validation-icon text-danger d-none"><i class="bi bi-x"></i></span>
 							<div id="duplicateNicknameText" class="validation-text text-danger d-none mr-5">사용 중인 닉네임입니다.</div>
@@ -92,8 +99,9 @@
 				
 				if (nickname == "") {
 					// 입력란이 비어있으면 기존 닉네임으로 저장
+					nickname = $("#editNickname").data("value");
 				}
-
+				
 				$.ajax({
 					
 					type:"get"
@@ -105,14 +113,20 @@
 						$("#duplicateNicknameIcon").addClass("d-none");
 						$("#duplicateNicknameText").addClass("d-none");
 						
-						if(data.is_duplicate) {
+						// 세션에 저장된 값과 같은 이름이면 false
+						// 아니면 중복검사 실행
+						
+						if (nickname == $("#editNickname").data("value")) {
+							$("#availableNicknameIcon").removeClass("d-none");
+							nicknameIsDuplicate = false;
+						} else if (data.is_duplicate) {
 							$("#duplicateNicknameIcon").removeClass("d-none");
 							$("#duplicateNicknameText").removeClass("d-none");
+							nicknameIsDuplicate = data.is_duplicate;
 						} else {
 							$("#availableNicknameIcon").removeClass("d-none");
+							nicknameIsDuplicate = data.is_duplicate;
 						}
-						
-						nicknameIsDuplicate = data.is_duplicate;
 						
 					}
 					, error:function(){
@@ -121,17 +135,17 @@
 					
 				});
 				
-				// 닉네임 중복확인 초기화
-				$("#nickname").on("input", function(){
-					
-					nicknameIsDuplicate = true;
-					
-					$("#availableNicknameIcon").addClass("d-none");
-					$("#duplicateNicknameIcon").addClass("d-none");
-					$("#duplicateNicknameText").addClass("d-none");
-					
-				});
+			});
+			
+			
+			// 닉네임 중복확인 초기화
+			$("#nickname").on("input", function(){
 				
+				nicknameIsDuplicate = true;
+				
+				$("#availableNicknameIcon").addClass("d-none");
+				$("#duplicateNicknameIcon").addClass("d-none");
+				$("#duplicateNicknameText").addClass("d-none");
 				
 			});
 			
@@ -141,13 +155,43 @@
 				
 				let nickname = $("#editNickname").val().trim();
 				
+				// 입력란이 비어있으면 기존 닉네임으로 저장
+				if (nickname == "") {
+					nickname = $("#editNickname").data("value");
+				}
 				
-				
+				if (nicknameIsDuplicate) {
+					alert("사용할 수 없는 닉네임입니다.");
+					return;
+				}
 				
 				// 이미지 파일 업로드
+				let formData = new FormData();
+				formData.append("nickname", nickname);
+				formData.append("file", $("#fileInput")[0].files[0]);
+				
+				$.ajax({
+					
+					type:"post"
+					, url:"/user/manage_profile"
+					, data:formData
+					, enctype:"multipart/form-data"
+					, processData:false
+					, contentType:false
+					, success:function(data){
+						if (data.result == "success") {
+							location.href="/user/profile";
+						} else {
+							alert("프로필을 수정하지 못했습니다.");
+						}
+					}
+					, error:function(){
+						alert("프로필 수정 통신 에러");
+					}
+					
+				});
 				
 			});
-			
 			
 			
 			$("#editImage").on("click", function(){
