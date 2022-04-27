@@ -99,7 +99,29 @@
 					
 					<div class="bookInfo-subtitle">한 줄 평</div>
 					<div class="mt-1">
-						<div class="comment-box"></div>
+						<div class="comment-box">
+							<div class="comment-list-box d-flex align-items-center">
+								<div>
+									<div class="comment-nickname">가나다</div>
+									<div class="comment-date">2022.12.06.</div>
+									<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
+								</div>
+							</div>
+							<div class="comment-list-box d-flex align-items-center">
+								<div>
+									<div class="comment-nickname">가나다</div>
+									<div class="comment-date">2022.12.06.</div>
+									<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
+								</div>
+							</div>
+							<div class="comment-list-box d-flex align-items-center">
+								<div>
+									<div class="comment-nickname">가나다</div>
+									<div class="comment-date">2022.12.06.</div>
+									<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
+								</div>
+							</div>
+						</div>
 					</div>
 					<div class="write-comment-box">
 						<input type="text" id="commentInput" placeholder="한 줄 평 작성하기">
