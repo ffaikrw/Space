@@ -87,6 +87,18 @@
 	</update>
 	
 	
+	<update id="updateProfileNickname" parameterType="map">
+	
+		update `user`
+		set
+			`nickname` = #{nickname}
+			, `updatedAt` = now()
+		where
+			`id` = #{id}
+	
+	</update>
+	
+	
 	<select id="selectProfile" parameterType="int" resultType="com.ffaikrw.space.user.model.User">
 	
 		select
@@ -99,6 +111,7 @@
 			`id` = #{id}
 	
 	</select>
+	
 
 
 </mapper>

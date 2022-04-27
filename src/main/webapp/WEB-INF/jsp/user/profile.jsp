@@ -35,6 +35,9 @@
 			
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">프로필 관리</div>
+					<div class="d-flex justify-content-center">
+						<button type="button" id="editProfileBtn" class="profile-update-btn">수정</button>
+					</div>
 				</div>
 				
 				<div class="content-section d-flex">
@@ -59,18 +62,12 @@
 								<a href="#" id="editImage"><i class="bi bi-image-fill"></i> 프로필 사진 선택</a>
 								<input type="file" id="fileInput" class="d-none">
 							</div>
-							<div class="d-flex justify-content-center">
-								<button type="button" id="editImageBtn" class="image-update-btn">수정</button>
-							</div>
 						</div>	
 					</div>
 					<div class="profile-nickname-box d-flex align-items-center">
 						<div>
 							<div class="d-flex align-items-center mb-1">
-								<div class="nickname-edit-label">닉네임</div>
-								<div class="d-flex justify-content-center">
-									<button type="button" id="editNicknameBtn" class="nickname-update-btn">수정</button>
-								</div>
+								<div class="nickname-edit-label">닉네임 수정</div>
 							</div>	
 							<input type="text" id="editNickname" data-value="${ userInfo.nickname }" class="nickname-edit-input" placeholder="${ userInfo.nickname }">
 							<span id="availableNicknameIcon" class="validation-icon text-success d-none"><i class="bi bi-check"></i></span>
@@ -157,8 +154,8 @@
 			});
 			
 			
-			// 닉네임 수정 버튼
-			$("#editNicknameBtn").on("click", function(){
+			// 프로필 수정 버튼
+			$("#editProfileBtn").on("click", function(){
 				
 				let nickname = $("#editNickname").val().trim();
 				
@@ -172,7 +169,6 @@
 					alert("사용할 수 없는 닉네임입니다.");
 					return;
 				}
-				
 				
 				// 이미지 파일 업로드
 				let formData = new FormData();
@@ -219,8 +215,6 @@
 			});
 			
 			
-			
-			
 			$("#editImage").on("click", function(){
 				
 				$("#fileInput").click();
@@ -228,7 +222,6 @@
 			});
 			
 		});
-	
 	
 	</script>
 	

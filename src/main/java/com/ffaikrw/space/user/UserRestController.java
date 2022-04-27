@@ -107,7 +107,7 @@ public class UserRestController {
 	
 	
 	// 프로필 관리 API
-	@PostMapping("/edit_image")
+	@PostMapping("/manage_profile")
 	public Map<String, String> manageProfile(
 			@RequestParam("nickname") String nickname
 			, @RequestParam(value = "file", required = false) MultipartFile file

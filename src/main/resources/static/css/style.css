@@ -1215,31 +1215,18 @@ footer {
 	margin: auto;
 }
 
-.image-update-btn {
+.profile-update-btn {
 	border-radius: 30px;
 	border: 0;
 	background-color: #6b4bde;
 	color: #fff;
-	font-size: 12px;
+	font-size: 16px;
 	font-weight: bold;
 	padding-top: 5px;
 	padding-bottom: 5px;
-	width: 50px;
+	width: 100px;
 	box-shadow: 0;
 	margin-top: 15px;
-}
-
-.nickname-update-btn {
-	border-radius: 30px;
-	border: 0;
-	background-color: #6b4bde;
-	color: #fff;
-	font-size: 12px;
-	font-weight: bold;
-	width: 50px;
-	height: 20px;
-	box-shadow: 0;
-	margin-left: 5px;
 }
 
 .profile-nickname-box {
