@@ -74,10 +74,9 @@
 	</select>
 	
 	
-	<update id="updateProfile" parameterType="int">
+	<update id="updateProfile" parameterType="map">
 		
-		update
-			`user`
+		update `user`
 		set
 			`nickname` = #{nickname}
 			, `profileImage` = #{profileImage}

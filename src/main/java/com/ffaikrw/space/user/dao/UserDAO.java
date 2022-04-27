@@ -32,11 +32,17 @@ public interface UserDAO {
 			);
 	
 	
-	// 프로필 관리
+	// 프로필 관리 - 닉네임, 프로필사진 모두 수정
 	public int updateProfile(
 			@Param("id") int userId
 			, @Param("nickname") String nickname
 			, @Param("profileImage") String profileImage
+			);
+	
+	// 프로필 관리 - 닉네임만 수정
+	public int updateProfileNickname(
+			@Param("id") int userId
+			, @Param("nickname") String nickname
 			);
 		
 	

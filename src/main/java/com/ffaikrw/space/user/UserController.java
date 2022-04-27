@@ -70,6 +70,12 @@ public class UserController {
 		User user = userBO.getProfile(userId);
 		model.addAttribute("userInfo", user);
 		
+		session.removeAttribute("userNickname");
+		session.removeAttribute("userProfileImg");
+		
+		session.setAttribute("userNickname", user.getNickname());
+		session.setAttribute("userProfileImg", user.getProfileImage());
+		
 		return "user/profile";
 	}
 	

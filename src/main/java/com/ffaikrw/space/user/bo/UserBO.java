@@ -64,9 +64,18 @@ public class UserBO {
 	// 프로필 수정
 	public int editProfile(int userId, String nickname, MultipartFile file) {
 		
-		String profileImage = FileManagerService.saveFile(userId, file);
+		String profileImage = null;
 		
-		return userDAO.updateProfile(userId, nickname, profileImage);
+		// 파일이 비어 있으면 닉네임만 업데이트 하는 DAO로 리턴
+		// 그렇지 않으면 return userDAO.updateProfile(userId, nickname, profileImage);
+		
+		if(file != null) {
+			profileImage = FileManagerService.saveFile(userId, file);
+			return userDAO.updateProfile(userId, nickname, profileImage);
+		} else {
+			return userDAO.updateProfileNickname(userId, nickname);
+		}
+		
 	}
 	
 	

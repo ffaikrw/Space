@@ -107,10 +107,10 @@ public class UserRestController {
 	
 	
 	// 프로필 관리 API
-	@PostMapping("/manage_profile")
+	@PostMapping("/edit_image")
 	public Map<String, String> manageProfile(
 			@RequestParam("nickname") String nickname
-			, @RequestParam("file") MultipartFile file
+			, @RequestParam(value = "file", required = false) MultipartFile file
 			, HttpServletRequest request
 			) {
 		

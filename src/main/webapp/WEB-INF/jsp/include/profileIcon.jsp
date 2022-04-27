@@ -5,7 +5,11 @@
 		<div class="profile-icon">
 			<c:choose>
 				<c:when test="${ userProfileImg ne null and userProfileImg ne ''}">
-					<a href="#" class="profile-link"><img src=""></a>
+					<div class="profile-link-box">
+						<a href="#" class="profile-link" data-toggle="modal" data-target="#profileModal">
+							<img src="${ userProfileImg }" class="profile-link-image">
+						</a>
+					</div>	
 				</c:when>
 				<c:otherwise>
 					<a href="#" class="profile-link-icon" data-toggle="modal" data-target="#profileModal">

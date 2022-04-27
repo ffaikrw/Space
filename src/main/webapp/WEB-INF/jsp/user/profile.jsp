@@ -35,9 +35,6 @@
 			
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">프로필 관리</div>
-					<div>
-						<button type="button" id="editProfileBtn" class="profile-update-btn">수정</button>
-					</div>
 				</div>
 				
 				<div class="content-section d-flex">
@@ -53,19 +50,29 @@
 								</div>
 							</c:when>
 							<c:otherwise>
-								<img src="" width="300px" height="300px">
+								<div class="profile-image-border">
+									<img src="${ userInfo.profileImage }" id="imgPreview" class="profile-image">
+								</div>
 							</c:otherwise>
 						</c:choose>
 							<div class="edit-profile-image">
-								<a href="#" id="editImage"><i class="bi bi-image-fill"></i> 프로필 사진 수정</a>
+								<a href="#" id="editImage"><i class="bi bi-image-fill"></i> 프로필 사진 선택</a>
 								<input type="file" id="fileInput" class="d-none">
+							</div>
+							<div class="d-flex justify-content-center">
+								<button type="button" id="editImageBtn" class="image-update-btn">수정</button>
 							</div>
 						</div>	
 					</div>
 					<div class="profile-nickname-box d-flex align-items-center">
 						<div>
-							<div class="nickname-edit-label">닉네임 수정</div>
-							<input type="text" id="editNickname" data-value="${ userNickname }" class="nickname-edit-input" placeholder="${ userNickname }">
+							<div class="d-flex align-items-center mb-1">
+								<div class="nickname-edit-label">닉네임</div>
+								<div class="d-flex justify-content-center">
+									<button type="button" id="editNicknameBtn" class="nickname-update-btn">수정</button>
+								</div>
+							</div>	
+							<input type="text" id="editNickname" data-value="${ userInfo.nickname }" class="nickname-edit-input" placeholder="${ userInfo.nickname }">
 							<span id="availableNicknameIcon" class="validation-icon text-success d-none"><i class="bi bi-check"></i></span>
 							<span id="duplicateNicknameIcon" class="validation-icon text-danger d-none"><i class="bi bi-x"></i></span>
 							<div id="duplicateNicknameText" class="validation-text text-danger d-none mr-5">사용 중인 닉네임입니다.</div>
@@ -150,20 +157,22 @@
 			});
 			
 			
-			
-			$("#editProfileBtn").on("click", function(){
+			// 닉네임 수정 버튼
+			$("#editNicknameBtn").on("click", function(){
 				
 				let nickname = $("#editNickname").val().trim();
 				
 				// 입력란이 비어있으면 기존 닉네임으로 저장
 				if (nickname == "") {
 					nickname = $("#editNickname").data("value");
+					nicknameIsDuplicate = false;
 				}
 				
 				if (nicknameIsDuplicate) {
 					alert("사용할 수 없는 닉네임입니다.");
 					return;
 				}
+				
 				
 				// 이미지 파일 업로드
 				let formData = new FormData();
@@ -179,6 +188,7 @@
 					, processData:false
 					, contentType:false
 					, success:function(data){
+						
 						if (data.result == "success") {
 							location.href="/user/profile";
 						} else {
@@ -192,6 +202,23 @@
 				});
 				
 			});
+			
+			
+			// 이미지 파일 미리보기
+			$("#fileInput").on("change", function(event){
+				
+				var file = event.target.files[0];
+				
+				var reader = new FileReader();
+				reader.onload = function(e) {
+					$("#imgPreview").attr("src", e.target.result);
+				}
+				
+				reader.readAsDataURL(file);
+				
+			});
+			
+			
 			
 			
 			$("#editImage").on("click", function(){
