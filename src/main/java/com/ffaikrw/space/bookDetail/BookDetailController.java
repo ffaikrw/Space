@@ -22,6 +22,7 @@ public class BookDetailController {
 	@GetMapping("/book_info")
 	public String bookInfoView(
 			@RequestParam("isbn13") String isbn13
+			, @RequestParam(value = "count", required = false) String count
 			, HttpServletRequest request
 			, Model model) {
 		
@@ -29,7 +30,7 @@ public class BookDetailController {
 		
 		Integer userId = (Integer)session.getAttribute("userId");
 		
-		BookInfo bookInfo = bookDetailBO.getBookDetail(userId, isbn13);
+		BookInfo bookInfo = bookDetailBO.getBookDetail(userId, isbn13, count);
 		model.addAttribute("bookDetail", bookInfo);
 		
 		return "bookDetail";

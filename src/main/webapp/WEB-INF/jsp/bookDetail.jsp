@@ -99,35 +99,39 @@
 					
 					<div class="d-flex">
 						<div class="bookInfo-subtitle">한 줄 평</div>
-						<a href="#" id="moreComment">더보기 <i class="bi bi-caret-down"></i></a>
-						<a href="#" id="lessComment">접기 <i class="bi bi-caret-up"></i></a>
+						<a href="/book_info?isbn13=${ bookDetail.isbn13 }&count=all" id="moreComment">더보기 <i class="bi bi-caret-down"></i></a>
+						<a href="/book_info?isbn13=${ bookDetail.isbn13 }" id="lessComment" class="d-none">접기 <i class="bi bi-caret-up"></i></a>
 					</div>
 					<div class="comment-box mt-1">
-						<div class="comment-list-box d-flex align-items-center">
-							<div>
-								<div class="comment-nickname">가나다</div>
-								<div class="comment-date">2022.12.06.</div>
-								<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
+					<c:choose>
+						<c:when test="${ empty bookDetail.reviewList }">
+							<div class="comment-list-box d-flex align-items-center">
+								<div class="comment-content">
+									한 줄 평이 없습니다.
+								</div>
 							</div>
-						</div>
-						<div class="comment-list-box d-flex align-items-center">
-							<div>
-								<div class="comment-nickname">가나다</div>
-								<div class="comment-date">2022.12.06.</div>
-								<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
-							</div>
-						</div>
-						<div class="comment-list-box d-flex align-items-center">
-							<div>
-								<div class="comment-nickname">가나다</div>
-								<div class="comment-date">2022.12.06.</div>
-								<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
-							</div>
-						</div>
+						</c:when>
+						<c:otherwise>
+							<c:forEach var="review" items="${ bookDetail.reviewList }" >
+								<div class="comment-list-box d-flex align-items-center">
+									<div>
+										<div class="comment-nickname">
+											${ review.nickname }
+											<c:if test="${ review.userId eq userId }">
+												<a href="#" class="delete-comment" data-id="${ review.id }"><i class="bi bi-trash"></i></a>
+											</c:if>
+										</div>
+										<div class="comment-date"><fmt:formatDate value="${ review.createdAt }" pattern="yyyy.MM.dd." /></div>
+										<div class="comment-content">${ review.comment }</div>
+									</div>
+								</div>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 					</div>
 					<div class="write-comment-box">
-						<input type="text" id="commentInput" placeholder="한 줄 평 작성하기">
-						<button id="commentBtn">작성</button>
+						<input type="text" id="commentInput" placeholder="한 줄 평 작성하기(28자 제한)">
+						<button id="commentBtn" data-isbn13-id="${ bookDetail.isbn13 }">작성</button>
 					</div>
 					
 					<div>
@@ -161,6 +165,84 @@
 	<script>
 	
 		$(document).ready(function(){
+			
+			// 한 줄 평 더보기-접기
+			$("#moreComment").on("click", function(){
+				$("#lessComment").removeClass("d-none");
+			});
+			
+			
+			
+			// 한 줄 평 작성
+			$("#commentBtn").on("click", function(){
+				
+				let isbn13 = $(this).data("isbn13-id");
+				let comment = $("#commentInput").val().trim();
+				
+				if (comment == "") {
+					return ;
+				}
+				
+				if (comment.length > 28) {
+					alert("한 줄 평은 28자까지만 작성 가능합니다.");
+					return ;
+				}
+				
+				
+				$.ajax({
+					
+					type:"post"
+					, url:"/review/add_review"
+					, data:{"isbn13":isbn13, "comment":comment}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("한 줄 평을 작성했습니다.");
+							location.reload();
+						} else {
+							alert("한 줄 평을 작성하지 못했습니다:(");
+						}
+						
+					}
+					, error:function(){
+						alert("review 작성 통신 에러");
+					}
+					
+				});
+				
+			});
+			
+			
+			// 한 줄 평 삭제
+			$(".delete-comment").on("click", function(e){
+				
+				e.preventDefault();
+				
+				let id = $(this).data("id");
+				
+				$.ajax({
+					
+					type:"get"
+					, url:"/review/delete_review"
+					, data:{"id":id}
+					, success:function(data){
+						
+						if (data.result == "success") {
+							alert("한 줄 평을 삭제했습니다.")
+							location.reload();
+						} else {
+							alert("한 줄 평을 삭제하지 못했습니다.");
+						}
+						
+					}
+					, error:function(){
+						alert("review 삭제 통신 에러");
+					}
+					
+				});
+				
+			});
+			
 			
 			// 읽어볼까에 추가
 			$("#addWish").on("click", function(e){

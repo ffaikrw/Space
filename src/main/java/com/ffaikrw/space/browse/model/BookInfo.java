@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.ffaikrw.space.aladinAPI.model.AladinSeriesInfo;
+import com.ffaikrw.space.bookDetail.review.model.Review;
 
 public class BookInfo {
 	
@@ -26,6 +27,7 @@ public class BookInfo {
 	private boolean recommendIsDuplicate;
 	private boolean noteIsDuplicate;
 	private int recommendCount;
+	private List<Review> reviewList;
 	
 	public BookResultInfo getBookResultInfo() {
 		return bookResultInfo;
@@ -141,6 +143,12 @@ public class BookInfo {
 	}
 	public void setAuthorList(List<String> authorList) {
 		this.authorList = authorList;
+	}
+	public List<Review> getReviewList() {
+		return reviewList;
+	}
+	public void setReviewList(List<Review> reviewList) {
+		this.reviewList = reviewList;
 	}
 	
 }

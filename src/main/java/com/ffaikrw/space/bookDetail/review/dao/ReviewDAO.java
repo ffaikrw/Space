@@ -10,12 +10,25 @@ import com.ffaikrw.space.bookDetail.review.model.Review;
 @Repository
 public interface ReviewDAO {
 	
-	// 한 줄 평 리스트 3개만 가져오기
+	// 한 줄 평 3개만 가져오기
 	public List<Review> selectReviewLimit3(@Param("isbn") String isbn13);
 	
 	
 	// 한 줄 평 전체 가져오기
 	public List<Review> selectAllReview(@Param("isbn") String isbn13);
+	
+	
+	// 한 줄 평 작성
+	public int insertReview(
+			@Param("userId") int userId
+			, @Param("isbn") String isbn13
+			, @Param("nickname") String nickname
+			, @Param("comment") String comment
+			);
+	
+	
+	// 한 줄 평 삭제
+	public int deleteReview(@Param("id") int id);
 	
 	
 }

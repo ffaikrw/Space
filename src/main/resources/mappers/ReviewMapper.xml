@@ -7,6 +7,74 @@
   
 <mapper namespace="com.ffaikrw.space.bookDetail.review.dao.ReviewDAO">
 
-
+	<select id="selectReviewLimit3" parameterType="String" resultType="com.ffaikrw.space.bookDetail.review.model.Review">
+		
+		select
+			`id`
+			, `userId`
+			, `isbn`
+			, `nickname`
+			, `comment`
+			, `createdAt`
+		from
+			`review`
+		where
+			`isbn` = #{isbn}
+		order by
+			`id` desc
+		limit
+			3
+	
+	</select>
+	
+	
+	<select id="selectAllReview" parameterType="String" resultType="com.ffaikrw.space.bookDetail.review.model.Review">
+	
+		select
+			`id`
+			, `userId`
+			, `isbn`
+			, `nickname`
+			, `comment`
+			, `createdAt`
+		from
+			`review`
+		where
+			`isbn` = #{isbn}
+		order by
+			`id` desc
+	
+	</select>
+	
+	
+	<insert id="insertReview" parameterType="map">
+	
+		insert into `review`
+		(
+			`userId`
+			, `isbn`
+			, `nickname`
+			, `comment`
+			, `createdAt`
+		)
+		value
+		(
+			#{userId}
+			, #{isbn}
+			, #{nickname}
+			, #{comment}
+			, now()
+		)
+	
+	</insert>
+	
+	
+	<delete id="deleteReview" parameterType="map">
+	
+		delete from `review`
+		where
+			`id` = #{id}
+	
+	</delete>
 
 </mapper>

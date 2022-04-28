@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.ffaikrw.space.aladinAPI.bo.AladinApiBO;
 import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
+import com.ffaikrw.space.bookDetail.review.bo.ReviewBO;
 import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.wish.bo.WishBO;
@@ -25,8 +26,11 @@ public class BookDetailBO {
 	@Autowired
 	private LibraryBO libraryBO;
 	
+	@Autowired
+	private ReviewBO reviewBO;
 	
-	public BookInfo getBookDetail(Integer userId, String isbn13) {
+	
+	public BookInfo getBookDetail(Integer userId, String isbn13, String count) {
 		
 		String coverSize = "big";
 		
@@ -68,6 +72,12 @@ public class BookDetailBO {
 			
 			bookInfo.setWishIsDuplicate(wishIdDuplicate);
 			bookInfo.setLibraryIsDuplicate(libraryIsDuplicate);
+		}
+		
+		if (count != null) {
+			bookInfo.setReviewList(reviewBO.getReviewList(isbn13, count));
+		} else {
+			bookInfo.setReviewList(reviewBO.getReviewList(isbn13, count));
 		}
 		
 		return bookInfo;
