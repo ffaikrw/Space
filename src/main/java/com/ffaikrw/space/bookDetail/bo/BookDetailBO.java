@@ -30,7 +30,7 @@ public class BookDetailBO {
 	private ReviewBO reviewBO;
 	
 	
-	public BookInfo getBookDetail(Integer userId, String isbn13, String count) {
+	public BookInfo getBookDetail(Integer userId, String isbn13) {
 		
 		String coverSize = "big";
 		
@@ -74,11 +74,7 @@ public class BookDetailBO {
 			bookInfo.setLibraryIsDuplicate(libraryIsDuplicate);
 		}
 		
-		if (count != null) {
-			bookInfo.setReviewList(reviewBO.getReviewList(isbn13, count));
-		} else {
-			bookInfo.setReviewList(reviewBO.getReviewList(isbn13, count));
-		}
+		bookInfo.setReviewList(reviewBO.getReviewList(isbn13));
 		
 		return bookInfo;
 	}

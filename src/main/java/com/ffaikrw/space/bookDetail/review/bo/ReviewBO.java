@@ -16,14 +16,8 @@ public class ReviewBO {
 	
 	
 	// 한 줄 평 리스트 가져오기
-	public List<Review> getReviewList(String isbn13, String count) {
-		
-		if (count != null) {
-			return reviewDAO.selectAllReview(isbn13);
-		} else {
-			return reviewDAO.selectReviewLimit3(isbn13);
-		}
-		
+	public List<Review> getReviewList(String isbn13) {
+		return reviewDAO.selectAllReview(isbn13);
 	}
 	
 	

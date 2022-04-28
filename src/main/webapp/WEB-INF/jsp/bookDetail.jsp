@@ -99,8 +99,8 @@
 					
 					<div class="d-flex">
 						<div class="bookInfo-subtitle">한 줄 평</div>
-						<a href="/book_info?isbn13=${ bookDetail.isbn13 }&count=all" id="moreComment">더보기 <i class="bi bi-caret-down"></i></a>
-						<a href="/book_info?isbn13=${ bookDetail.isbn13 }" id="lessComment" class="d-none">접기 <i class="bi bi-caret-up"></i></a>
+						<a href="#" id="moreComment">더보기 <i class="bi bi-caret-down"></i></a>
+						<a href="#" id="lessComment" class="d-none">접기 <i class="bi bi-caret-up"></i></a>
 					</div>
 					<div class="comment-box mt-1">
 					<c:choose>
@@ -113,6 +113,7 @@
 						</c:when>
 						<c:otherwise>
 							<c:forEach var="review" items="${ bookDetail.reviewList }" >
+							<div class="comment-wrap d-none">
 								<div class="comment-list-box d-flex align-items-center">
 									<div>
 										<div class="comment-nickname">
@@ -125,6 +126,7 @@
 										<div class="comment-content">${ review.comment }</div>
 									</div>
 								</div>
+							</div>	
 							</c:forEach>
 						</c:otherwise>
 					</c:choose>
@@ -134,7 +136,7 @@
 						<button id="commentBtn" data-isbn13-id="${ bookDetail.isbn13 }">작성</button>
 					</div>
 					
-					<div>
+					<div class="bookInfo-wrap">
 						<div class="bookInfo-subtitle d-flex">책 소개</div>
 						<div class="bookInfo-description">
 							${ bookDetail.description }
@@ -166,9 +168,35 @@
 	
 		$(document).ready(function(){
 			
-			// 한 줄 평 더보기-접기
-			$("#moreComment").on("click", function(){
+			$(".comment-wrap").addClass("d-none");
+			$(".comment-wrap").slice(0, 3).removeClass("d-none");
+			
+			// 한 줄 평 더보기
+			$("#moreComment").on("click", function(e){
+				
+				e.preventDefault();
+				
+				$("#moreComment").addClass("d-none");
 				$("#lessComment").removeClass("d-none");
+				$(".comment-wrap").removeClass("d-none");
+				$(".bookInfo-wrap").addClass("d-none");
+				
+			});
+			
+			
+			// 한 줄 평 접기
+			$("#lessComment").on("click", function(e){
+				
+				e.preventDefault();
+				
+				$("#lessComment").addClass("d-none");
+				$("#moreComment").removeClass("d-none");
+				
+				$(".comment-wrap").addClass("d-none");
+				$(".comment-wrap").slice(0, 3).removeClass("d-none");
+				
+				$(".bookInfo-wrap").removeClass("d-none");
+				
 			});
 			
 			
@@ -197,7 +225,6 @@
 					, success:function(data){
 						
 						if (data.result == "success") {
-							alert("한 줄 평을 작성했습니다.");
 							location.reload();
 						} else {
 							alert("한 줄 평을 작성하지 못했습니다:(");
