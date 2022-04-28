@@ -1,4 +1,4 @@
-package com.ffaikrw.space.bookInfo.bo;
+package com.ffaikrw.space.bookDetail.bo;
 
 import java.util.ArrayList;
 import java.util.List;

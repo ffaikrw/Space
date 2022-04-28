@@ -97,29 +97,31 @@
 					</c:choose>
 					</div>
 					
-					<div class="bookInfo-subtitle">한 줄 평</div>
-					<div class="mt-1">
-						<div class="comment-box">
-							<div class="comment-list-box d-flex align-items-center">
-								<div>
-									<div class="comment-nickname">가나다</div>
-									<div class="comment-date">2022.12.06.</div>
-									<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
-								</div>
+					<div class="d-flex">
+						<div class="bookInfo-subtitle">한 줄 평</div>
+						<a href="#" id="moreComment">더보기 <i class="bi bi-caret-down"></i></a>
+						<a href="#" id="lessComment">접기 <i class="bi bi-caret-up"></i></a>
+					</div>
+					<div class="comment-box mt-1">
+						<div class="comment-list-box d-flex align-items-center">
+							<div>
+								<div class="comment-nickname">가나다</div>
+								<div class="comment-date">2022.12.06.</div>
+								<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
 							</div>
-							<div class="comment-list-box d-flex align-items-center">
-								<div>
-									<div class="comment-nickname">가나다</div>
-									<div class="comment-date">2022.12.06.</div>
-									<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
-								</div>
+						</div>
+						<div class="comment-list-box d-flex align-items-center">
+							<div>
+								<div class="comment-nickname">가나다</div>
+								<div class="comment-date">2022.12.06.</div>
+								<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
 							</div>
-							<div class="comment-list-box d-flex align-items-center">
-								<div>
-									<div class="comment-nickname">가나다</div>
-									<div class="comment-date">2022.12.06.</div>
-									<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
-								</div>
+						</div>
+						<div class="comment-list-box d-flex align-items-center">
+							<div>
+								<div class="comment-nickname">가나다</div>
+								<div class="comment-date">2022.12.06.</div>
+								<div class="comment-content">언제부턴가 '자존감'이라는 단어를 흔히 접할 수 있게 되었다.</div>
 							</div>
 						</div>
 					</div>
@@ -128,15 +130,17 @@
 						<button id="commentBtn">작성</button>
 					</div>
 					
-					<div class="bookInfo-subtitle d-flex">책 소개</div>
-					<div class="bookInfo-description">
-						${ bookDetail.description }
-					</div>
-					
-					<div class="bookInfo-subtitle d-flex">기타 정보</div>
-					<div class="bookInfo-description">
-						<p><b>출판사</b> ${ bookDetail.publisher }</p>
-						<p><b>출간일</b> <fmt:formatDate value="${ bookDetail.pubDate }" pattern="yyyy년 M월 d일" /></p>
+					<div>
+						<div class="bookInfo-subtitle d-flex">책 소개</div>
+						<div class="bookInfo-description">
+							${ bookDetail.description }
+						</div>
+						
+						<div class="bookInfo-subtitle d-flex">기타 정보</div>
+						<div class="bookInfo-description">
+							<p><b>출판사</b> ${ bookDetail.publisher }</p>
+							<p><b>출간일</b> <fmt:formatDate value="${ bookDetail.pubDate }" pattern="yyyy년 M월 d일" /></p>
+						</div>
 					</div>
 				
 				</div>

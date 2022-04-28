@@ -1,4 +1,4 @@
-package com.ffaikrw.space.bookInfo;
+package com.ffaikrw.space.bookDetail;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,7 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.ffaikrw.space.bookInfo.bo.BookDetailBO;
+import com.ffaikrw.space.bookDetail.bo.BookDetailBO;
 import com.ffaikrw.space.browse.model.BookInfo;
 
 @Controller
