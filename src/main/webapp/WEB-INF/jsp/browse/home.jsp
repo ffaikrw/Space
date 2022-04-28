@@ -39,19 +39,43 @@
 						<div class="top-box">
 							<div><a href="/browse/weekly_new" class="home-subtitle">이번 주 신작</a></div>
 							<div OnClick="location.href='/browse/weekly_new'" style="cursor:pointer;" class="top-content bg-warning">
-							
+								<div class="home-weeklyNew-title d-flex justify-content-center align-items-center">
+									<div><나를 마릴린 먼로라고 하자></div>
+								</div>
+								<div class="home-weeklyNew d-flex justify-content-between align-items-center">
+									<img src="" class="bg-white" width="85px" height="100px">
+									<div class="home-weeklyNew-description">
+										<b>외 200권</b>의<br>이번 주 신작의 우주를<br> 탐험해보세요!
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="top-box">
 							<div><a href="/browse/bestseller" class="home-subtitle">이번 주 베스트셀러</a></div>
 							<div OnClick="location.href='/browse/bestseller'" style="cursor:pointer;" class="top-content bg-success">
-							
+								<div class="home-weeklyNew-title d-flex justify-content-center align-items-center">
+									<div>뭘 읽어야할지 모르겠다면?</div>
+								</div>
+								<div class="home-weeklyNew d-flex justify-content-between align-items-center">
+									<img src="" class="bg-white" width="85px" height="100px">
+									<div class="home-weeklyNew-description">
+										<b><살인자의 기억법> 외<br>200권</b>의 베스트셀러를<br>먼저 만나보세요.
+									</div>
+								</div>
 							</div>
 						</div>
 						<div class="top-box">
 							<div><a href="/browse/editor_recommend" class="home-subtitle">편집자 추천 소설</a></div>
 							<div OnClick="location.href='/browse/editor_recommend'" style="cursor:pointer;" class="top-content bg-primary">
-							
+								<div class="home-weeklyNew-title d-flex justify-content-center align-items-center">
+									<div>편집자가 추천해드립니다!</div>
+								</div>
+								<div class="home-weeklyNew d-flex justify-content-between align-items-center">
+									<img src="" class="bg-white" width="85px" height="100px">
+									<div class="home-weeklyNew-description">
+										<b><휴남동 서점> 외<br>200권</b>의 소설을<br>space 편집자가<br>추천해드립니다.
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -120,9 +144,9 @@
 						</div>
 					</div>
 					
-					<!-- 드라마/영화/애니메이션 원작 소설 -->
+					<!-- 나의 책장 -->
 					<div class="content-media mt-5">
-						<div><a href="#" class="home-subtitle">드라마/영화/애니메이션 원작 소설</a></div>
+						<div><a href="#" class="home-subtitle">나의 책장</a></div>
 						<div class="d-flex mt-2">
 						<c:forEach var="i" begin="0" end="5" varStatus="status">	
 							<div class="mr-3">
