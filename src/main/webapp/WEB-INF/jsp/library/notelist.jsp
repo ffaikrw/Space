@@ -39,43 +39,48 @@
 			<c:import url="/WEB-INF/jsp/include/nav.jsp" />
 			
 			<div class="content">
-				
+			
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">독서노트 모아보기</div>
 					<c:import url="/WEB-INF/jsp/include/profileIcon.jsp" />
 				</div>
 				
 				<div class="content-section">
-					
-					<table class="notelist-table text-white text-center">
-						<thead>
-							<tr>
-								<th>표지</th>
-								<th>도서명</th>
-								<th>내용</th>
-							</tr>
-						</thead>
-						<tbody>
-						<c:forEach var="notelist" items="${ notelist }">
-							<tr>
-								<td class="notelist-cover">
-									<a href="/book_info?isbn13=${ notelist.isbn }"><img src="${ notelist.cover }"></a>
-								</td>
-								<td class="notelist-title">
-									<a href="/book_info?isbn13=${ notelist.isbn }" class="notelist-bookinfo-link">
-										<b>${ notelist.title }</b>
-									</a>
-								</td>
-								<td class="notelist-content">
-									<a href="/library/note_view?isbn13=${ notelist.isbn }" class="notelist-noteView-link">
-										${ notelist.content }
-									</a>
-								</td>
-							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
-					
+				<c:choose>
+					<c:when test="${ !empty notelist }">
+						<table class="notelist-table text-white text-center">
+							<thead>
+								<tr>
+									<th>표지</th>
+									<th>도서명</th>
+									<th>내용</th>
+								</tr>
+							</thead>
+							<tbody>
+							<c:forEach var="notelist" items="${ notelist }">
+								<tr>
+									<td class="notelist-cover">
+										<a href="/book_info?isbn13=${ notelist.isbn }"><img src="${ notelist.cover }"></a>
+									</td>
+									<td class="notelist-title">
+										<a href="/book_info?isbn13=${ notelist.isbn }" class="notelist-bookinfo-link">
+											<b>${ notelist.title }</b>
+										</a>
+									</td>
+									<td class="notelist-content">
+										<a href="/library/note_view?isbn13=${ notelist.isbn }" class="notelist-noteView-link">
+											${ notelist.content }
+										</a>
+									</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+					</c:when>	
+					<c:otherwise>
+						<div class="text-white">작성한 독서노트가 없습니다.</div>
+					</c:otherwise>
+				</c:choose>	
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />

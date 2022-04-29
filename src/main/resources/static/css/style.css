@@ -1103,18 +1103,26 @@ footer {
 
 
 .go-to-notelist {
-	width: 200px;
-	height: 40px;
-	color: #fff;
-	font-size: 18px;
+	color: #6b4bde;
+	font-size: 30px;
 	font-weight: bold;
-	border: 1px solid #6b4bde;
-	border-radius: 10px;
-	margin-right: 20px;
-	padding-top: 5px;
-	padding-bottom: 5px;
 }
 
+.go-to-notelist:hover {
+	color: #6b4bde;
+	text-decoration: none;
+}
+
+.go-to-calendar {
+	color: #6b4bde;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.go-to-calendar:hover {
+	color: #6b4bde;
+	text-decoration: none;
+}
 
 /* createNote.jsp */
 
