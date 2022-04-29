@@ -11,6 +11,7 @@ import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.BookResultInfo;
+import com.ffaikrw.space.browse.model.Home;
 import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.wish.bo.WishBO;
 
@@ -25,6 +26,23 @@ public class BrowseBO {
 	
 	@Autowired
 	private LibraryBO libraryBO;
+	
+	
+	// 홈 화면
+	public Home getHome(Integer userId) {
+	
+		Home home = new Home();
+		
+		// 신작, 베스트셀러, 편집자추천 정보 가져오기
+		home.setHomeWeeklyNew(this.getBookList(userId, "ItemNewAll", 1, "Mid").get(0));
+		home.setHomeBestseller(this.getBookList(userId, "Bestseller", 1, "Mid").get(0));
+		home.setHomeEditorRecommend(this.getBookList(userId, "ItemEditorChoice", 1, "Mid").get(0));
+		
+		
+		
+		
+		return home;
+	}
 	
 	
 	

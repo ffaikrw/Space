@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.ffaikrw.space.browse.bo.BrowseBO;
 import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.BookResultInfo;
+import com.ffaikrw.space.browse.model.Home;
 
 @Controller
 @RequestMapping("/browse")
@@ -26,7 +27,16 @@ public class BrowseController {
 	
 	// 홈 화면
 	@GetMapping("/home")
-	public String homeView() {
+	public String homeView(
+			HttpServletRequest request
+			, Model model) {
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		Home home = browseBO.getHome(userId);
+		model.addAttribute("home", home);
+		
 		return "/browse/home";
 	}
 	
