@@ -1,9 +1,12 @@
 package com.ffaikrw.space.library.recommend.bo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ffaikrw.space.library.recommend.dao.RecommendDAO;
+import com.ffaikrw.space.library.recommend.model.Recommend;
 
 @Service
 public class RecommendBO {
@@ -39,5 +42,9 @@ public class RecommendBO {
 	}
 	
 	
+	// 추천 수 높은 순서대로 10개
+	public List<Recommend> getRecommendTop10() {
+		return recommendDAO.selectRecommendTop10();
+	}
 	
 }

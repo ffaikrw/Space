@@ -361,21 +361,8 @@ footer {
 	width: 180px;
 }
 
-.top10-box {
-	width: 150px;
-	margin-top: 15px;
-}
-
-.top10-bookImg {
-	width: 120px;
-	height: 150px;
-	margin-left: 10px;
-}
-
-.top10-bookTitle {
-	color: #fff;
-	font-size: 18px;
-	font-weight: bold;
+.homeWish-box {
+	width: 105px;
 }
 
 .wish-bookImg {
@@ -441,7 +428,7 @@ footer {
 .top10-slide-wrapper {
 	position: relative;
 	width: 800px;
-	height: 250px;
+	height: 240px;
 	margin: 0 auto;
 	overflow: hidden;
 }
@@ -456,6 +443,22 @@ footer {
 .top10-slides .top10-box:not(:last-child) {
 	float: left;
 	margin-right: 30px;
+}
+
+.top10-box {
+	width: 110px;
+}
+
+.top10-book-box {
+	width: 85px;
+	margin-left: 10px;
+}
+
+.top10-bookTitle {
+	width: 85px;
+	color: #fff;
+	font-size: 14px;
+	font-weight: bold;
 }
 
 .author-slide-wrapper {

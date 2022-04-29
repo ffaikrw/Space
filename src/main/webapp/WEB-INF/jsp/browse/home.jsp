@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,7 +42,13 @@
 							<div><a href="/browse/weekly_new" class="home-subtitle">이번 주 신작</a></div>
 							<div OnClick="location.href='/browse/weekly_new'" style="cursor:pointer;" class="top-content bg-warning">
 								<div class="home-weeklyNew-title d-flex justify-content-center align-items-center">
-									<div><${ home.homeWeeklyNew.title }></div>
+									<div>
+										<${ fn:substring(home.homeWeeklyNew.title, 0, 13 ) }
+										<c:if test="${fn:length(home.homeWeeklyNew.title) > 13}">
+										...
+										</c:if>
+										>
+									</div>
 								</div>
 								<div class="home-weeklyNew d-flex justify-content-between align-items-center">
 									<img src="${ home.homeWeeklyNew.cover }">
@@ -59,7 +67,13 @@
 								<div class="home-weeklyNew d-flex justify-content-between align-items-center">
 									<img src="${ home.homeBestseller.cover }">
 									<div class="home-weeklyNew-description">
-										<b><${ home.homeBestseller.title }> 외<br>200권</b>의 베스트셀러를<br>먼저 만나보세요.
+										<b>
+										<${ fn:substring(home.homeBestseller.title, 0, 6 ) }
+										<c:if test="${fn:length(home.homeBestseller.title) > 6}">
+										...
+										</c:if>
+										>
+										 외<br>200권</b>의 베스트셀러를<br>먼저 만나보세요.
 									</div>
 								</div>
 							</div>
@@ -73,7 +87,13 @@
 								<div class="home-weeklyNew d-flex justify-content-between align-items-center">
 									<img src="${ home.homeEditorRecommend.cover }">
 									<div class="home-weeklyNew-description">
-										<b><${ home.homeEditorRecommend.title }> 외<br>200권</b>의 소설을<br>space 편집자가<br>추천해드립니다.
+										<b>
+										<${ fn:substring(home.homeEditorRecommend.title, 0, 6 ) }
+										<c:if test="${fn:length(home.homeEditorRecommend.title) > 6}">
+										...
+										</c:if>
+										>
+										 외<br>200권</b>의 소설을<br>space 편집자가<br>추천해드립니다.
 									</div>
 								</div>
 							</div>
@@ -82,19 +102,24 @@
 					
 					<!-- 오늘의 10가지 소설 --> 
 					<div class="content-top10 mt-5">
-						<div><a href="#" class="home-subtitle">오늘의 10가지 소설</a></div>
-						<div class="d-flex">
+						<div><a href="#" class="home-subtitle">space TOP 10</a></div>
+						<div class="d-flex mt-3">
 							<div class="top10-prev arrow-icon mt-5">
 								<i class="bi bi-caret-left-fill"></i>
 							</div>
 							<div class="top10-slide-wrapper">
 								<div class="top10-slides">
-								<c:forEach var="i" begin="0" end="9" varStatus="status">
+								<c:forEach var="homeTop10" items="${ home.todayTop10 }" varStatus="status">
 									<div class="top10-box d-flex">
 										<div class="home-subtitle">${ status.count }</div>
-										<div>
-											<div class="top10-bookImg bg-info"></div>
-											<div class="top10-bookTitle pl-3 mt-1">책 제목</div>
+										<div OnClick="location.href='/book_info?isbn13=${ homeTop10.isbn13 }'" style="cursor:pointer;" class="top10-book-box">
+											<img src="${ homeTop10.cover }" >
+											<div class="top10-bookTitle">
+												${ fn:substring(homeTop10.title, 0, 12 ) }
+												<c:if test="${fn:length(homeTop10.title) > 12}">
+												...
+												</c:if>
+											</div>
 										</div>
 									</div>
 								</c:forEach>
@@ -107,33 +132,50 @@
 					</div>
 					
 					<!-- 읽어볼까 한 소설 --> 
-					<div class="content-wishlist mt-5">
+					<c:if test="${ !empty home.homeWishlist }">
+					<div class="content-wishlist mt-3">
 						<div><a href="#" class="home-subtitle">읽어볼까 한 소설</a></div>
 						<div class="d-flex mt-2">
-						<c:forEach var="i" begin="0" end="5" varStatus="status">	
-							<div class="mr-3">
-								<div class="wish-bookImg bg-warning"></div>
-								<div class="top10-bookTitle mt-1">책 제목${ status.count }</div>
+						<c:forEach var="homeWish" items="${ home.homeWishlist }" end="7" varStatus="status">	
+							<div class="homeWish-box d-flex align-items-center justify-content-center">
+								<div OnClick="location.href='/book_info?isbn13=${ homeWish.isbn13 }'" style="cursor:pointer;">
+									<img src="${ homeWish.cover }">
+									<div class="top10-bookTitle mt-1">
+										${ fn:substring(homeWish.title, 0, 12 ) }
+										<c:if test="${fn:length(homeWish.title) > 12}">
+										...
+										</c:if>
+									</div>
+								</div>
 							</div>
 						</c:forEach>
+						<c:if test="${ fn:length(home.homeWishlist) > 8 }">
 							<div class="d-flex justify-content-center align-items-center">
-								<a href="#" class="more-text">더보기</a>
+								<a href="/wishlist" class="more-text">더보기</a>
 							</div>
+						</c:if>
 						</div>
 					</div>
+					</c:if>
 					
 					<!-- 서재 속 작가들 -->
+					<c:if test="${ !empty home.homeLibrary }">
 					<div class="content-author mt-5">
 						<div><a href="#" class="home-subtitle">서재 속 작가들</a></div>
-						<div class="d-flex">
+						<div class="d-flex mt-3">
 							<div class="author-prev arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-left-fill"></i>
 							</div>
 							<div class="author-slide-wrapper">
 								<div class="author-slides">
-								<c:forEach var="i" begin="0" end="8" varStatus="status">
-									<div OnClick="location.href='#'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
-										<div class="author-name">작가명${ status.count }</div>
+								<c:forEach var="homeAuthors" items="${ home.homeLibrary }" varStatus="status">
+									<div OnClick="location.href='/author?author=${ homeAuthors.authorList[0] }'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
+										<div class="author-name">
+											${ fn:substring(homeAuthors.authorList[0], 0, 8 ) }
+											<c:if test="${fn:length(homeAuthors.authorList[0]) > 9}">
+											...
+											</c:if>
+										</div>
 									</div>
 								</c:forEach>
 								</div>
@@ -143,22 +185,35 @@
 							</div>
 						</div>
 					</div>
+					</c:if>
 					
 					<!-- 나의 책장 -->
-					<div class="content-media mt-5">
-						<div><a href="#" class="home-subtitle">나의 책장</a></div>
+					<c:if test="${ !empty home.homeLibrary }">
+					<div class="content-media mt-3">
+						<div><a href="/library" class="home-subtitle">나의 책장</a></div>
 						<div class="d-flex mt-2">
-						<c:forEach var="i" begin="0" end="5" varStatus="status">	
-							<div class="mr-3">
-								<div class="wish-bookImg bg-danger"></div>
-								<div class="top10-bookTitle mt-1">책 제목${ status.count }</div>
+						<c:forEach var="homeLibrary" items="${ home.homeLibrary }" end="7" varStatus="status">
+							<div class="homeWish-box d-flex align-items-center justify-content-center">
+								<div OnClick="location.href='/book_info?isbn13=${ homeLibrary.isbn13 }'" style="cursor:pointer;">
+									<img src="${ homeLibrary.cover }">
+									<div class="top10-bookTitle mt-1">
+										${ fn:substring(homeLibrary.title, 0, 12 ) }
+										<c:if test="${fn:length(homeLibrary.title) > 12}">
+										...
+										</c:if>
+									</div>
+								</div>
 							</div>
 						</c:forEach>
+						<c:if test="${ fn:length(home.homeLibrary) > 8 }">
 							<div class="d-flex justify-content-center align-items-center">
-								<a href="#" class="more-text">더보기</a>
+								<a href="/library" class="more-text">더보기</a>
 							</div>
+						</c:if>
 						</div>
 					</div>
+					</c:if>
+					
 					<div class="content-bottom mb-5">
 						<div class="home-subtitle mt-5">아직 고민 중이신가요?</div>
 						<div class="mt-2"><a href="#" class="more-text">읽어볼까 한 도서를 랜덤으로 감상해보세요!</a></div>
@@ -183,7 +238,7 @@
 			top10Slide = document.querySelectorAll('.top10-slides .top10-box'),
 			top10CurrentIndex = 0,
 			top10SlideCount = top10Slide.length,
-			top10SlideWidth = 170,
+			top10SlideWidth = 110,
 			top10SlideMargin = 30,
 			top10PrevBtn = document.querySelector('.top10-prev'),
 			top10NextBtn = document.querySelector('.top10-next');

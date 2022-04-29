@@ -57,6 +57,25 @@
 			isbn = #{isbn}
 		
 	</select>
+	
+	
+	<select id="selectRecommendTop10" resultType="com.ffaikrw.space.library.recommend.model.Recommend">
+	
+		select
+			`id`
+			, `userId`
+			, `isbn`
+			, `createdAt`
+			, count(*)
+		from
+			`recommend`
+		group by
+			`isbn`
+		order by
+			count(*) desc
+		limit 10;
+	
+	</select>
 
 
 </mapper>

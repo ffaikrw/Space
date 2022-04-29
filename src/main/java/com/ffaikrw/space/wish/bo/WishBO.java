@@ -53,9 +53,7 @@ public class WishBO {
 	
 	
 	// 사용자의 모든 읽어볼까 도서 가져오기
-	public List<BookInfo> getWishlist(Integer userId) {
-		
-		String coverSize = "MidBig";
+	public List<BookInfo> getWishlist(Integer userId, String coverSize) {
 		
 		List<Wish> wishlist = wishDAO.selectWishlist(userId);
 		

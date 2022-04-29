@@ -29,7 +29,9 @@ public class LibraryController {
 		HttpSession session = request.getSession();
 		int userId = (Integer)session.getAttribute("userId");
 		
-		List<BookInfo> bookInfo = libraryBO.getLibrary(userId);
+		String coverSize = "MidBig";
+		
+		List<BookInfo> bookInfo = libraryBO.getLibrary(userId, coverSize);
 		model.addAttribute("library", bookInfo);
 		
 		return "library/library";

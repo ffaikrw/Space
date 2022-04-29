@@ -13,6 +13,8 @@ import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.BookResultInfo;
 import com.ffaikrw.space.browse.model.Home;
 import com.ffaikrw.space.library.bo.LibraryBO;
+import com.ffaikrw.space.library.recommend.bo.RecommendBO;
+import com.ffaikrw.space.library.recommend.model.Recommend;
 import com.ffaikrw.space.wish.bo.WishBO;
 
 @Service
@@ -27,6 +29,9 @@ public class BrowseBO {
 	@Autowired
 	private LibraryBO libraryBO;
 	
+	@Autowired
+	private RecommendBO recommendBO;
+	
 	
 	// 홈 화면
 	public Home getHome(Integer userId) {
@@ -38,7 +43,35 @@ public class BrowseBO {
 		home.setHomeBestseller(this.getBookList(userId, "Bestseller", 1, "Mid").get(0));
 		home.setHomeEditorRecommend(this.getBookList(userId, "ItemEditorChoice", 1, "Mid").get(0));
 		
+		// 오늘의 10가지 소설
+		List<Recommend> recommendList = recommendBO.getRecommendTop10();
+		List<BookInfo> bookInfoList = new ArrayList<>();
 		
+		for (Recommend recommend : recommendList) {
+			
+			AladinResponse aladinResponse = aladinApiBO.getItemLookUp(recommend.getIsbn(), "Mid");
+			List<AladinItem> aladinItem = aladinResponse.getItem();
+			
+			if (aladinItem == null) {
+				continue;
+			}
+			
+			BookInfo bookInfo = new BookInfo();
+			
+			bookInfo.setCover(aladinItem.get(0).getCover());
+			bookInfo.setTitle(aladinItem.get(0).getTitle());
+			bookInfo.setIsbn13(aladinItem.get(0).getIsbn13());
+			
+			bookInfoList.add(bookInfo);
+		}
+		
+		home.setTodayTop10(bookInfoList);
+		
+		// 읽어볼까 한 소설
+		home.setHomeWishlist(wishBO.getWishlist(userId, "Mid"));
+		
+		// 나의 책장
+		home.setHomeLibrary(libraryBO.getLibrary(userId, "Mid"));
 		
 		
 		return home;
