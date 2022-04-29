@@ -338,6 +338,8 @@ footer {
 .top-content {
 	width: 300px;
 	height: 200px;
+	border: 1px solid #6b4bde;
+	background-color: #222;
 	margin-top: 10px;
 	padding: 10px;
 }

@@ -40,10 +40,11 @@
 					<div class="content-top d-flex mt-5">
 						<div class="top-box">
 							<div><a href="/browse/weekly_new" class="home-subtitle">이번 주 신작</a></div>
-							<div OnClick="location.href='/browse/weekly_new'" style="cursor:pointer;" class="top-content bg-warning">
+							<div OnClick="location.href='/browse/weekly_new'" style="cursor:pointer;" class="top-content">
 								<div class="home-weeklyNew-title d-flex justify-content-center align-items-center">
 									<div>
-										<${ fn:substring(home.homeWeeklyNew.title, 0, 13 ) }
+										<
+										${ fn:substring(home.homeWeeklyNew.title, 0, 13 ) }
 										<c:if test="${fn:length(home.homeWeeklyNew.title) > 13}">
 										...
 										</c:if>
@@ -60,7 +61,7 @@
 						</div>
 						<div class="top-box">
 							<div><a href="/browse/bestseller" class="home-subtitle">이번 주 베스트셀러</a></div>
-							<div OnClick="location.href='/browse/bestseller'" style="cursor:pointer;" class="top-content bg-success">
+							<div OnClick="location.href='/browse/bestseller'" style="cursor:pointer;" class="top-content">
 								<div class="home-weeklyNew-title d-flex justify-content-center align-items-center">
 									<div>뭘 읽어야할지 모르겠다면?</div>
 								</div>
@@ -68,7 +69,8 @@
 									<img src="${ home.homeBestseller.cover }">
 									<div class="home-weeklyNew-description">
 										<b>
-										<${ fn:substring(home.homeBestseller.title, 0, 6 ) }
+										<
+										${ fn:substring(home.homeBestseller.title, 0, 6 ) }
 										<c:if test="${fn:length(home.homeBestseller.title) > 6}">
 										...
 										</c:if>
@@ -80,7 +82,7 @@
 						</div>
 						<div class="top-box">
 							<div><a href="/browse/editor_recommend" class="home-subtitle">편집자 추천 소설</a></div>
-							<div OnClick="location.href='/browse/editor_recommend'" style="cursor:pointer;" class="top-content bg-primary">
+							<div OnClick="location.href='/browse/editor_recommend'" style="cursor:pointer;" class="top-content">
 								<div class="home-weeklyNew-title d-flex justify-content-center align-items-center">
 									<div>편집자가 추천해드립니다!</div>
 								</div>
@@ -88,7 +90,8 @@
 									<img src="${ home.homeEditorRecommend.cover }">
 									<div class="home-weeklyNew-description">
 										<b>
-										<${ fn:substring(home.homeEditorRecommend.title, 0, 6 ) }
+										<
+										${ fn:substring(home.homeEditorRecommend.title, 0, 6 ) }
 										<c:if test="${fn:length(home.homeEditorRecommend.title) > 6}">
 										...
 										</c:if>
