@@ -11,6 +11,8 @@ public class Home {
 	private List<BookInfo> homeWishlist;
 	private List<BookInfo> homeAuthorList;
 	private List<BookInfo> homeLibrary;
+	private String randomIsbn13;
+	
 	public BookInfo getHomeWeeklyNew() {
 		return homeWeeklyNew;
 	}
@@ -53,7 +55,11 @@ public class Home {
 	public void setHomeLibrary(List<BookInfo> homeLibrary) {
 		this.homeLibrary = homeLibrary;
 	}
-	
-	
+	public String getRandomIsbn13() {
+		return randomIsbn13;
+	}
+	public void setRandomIsbn13(String randomIsbn13) {
+		this.randomIsbn13 = randomIsbn13;
+	}
 	
 }

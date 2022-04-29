@@ -102,7 +102,7 @@
 					
 					<!-- 오늘의 10가지 소설 --> 
 					<div class="content-top10 mt-5">
-						<div><a href="#" class="home-subtitle">space TOP 10</a></div>
+						<div class="home-subtitle">space TOP 10</div>
 						<div class="d-flex mt-3">
 							<div class="top10-prev arrow-icon mt-5">
 								<i class="bi bi-caret-left-fill"></i>
@@ -134,7 +134,7 @@
 					<!-- 읽어볼까 한 소설 --> 
 					<c:if test="${ !empty home.homeWishlist }">
 					<div class="content-wishlist mt-3">
-						<div><a href="#" class="home-subtitle">읽어볼까 한 소설</a></div>
+						<div><a href="/wishlist" class="home-subtitle">읽어볼까 한 소설</a></div>
 						<div class="d-flex mt-2">
 						<c:forEach var="homeWish" items="${ home.homeWishlist }" end="7" varStatus="status">	
 							<div class="homeWish-box d-flex align-items-center justify-content-center">
@@ -161,7 +161,7 @@
 					<!-- 서재 속 작가들 -->
 					<c:if test="${ !empty home.homeLibrary }">
 					<div class="content-author mt-5">
-						<div><a href="#" class="home-subtitle">서재 속 작가들</a></div>
+						<div class="home-subtitle">서재 속 작가들</div>
 						<div class="d-flex mt-3">
 							<div class="author-prev arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-left-fill"></i>
@@ -216,7 +216,12 @@
 					
 					<div class="content-bottom mb-5">
 						<div class="home-subtitle mt-5">아직 고민 중이신가요?</div>
-						<div class="mt-2"><a href="#" class="more-text">읽어볼까 한 도서를 랜덤으로 감상해보세요!</a></div>
+						<div class="mt-2">
+							<a href="/book_info?isbn13=${ home.randomIsbn13 }" class="more-text">
+								읽어볼까 한 도서를 랜덤으로 감상해보세요!
+							</a>
+							<a href="#" id="reloadIcon" class="more-text ml-1"><i class="bi bi-arrow-clockwise"></i></a>
+						</div>
 					</div>
 					
 					
@@ -301,7 +306,14 @@
 			});
 			
 		
-		
+		// 랜덤 선택 다시하기
+		$("#reloadIcon").on("click", function(e){
+			
+			e.preventDefault();
+			
+			location.reload();
+			
+		});
 			
 		
 			

@@ -2,6 +2,7 @@ package com.ffaikrw.space.browse.bo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 import com.ffaikrw.space.library.recommend.model.Recommend;
 import com.ffaikrw.space.wish.bo.WishBO;
+import com.ffaikrw.space.wish.model.Wish;
 
 @Service
 public class BrowseBO {
@@ -73,6 +75,12 @@ public class BrowseBO {
 		// 나의 책장
 		home.setHomeLibrary(libraryBO.getLibrary(userId, "Mid"));
 		
+		// 읽어볼까 한 소설 랜덤 독서
+		List<BookInfo> wishlist = wishBO.getWishlist(userId, "Mid");
+		
+		Random rand = new Random();
+		
+		home.setRandomIsbn13(wishlist.get(rand.nextInt(wishlist.size())).getIsbn13());
 		
 		return home;
 	}
