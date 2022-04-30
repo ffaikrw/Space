@@ -19,7 +19,7 @@ public class LibraryController {
 	@Autowired
 	private LibraryBO libraryBO;
 	
-	
+	// 내 서재
 	@GetMapping("/library")
 	public String libraryView(
 			HttpServletRequest request
@@ -35,6 +35,13 @@ public class LibraryController {
 		model.addAttribute("library", bookInfo);
 		
 		return "library/library";
+	}
+	
+	
+	// 독서 캘린더
+	@GetMapping("/library/calendar")
+	public String calendar() {
+		return "library/calendar";
 	}
 	
 	

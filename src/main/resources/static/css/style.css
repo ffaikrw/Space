@@ -1124,6 +1124,29 @@ footer {
 	text-decoration: none;
 }
 
+#calendar {
+	color: #fff;
+}
+
+.fc-view-harness {
+	background-color: #000;
+}
+
+.fc-button {
+	background-color: #000 !important;
+	border: none !important;
+}
+
+.fc-icon-chevron-left {
+	color: #6b4bde;
+}
+
+.fc-icon-chevron-right {
+	color: #6b4bde;
+}
+
+
+
 /* createNote.jsp */
 
 .readingNote-box {

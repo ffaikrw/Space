@@ -49,7 +49,7 @@
 							<a href="/library/notelist" class="go-to-notelist mr-3">
 								<i class="bi bi-journal-text"></i>
 							</a>
-							<a href="#" class="go-to-calendar">
+							<a href="/library/calendar" class="go-to-calendar">
 								<i class="bi bi-calendar4-week"></i>
 							</a>
 						</div>
