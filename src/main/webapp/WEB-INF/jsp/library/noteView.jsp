@@ -43,13 +43,20 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">독서노트 보기</div>
 					
-					<div OnClick="location.href='/library/notelist'" style="cursor:pointer;" class="go-to-notelist text-center">
-						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
-					</div>
 					<c:import url="/WEB-INF/jsp/include/profileIcon.jsp" />
 				</div>
 				
 				<div class="content-section">
+				
+					<div class="w-100 d-flex justify-content-end">
+						<a href="/library/notelist" class="go-to-notelist mr-3">
+							<i class="bi bi-journal-text"></i>
+						</a>
+						<a href="/library/calendar" class="go-to-calendar">
+							<i class="bi bi-calendar4-week"></i>
+						</a>
+					</div>
+					
 					<div class="note-box">
 						<div class="d-flex justify-content-between">
 							<!-- 삭제 버튼 -->

@@ -1,6 +1,8 @@
 package com.ffaikrw.space.library.bo;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import com.ffaikrw.space.aladinAPI.model.AladinItem;
 import com.ffaikrw.space.aladinAPI.model.AladinResponse;
 import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.library.dao.LibraryDAO;
+import com.ffaikrw.space.library.model.Calendar;
 import com.ffaikrw.space.library.model.Library;
 import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 import com.ffaikrw.space.note.bo.NoteBO;
@@ -119,5 +122,51 @@ public class LibraryBO {
 		
 		return (count != 0);
 	}
+	
+	
+	// 캘린더
+	public List<Calendar> calendar(int userId) {
+		// 내 서재에 있는 도서들 정보 가져와서 캘린더 모델에 값 넣기
+		// 제목과 그뭐냐 그..... 그.... 아뭐더라 아 완독일만 가져오면 ㅇㅇ
+		
+		List<Library> libraryList = libraryDAO.selectLibrary(userId);
+		
+		List<Calendar> calendarList = new ArrayList<>();
+		
+		String coverSize = "Mid";
+		
+		for (Library library : libraryList) {
+			
+			AladinResponse aladinResponse = aladinApiBO.getItemLookUp(library.getIsbn(), coverSize);
+			List<AladinItem> aladinItem = aladinResponse.getItem();
+			
+			if (aladinItem == null) {
+				continue;
+			}
+			
+			Calendar calendar = new Calendar();
+			
+			if(library.getReadDate() == null) {
+				continue;
+			}
+			
+			Date readDate = library.getReadDate();
+			SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+			
+			calendar.setTitle(aladinItem.get(0).getTitle());
+			calendar.setStart(format.format(readDate));
+			calendar.setColor("#6b4bde");
+			calendar.setTextColor("#ffffff");
+			
+			calendarList.add(calendar);
+		}
+		
+		return calendarList;
+	}
+	
+	
+	
+	
+	
 	
 }

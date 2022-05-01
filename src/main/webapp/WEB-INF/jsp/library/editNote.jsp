@@ -42,9 +42,6 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">독서노트 수정하기</div>
 					
-					<div OnClick="location.href='#'" style="cursor:pointer;" class="go-to-notelist text-center">
-						독서노트 모아보기 <i class="bi bi-emoji-sunglasses"></i>
-					</div>
 					<c:import url="/WEB-INF/jsp/include/profileIcon.jsp" />
 				</div>
 				
@@ -85,11 +82,10 @@
 			    ['table', ['table']],
 			    ['para', ['ul', 'ol', 'paragraph']],
 			    ['height', ['height']],
-			    ['insert',['picture','link','video']],
-			    ['view', ['codeview','fullscreen', 'help']]
-			  ],
-			fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체'],
-			fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
+			    ['view', ['help']]
+			  ]
+			, fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New','맑은 고딕','궁서','굴림체','굴림','돋음체','바탕체']
+			, fontSizes: ['8','9','10','11','12','14','16','18','20','22','24','28','30','36','50','72']
 			
 		});
 	

@@ -60,12 +60,15 @@
 		
 	</div>
 	
+	<c:import url="/WEB-INF/jsp/include/profileModal.jsp" />
+	
 	
 	
 	<script>
 	
 		document.addEventListener('DOMContentLoaded', function() {
 	    	var calendarEl = document.getElementById('calendar');
+	    	
 	        var calendar = new FullCalendar.Calendar(calendarEl, {
 	        	headerToolbar: {
 	        		left: 'prev',
@@ -79,21 +82,21 @@
 	       		, nowIndicator: true
 	       		, dayMaxEvents: false
 	       		, locale: 'ko'
-	       		, events: [
-	       			{
-	       				title: '몽환화'
-	       				, color: "#6b4bde"
-	       				, textColor: "#ffffff"
-	       				, start: '2022-04-01'
-	       			},
-	       			{
-	       				title: '아몬드'
-	       				, color: "#6b4bde"
-	    	       		, textColor: "#ffffff"
-	       				, start: '2022-04-17'
+	       		, eventSources: [{
+	       			events: function(info, successCallback, failureCallback) {
+	       				$.ajax({
+	       					
+	       					type: "get"
+       			    		, url: "/library/get_calendar"
+       			    		, dataType: "json"
+       			    		, success: function(data){
+       			    			successCallback(data);
+       			    		}
+	       					
+	       				});
 	       			}
-	        	]
-	        });
+	       		}]
+	       	});
 	        
 	        calendar.render();
 	        
