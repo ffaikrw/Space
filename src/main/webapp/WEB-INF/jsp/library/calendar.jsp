@@ -41,7 +41,7 @@
 			
 			<div class="content">
 				<div class="content-header d-flex justify-content-between align-items-center">
-					<div class="page-name">내 서재</div>
+					<div class="page-name">독서 캘린더</div>
 					
 					<c:import url="/WEB-INF/jsp/include/profileIcon.jsp" />
 				</div>
