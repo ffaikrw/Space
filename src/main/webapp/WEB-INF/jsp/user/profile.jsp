@@ -75,6 +75,9 @@
 							<div id="duplicateNicknameText" class="validation-text text-danger d-none mr-5">사용 중인 닉네임입니다.</div>
 						</div>	
 					</div>
+					<div class="withdrawal-box d-flex align-items-end">
+						<button type="button" data-toggle="modal" data-target="#withdrawalModalCenter" class="withdrawal-btn">회원탈퇴</button>
+					</div>
 				
 				</div>
 				
@@ -85,7 +88,27 @@
 		</div>
 	</div>
 	
+	<!-- 프로필 Modal -->
 	<c:import url="/WEB-INF/jsp/include/profileModal.jsp" />
+	
+	
+	<!-- 회원탈퇴 Modal -->
+	<div class="modal fade" id="withdrawalModalCenter" tabindex="-1" role="dialog">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+		    	<div class="modal-body withdrawal-modal-body d-flex justify-content-center align-items-center">
+		    		<div class="text-center">
+			    		<div class="mt-3">회원탈퇴 시 개인정보, 내 서재, 독서노트, 읽어볼까, 한 줄 평의<br>모든 정보가 삭제됩니다.</div>
+			    		<div class="mt-3">space를 탈퇴하시겠습니까?</div>
+		    		</div>
+		    	</div>
+				<div class="modal-footer withdrawal-modal-footer d-flex justify-content-between">
+					<button type="button" id="withdrawalClose" data-dismiss="modal">취소</button>
+					<button type="button" id="withdrawalModal">탈퇴</button>
+				</div>
+			</div>
+		</div>
+	</div>
 	
 	
 	
@@ -221,8 +244,36 @@
 				
 			});
 			
+			
+			
+			// 회원탈퇴 버튼
+			$("#withdrawalModal").on("click", function(){
+				
+				$.ajax({
+					
+					type: "get"
+					, url: "/user/withdrawal"
+					, success: function(data){
+						
+						if (data.result == "success") {
+							alert("회원탈퇴가 정상적으로 완료되었습니다.");
+							location.href = "/user/start";
+						} else {
+							alert("회원탈퇴를 다시 시도해주세요.");
+						}
+						
+					}
+					, error: function(){
+						alert("회원탈퇴 통신에러");
+					}
+					
+				});
+				
+			});
+			
+			
 		});
-	
+		
 	</script>
 	
 	

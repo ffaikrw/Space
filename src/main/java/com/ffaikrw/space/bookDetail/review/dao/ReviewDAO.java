@@ -27,4 +27,11 @@ public interface ReviewDAO {
 	public int deleteReview(@Param("id") int id);
 	
 	
+	// 한 줄 평 존재 여부
+	public int selectReviewCountByUserId(@Param("userId") int userId);
+	
+	
+	// 회원탈퇴 - 모든 한 줄 평 삭제
+	public int deleteAllReview(@Param("userId") int userId);
+	
 }

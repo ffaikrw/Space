@@ -99,5 +99,26 @@
 			`id` desc
 	
 	</select>
+	
+	
+	<select id="selectNoteCountByUserId" parameterType="int" resultType="int">
+		
+		select
+			count(*)
+		from
+			`note`
+		where
+			`userId` = #{userId}
+	
+	</select>
+	
+	
+	<delete id="deleteAllNote" parameterType="int">
+		
+		delete from `note`
+		where
+			`userId` = #{userId}
+	
+	</delete>
 
 </mapper>

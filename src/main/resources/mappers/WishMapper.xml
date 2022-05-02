@@ -60,5 +60,26 @@
 			`id` desc
 		
 	</select>
+	
+	
+	<select id="selectWishCountByUserId" parameterType="int" resultType="int">
+	
+		select
+			count(*)
+		from
+			`wish`
+		where
+			`userId` = #{userId}
+	
+	</select>
+	
+	
+	<delete id="deleteAllWish" parameterType="int">
+	
+		delete from `wish`
+		where
+			`userId` = #{userId}
+	
+	</delete>
 
 </mapper>

@@ -17,7 +17,6 @@ import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 import com.ffaikrw.space.library.recommend.model.Recommend;
 import com.ffaikrw.space.wish.bo.WishBO;
-import com.ffaikrw.space.wish.model.Wish;
 
 @Service
 public class BrowseBO {
@@ -80,7 +79,9 @@ public class BrowseBO {
 		
 		Random rand = new Random();
 		
-		home.setRandomIsbn13(wishlist.get(rand.nextInt(wishlist.size())).getIsbn13());
+		if(wishlist.size() > 0) {
+			home.setRandomIsbn13(wishlist.get(rand.nextInt(wishlist.size())).getIsbn13());
+		}
 		
 		return home;
 	}

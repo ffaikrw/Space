@@ -43,5 +43,12 @@ public interface LibraryDAO {
 			, @Param("isbn") String isbn13
 			);
 	
+	
+	// 내 서재에 도서 존재 여부 확인
+	public int selectLibraryCountByUserId(@Param("userId") int userId);
+	
 	 
+	// 회원탈퇴 - 내 서재의 모든 도서 삭제
+	public int deleteAllLibrary(@Param("userId") int userId);
+	
 }

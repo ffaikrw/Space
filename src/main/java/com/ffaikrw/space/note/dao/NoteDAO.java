@@ -51,4 +51,11 @@ public interface NoteDAO {
 	public List<Note> selectNoteByUserId(@Param("userId") int userId);
 	
 	
+	// 독서노트 존재 여부 확인
+	public int selectNoteCountByUserId(@Param("userId") int userId);
+	
+	
+	// 회원탈퇴 - 모든 독서노트 삭제
+	public int deleteAllNote(@Param("userId") int userId);
+	
 }

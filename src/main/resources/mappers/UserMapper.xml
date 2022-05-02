@@ -112,6 +112,15 @@
 	
 	</select>
 	
+	
+	<delete id="deleteUser" parameterType="int">
+	
+		delete from `user`
+		where
+			`id` = #{id}
+	
+	</delete>
+	
 
 
 </mapper>

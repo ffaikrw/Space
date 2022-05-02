@@ -165,7 +165,19 @@ public class LibraryBO {
 	}
 	
 	
+	// 내 서재에 도서 존재 여부 확인
+	public boolean libraryIsExist(int userId) {
+		
+		int count = libraryDAO.selectLibraryCountByUserId(userId);
+		
+		return !(count == 0);
+	};
 	
+	
+	// 회원탈퇴 - 내 서재의 모든 도서 삭제
+	public int deleteAllLibrary(int userId) {
+		return libraryDAO.deleteAllLibrary(userId);
+	}
 	
 	
 	

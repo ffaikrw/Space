@@ -166,9 +166,11 @@
 					<div class="content-author mt-5">
 						<div class="home-subtitle">서재 속 작가들</div>
 						<div class="d-flex mt-3">
+						<c:if test="${ fn:length(home.homeLibrary) > 4 }">
 							<div class="author-prev arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-left-fill"></i>
 							</div>
+						</c:if>	
 							<div class="author-slide-wrapper">
 								<div class="author-slides">
 								<c:forEach var="homeAuthors" items="${ home.homeLibrary }" varStatus="status">
@@ -183,9 +185,11 @@
 								</c:forEach>
 								</div>
 							</div>
+						<c:if test="${ fn:length(home.homeLibrary) > 4 }">
 							<div class="author-next arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-right-fill"></i>
 							</div>
+						</c:if>
 						</div>
 					</div>
 					</c:if>
@@ -217,16 +221,17 @@
 					</div>
 					</c:if>
 					
+					<c:if test="${ home.randomIsbn13 ne null && home.randomIsbn13 ne '' }">
 					<div class="content-bottom mb-5">
 						<div class="home-subtitle mt-5">아직 고민 중이신가요?</div>
 						<div class="mt-2">
 							<a href="/book_info?isbn13=${ home.randomIsbn13 }" class="more-text">
 								읽어볼까 한 도서를 랜덤으로 감상해보세요!
 							</a>
-							<a href="#" id="reloadIcon" class="more-text ml-1"><i class="bi bi-arrow-clockwise"></i></a>
+							<a href="/browse/home" id="reloadIcon" class="more-text ml-1"><i class="bi bi-arrow-clockwise"></i></a>
 						</div>
 					</div>
-					
+					</c:if>
 					
 				
 				</div>
@@ -307,17 +312,6 @@
 					authorMoveSlide(authorSlideCount - 4);
 				}
 			});
-			
-		
-		// 랜덤 선택 다시하기
-		$("#reloadIcon").on("click", function(e){
-			
-			e.preventDefault();
-			
-			location.reload();
-			
-		});
-			
 		
 			
 	</script>

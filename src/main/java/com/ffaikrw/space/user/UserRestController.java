@@ -131,7 +131,28 @@ public class UserRestController {
 	}
 	
 	
-	
+	// 회원탈퇴 API
+	@GetMapping("/withdrawal")
+	public Map<String, String> userWithdrawal(HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		int userId = (Integer)session.getAttribute("userId");
+		
+		Map<String, String> resultMap = new HashMap<>();
+		
+		if (userBO.userWithdrawal(userId)) {
+			resultMap.put("result", "success");
+		} else {
+			resultMap.put("result", "fail");
+		}
+		
+		// 세션에 저장된 값도 삭제
+		session.removeAttribute("userId");
+		session.removeAttribute("userNickname");
+		session.removeAttribute("userProfileImg");
+		
+		return resultMap;
+	}
 	
 
 }

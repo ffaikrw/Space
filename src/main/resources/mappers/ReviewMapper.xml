@@ -55,5 +55,26 @@
 			`id` = #{id}
 	
 	</delete>
+	
+	
+	<select id="selectReviewCountByUserId" parameterType="int" resultType="int">
+	
+		select
+			count(*)
+		from
+			`review`
+		where
+			`userId` = #{userId}
+	
+	</select>
+	
+	
+	<delete id="deleteAllReview" parameterType="int">
+	
+		delete from `review`
+		where
+			`userId` = #{userId}
+	
+	</delete>
 
 </mapper>

@@ -34,4 +34,12 @@ public interface WishDAO {
 	// 모든 읽어볼까 리스트 가져오기
 	public List<Wish> selectWishlist(@Param("userId") int userId);
 	
+	
+	// 읽어볼까 존재 여부 확인
+	public int selectWishCountByUserId(@Param("userId") int userId);
+	
+	
+	// 회원탈퇴 - 모든 읽어볼까 삭제
+	public int deleteAllWish(@Param("userId") int userId);
+	
 }

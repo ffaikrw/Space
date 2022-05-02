@@ -1392,3 +1392,48 @@ footer {
 	color: #fff;
 }
 
+.withdrawal-box {
+	width: 100px;
+	height: 400px;
+}
+
+.withdrawal-btn {
+	width: 100px;
+	border: 2px solid #6b4bde;
+	color: #fff;
+	font-size: 14px;
+	background-color: #222;
+	border-radius: 30px;
+	padding: 5px;
+}
+
+.withdrawal-modal-body {
+	color: #fff;
+	font-size: 14px;
+	height: 100px;
+	border: none;
+}
+
+.withdrawal-modal-footer {
+	border: none;
+}
+
+#withdrawalClose {
+	width: 60px;
+	border: none;
+	color: #fff;
+	font-size: 14px;
+	background-color: #6b4bde;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+#withdrawalModal {
+	width: 60px;
+	border: 1px solid #6b4bde;
+	color: #fff;
+	font-size: 14px;
+	background-color: #222;
+	border-radius: 5px;
+	padding: 5px;	
+}

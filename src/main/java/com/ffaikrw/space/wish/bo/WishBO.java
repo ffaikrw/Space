@@ -111,5 +111,18 @@ public class WishBO {
 		return bookInfoList;
 	}
 	
+	// 읽어볼까 존재 여부 확인
+	public boolean wishIsExist(int userId) {
+		
+		int count = wishDAO.selectWishCountByUserId(userId);
+		
+		return !(count == 0);
+	}
+	
+	
+	// 회원탈퇴 - 모든 읽어볼까 삭제
+	public int deleteAllWish(int userId) {
+		return wishDAO.deleteAllWish(userId);
+	}
 	
 }

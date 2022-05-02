@@ -48,5 +48,9 @@ public interface UserDAO {
 	
 	// 프로필 정보 가져오기
 	public User selectProfile(@Param("id") int userId);
+	
+	
+	// 회원탈퇴
+	public int deleteUser(@Param("id") int userId);
 		
 }

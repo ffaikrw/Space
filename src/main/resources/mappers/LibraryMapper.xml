@@ -78,5 +78,26 @@
 			and `isbn` = #{isbn}
 	
 	</select>
+	
+	
+	<select id="selectLibraryCountByUserId" parameterType="int" resultType="int">
+	
+		select
+			count(*)
+		from
+			`library`
+		where
+			`userId` = #{userId}
+	
+	</select>
+	
+	
+	<delete id="deleteAllLibrary" parameterType="int">
+	
+		delete from `library`
+		where
+			`userId` = #{userId}
+	
+	</delete>
 
 </mapper>

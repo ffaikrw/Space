@@ -102,4 +102,19 @@ public class NoteBO {
 	}
 	
 	
+	// 독서노트 존재 여부 확인
+	public boolean noteIsExist(int userId) {
+		
+		int count = noteDAO.selectNoteCountByUserId(userId);
+		
+		return !(count == 0);
+	}
+	
+	
+	// 회원탈퇴 - 모든 독서노트 삭제
+	public int deleteAllNote(int userId) {
+		return noteDAO.deleteAllNote(userId);
+	}
+	
+	
 }

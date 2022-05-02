@@ -33,6 +33,19 @@ public class ReviewBO {
 	}
 	
 	
+	// 한 줄 평 존재 여부
+	public boolean reviewIsExist(int userId) {
+		
+		int count = reviewDAO.selectReviewCountByUserId(userId);
+		
+		return !(count == 0);
+	}
+	
+	
+	// 회원탈퇴 - 모든 한 줄 평 삭제
+	public int deleteAllReview(int userId) {
+		return reviewDAO.deleteAllReview(userId);
+	}
 	
 	
 }
