@@ -44,20 +44,9 @@
 				
 					<div class="profile-image-box d-flex justify-content-center align-items-center">
 						<div>
-						<c:choose>
-							<c:when test="${ userInfo.profileImage eq null || userInfo.profileImage eq '' }">
-								<div class="user-icon-radius">
-									<div class="user-icon">
-										<i class="bi bi-person-fill"></i>
-									</div>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<div class="profile-image-border">
-									<img src="${ userInfo.profileImage }" id="imgPreview" class="profile-image">
-								</div>
-							</c:otherwise>
-						</c:choose>
+							<div class="profile-image-border">
+								<img src="${ userInfo.profileImage }" id="imgPreview" class="profile-image">
+							</div>
 							<div class="edit-profile-image">
 								<a href="#" id="editImage"><i class="bi bi-image-fill"></i> 프로필 사진 선택</a>
 								<input type="file" id="fileInput" class="d-none">

@@ -13,7 +13,8 @@ public interface UserDAO {
 	public int insertUser(
 			@Param("nickname") String nickname,
 			@Param("email") String email,
-			@Param("password") String password
+			@Param("password") String password,
+			@Param("profileImage") String profileImage
 			);
 	
 	

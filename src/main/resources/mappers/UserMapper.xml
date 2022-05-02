@@ -23,7 +23,7 @@
 			#{nickname}
 			, #{email}
 			, #{password}
-			, null
+			, #{profileImage}
 			, now()
 			, now()
 		)

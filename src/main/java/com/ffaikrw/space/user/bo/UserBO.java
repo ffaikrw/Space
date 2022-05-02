@@ -45,7 +45,9 @@ public class UserBO {
 			return 0;
 		}
 		
-		return userDAO.insertUser(nickname, email, encryptPassword);
+		String profileImage = "/static/images/user_1.png";
+		
+		return userDAO.insertUser(nickname, email, encryptPassword, profileImage);
 	}
 	
 	
