@@ -34,11 +34,9 @@ public class KakaoRestController {
 			@RequestParam(value = "code", required = false) String code
 			) {
 		
-		KakaoTokenResponse reqToken = kakaoBO.getToken(code);
+		KakaoTokenResponse response = kakaoBO.getToken(code);
 		
-		String access_token = reqToken.getAccess_token();
-		
-		return access_token;
+		return "kakao email : " + response.getToken_type();
 	}
 	
 	
