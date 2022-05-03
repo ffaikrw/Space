@@ -59,6 +59,13 @@
 				<div id="notMatchText" class="validation-text text-danger d-none">비밀번호가 일치하지 않습니다.</div>
 				
 				<button id="joinBtn" class="sign-btn mt-3">회원가입</button>
+				
+				<div class="social-login-box mt-3 d-flex align-items-center justify-content-center">
+					<a href="#" id="kakaoLoginLink" class="login-link">
+						<img src="/static/images/kakao_login_large_wide.png" class="social-login-img">
+					</a>
+				</div>
+				
 				<div class="sign-link-box mt-3 text-center">
 					<a href="/user/sign_in" id="loginLink" class="sign-link">로그인</a>
 				</div>
@@ -73,6 +80,26 @@
 	<script>
 	
 		$(document).ready(function(){
+			
+			// 카카오 로그인
+			$("#kakaoLoginLink").on("click", function(){
+				
+				$.ajax({
+					
+					type: "get"
+					, url: "/kakao/login"
+					, success: function(data) {
+						location.href = data;
+					}
+					, error: function() {
+						alert("카카오톡 로그인 통신 오류");
+					}
+					
+				});
+				
+			});
+			
+			
 			
 			// 닉네임 중복 여부 저장 변수
 			var nicknameIsDuplicate = true;

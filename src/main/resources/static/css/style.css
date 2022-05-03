@@ -165,7 +165,7 @@ footer {
 .sign-input {
 	width: 350px;
 	height: 40px;
-	border: 2px solid;
+	border: 1px solid;
 	border-radius: 5px;
 	border-color: #6b4bde;
 	background-color: #333;
@@ -203,6 +203,25 @@ footer {
 	width: 350px;
 	height: 40px;
 	margin-left: 20px;
+}
+
+.social-login-box {
+	width: 350px;
+	height: 40px;
+	margin-left: 20px;
+}
+
+.social-login-img {
+	width: 350px;
+}
+
+.login-link {
+	color: #000;
+}
+
+.login-link:hover {
+	color: #000;
+	text-decoration: none;
 }
 
 .sign-link {
@@ -1305,7 +1324,7 @@ footer {
 	position: relative;
 	width: 300px;
 	height: 300px;
-	border: 2px solid #6b4bde;
+	border: 12px solid #6b4bde;
     border-radius: 50%;
     overflow: hidden;
 }
