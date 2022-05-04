@@ -60,10 +60,8 @@ public class UserBO {
 	// 카카오 회원가입 API
 	public KakaoUserResponse getKakaoUserInfo(String code) {
 		
-		// 토큰 발급
 		KakaoTokenResponse responseToken = kakaoBO.getToken(code);
 		
-		// access_token으로 사용자 정보 가져오기
 		KakaoUserResponse responseUserInfo = kakaoBO.getUserInfo(responseToken.getAccess_token());
 		
 		return responseUserInfo;
@@ -74,6 +72,10 @@ public class UserBO {
 	public int saveKakaoUser(String nickname, String email, String profileImage) {
 		
 		String password = null;
+		
+		if (profileImage == null) {
+			profileImage = "/static/images/user_1.png";
+		}
 		
 		return userDAO.insertUser(nickname, email, password, profileImage);
 	}

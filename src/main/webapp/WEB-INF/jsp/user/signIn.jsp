@@ -47,8 +47,14 @@
 					<button type="submit" id="logininBtn" class="sign-btn mt-3">로그인</button>
 				</form>
 				
-				<div class="sign-link-box mt-3 mb-5 text-center">
-					<a href="/user/sign_up" id="joinLink" class="sign-link">회원가입</a>
+				<div class="social-login-box mt-3 d-flex align-items-center justify-content-center">
+					<a href="#" id="kakaoLoginLink" class="login-link">
+						<img src="/static/images/kakao_login_large_wide.png" class="social-login-img">
+					</a>
+				</div>
+				
+				<div class="sign-link-box mt-5 mb-5 text-center">
+					<a href="/user/sign_up" id="joinLink" class="sign-link">회원가입하러 가기</a>
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
@@ -61,6 +67,25 @@
 	<script>
 	
 		$(document).ready(function(){
+			
+			// 카카오 로그인
+			$("#kakaoLoginLink").on("click", function(){
+				
+				$.ajax({
+					
+					type: "get"
+					, url: "/kakao/login"
+					, success: function(data) {
+						location.href = data;
+					}
+					, error: function() {
+						alert("카카오톡 로그인 통신 오류");
+					}
+					
+				});
+				
+			});
+			
 			
 			$("#loginForm").on("submit", function(e){
 				

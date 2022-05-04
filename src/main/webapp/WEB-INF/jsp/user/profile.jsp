@@ -36,7 +36,7 @@
 				<div class="content-header d-flex justify-content-between align-items-center">
 					<div class="page-name">프로필 관리</div>
 					<div class="d-flex justify-content-center">
-						<button type="button" id="editProfileBtn" class="profile-update-btn">수정</button>
+						<button type="button" data-toggle="modal" data-target="#withdrawalModalCenter" class="withdrawal-btn">회원탈퇴</button>
 					</div>
 				</div>
 				
@@ -65,7 +65,7 @@
 						</div>	
 					</div>
 					<div class="withdrawal-box d-flex align-items-end">
-						<button type="button" data-toggle="modal" data-target="#withdrawalModalCenter" class="withdrawal-btn">회원탈퇴</button>
+						<button type="button" id="editProfileBtn" class="profile-update-btn">수정</button>
 					</div>
 				
 				</div>
@@ -198,6 +198,7 @@
 					, success:function(data){
 						
 						if (data.result == "success") {
+							alert("프로필이 수정되었습니다.");
 							location.href="/user/profile";
 						} else {
 							alert("프로필을 수정하지 못했습니다.");

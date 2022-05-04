@@ -9,10 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ffaikrw.space.kakao.bo.KakaoBO;
-import com.ffaikrw.space.kakao.model.KakaoTokenResponse;
 import com.ffaikrw.space.kakao.model.KakaoUserResponse;
 import com.ffaikrw.space.user.bo.UserBO;
 import com.ffaikrw.space.user.model.User;
@@ -46,45 +43,62 @@ public class UserController {
 			, HttpServletRequest request
 			) {
 		
-		KakaoUserResponse responseUserInfo = userBO.getKakaoUserInfo(code);
+		KakaoUserResponse kakaoUserInfo = userBO.getKakaoUserInfo(code);
 		
-		// 이메일이 있을 경우 정보를 세션과 DB에 저장하고 홈 화면으로 이동
-		if (responseUserInfo.getKakao_account().getEmail() != null) {
-			// DB에 저장
-			String nickname = Long.toString(responseUserInfo.getId());
-			String email = responseUserInfo.getKakao_account().getEmail();
-			String kakaoProfileImg = responseUserInfo.getKakao_account().getProfile().getProfile_image_url();
-			String profileImage = null;
-			if (responseUserInfo.getKakao_account().getProfile().isIs_default_image()) {
-				profileImage = "/static/images/user_1.png";
-			} else {
-				profileImage = kakaoProfileImg;
-			}
+		// 1. 사용자 정보 조회
+		// 2. 이미 회원일 경우 바로 세션에 값 저장하여 홈 화면으로 이동
+		// 3. 회원이 아닐 경우 회원가입 진행
+		// 3-1. 이메일이 없을 경우 카카오 로그인이 아닌 일반 회원가입 화면으로 이동
+		
+		User user = new User();
+		
+		if (userBO.emailIsDuplicate(kakaoUserInfo.getKakao_account().getEmail())) { // 이미 있는 사용자
 			
-			int count = userBO.saveKakaoUser(nickname, email, profileImage);
+			user = userBO.getKakaoUser(kakaoUserInfo.getKakao_account().getEmail());
 			
-			if (count == 1) {
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("userId", user.getId());
+			session.setAttribute("userNickname", user.getNickname());
+			session.setAttribute("userProfileImg", user.getProfileImage());
+			
+			return "redirect:/browse/home";
+			
+		} else { // 처음 가입하는 사용자
+			
+			if (kakaoUserInfo.getKakao_account().getEmail() != null) { // 이메일 있는 경우
 				
-				User user = userBO.getKakaoUser(email);
+				// DB에 사용자 회원번호, 이메일, 프로필 사진 저장
+				String nickname = Long.toString(kakaoUserInfo.getId());
+				String email = kakaoUserInfo.getKakao_account().getEmail();
+				String profileImage = kakaoUserInfo.getKakao_account().getProfile().getProfile_image_url();
 				
-				HttpSession session = request.getSession();
+				int count = userBO.saveKakaoUser(nickname, email, profileImage);
 				
-				session.setAttribute("userId", user.getId());
-				session.setAttribute("userNickname", user.getNickname());
-				session.setAttribute("userProfileImg", user.getProfileImage());
+				if (count == 1) {
+					
+					user = userBO.getKakaoUser(email);
+					
+					HttpSession session = request.getSession();
+					
+					session.setAttribute("userId", user.getId());
+					session.setAttribute("userNickname", user.getNickname());
+					session.setAttribute("userProfileImg", user.getProfileImage());
+					
+					return "redirect:/browse/home";
+					
+				} else {
+					
+					return "redirect:/user/sign_up";
+					
+				}
 				
-				return "redirect:/browse/home";
+			} else { // 이메일 없는 경우
 				
-			} else {
 				return "redirect:/user/sign_up";
+				
 			}
 			
-			
-			
-			
-		} else {
-			model.addAttribute("kakaoUserInfo", responseUserInfo);
-			return "user/kakaoSignUp";
 		}
 		
 	}

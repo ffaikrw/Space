@@ -66,8 +66,8 @@
 					</a>
 				</div>
 				
-				<div class="sign-link-box mt-3 text-center">
-					<a href="/user/sign_in" id="loginLink" class="sign-link">로그인</a>
+				<div class="sign-link-box mt-5 text-center">
+					<a href="/user/sign_in" id="loginLink" class="sign-link">로그인하러 가기</a>
 				</div>
 				
 				<c:import url="/WEB-INF/jsp/include/footer.jsp" />
