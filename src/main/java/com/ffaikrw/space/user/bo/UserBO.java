@@ -7,6 +7,9 @@ import org.springframework.web.multipart.MultipartFile;
 import com.ffaikrw.space.bookDetail.review.bo.ReviewBO;
 import com.ffaikrw.space.common.EncryptUtils;
 import com.ffaikrw.space.common.FileManagerService;
+import com.ffaikrw.space.kakao.bo.KakaoBO;
+import com.ffaikrw.space.kakao.model.KakaoTokenResponse;
+import com.ffaikrw.space.kakao.model.KakaoUserResponse;
 import com.ffaikrw.space.library.bo.LibraryBO;
 import com.ffaikrw.space.note.bo.NoteBO;
 import com.ffaikrw.space.user.dao.UserDAO;
@@ -18,6 +21,9 @@ public class UserBO {
 	
 	@Autowired
 	private UserDAO userDAO;
+	
+	@Autowired
+	private KakaoBO kakaoBO;
 	
 	@Autowired
 	private LibraryBO libraryBO;
@@ -51,10 +57,38 @@ public class UserBO {
 	}
 	
 	
+	// 카카오 회원가입 API
+	public KakaoUserResponse getKakaoUserInfo(String code) {
+		
+		// 토큰 발급
+		KakaoTokenResponse responseToken = kakaoBO.getToken(code);
+		
+		// access_token으로 사용자 정보 가져오기
+		KakaoUserResponse responseUserInfo = kakaoBO.getUserInfo(responseToken.getAccess_token());
+		
+		return responseUserInfo;
+	}
+	
+	
+	// 카카오 회원가입 정보 DB 저장
+	public int saveKakaoUser(String nickname, String email, String profileImage) {
+		
+		String password = null;
+		
+		return userDAO.insertUser(nickname, email, password, profileImage);
+	}
+	
+	
+	// 카카오 회원 정보 가져오기
+	public User getKakaoUser(String email) {
+		return userDAO.selectKakaoUser(email);
+	}
+	
+	
 	// 닉네임 중복확인 API
 	public boolean nicknameIsDuplicate(String nickname) {
 		
-		int count = userDAO.selectNicknameCount(nickname);;
+		int count = userDAO.selectNicknameCount(nickname);
 		
 		return !(count == 0);
 	}

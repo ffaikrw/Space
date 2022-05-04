@@ -4,14 +4,14 @@ import java.util.Date;
 
 public class KakaoUserResponse {
 	
-	private int id;
+	private Long id;
 	private Date connected_at;
 	private KakaoAccount kakao_account;
 	
-	public int getId() {
+	public Long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	public Date getConnected_at() {

@@ -18,6 +18,10 @@ public interface UserDAO {
 			);
 	
 	
+	// 카카오 회원정보 가져오기
+	public User selectKakaoUser(@Param("email") String email);
+	
+	
 	// 닉네임 중복확인 API
 	public int selectNicknameCount(@Param("nickname") String nickname);
 	

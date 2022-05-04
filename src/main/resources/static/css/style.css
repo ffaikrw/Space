@@ -233,6 +233,12 @@ footer {
 	text-decoration: none;
 }
 
+.social-sign-label {
+	color: #fff;
+	font-size: 14px;
+	margin-left: 20px;
+}
+
 
 /* home.jsp */
 .content {

@@ -14,8 +14,6 @@ import org.springframework.web.client.RestTemplate;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ffaikrw.space.kakao.model.KakaoAccount;
-import com.ffaikrw.space.kakao.model.KakaoProfile;
 import com.ffaikrw.space.kakao.model.KakaoTokenResponse;
 import com.ffaikrw.space.kakao.model.KakaoUserResponse;
 
@@ -24,7 +22,7 @@ public class KakaoBO {
 	
 	private final String grant_type = "authorization_code";
 	private final String client_id = "5170fc7c6355db5c1438e9b2e64d78bb";
-	private final String redirect_uri = "http://localhost:8080/oauth/kakaoLogin";
+	private final String redirect_uri = "http://localhost:8080/user/oauth/kakaoLogin";
 	private final String reqTokenURL = "https://kauth.kakao.com/oauth/token";
 	private final String reqUserInfoURL = "https://kapi.kakao.com/v2/user/me";
 	
@@ -70,82 +68,45 @@ public class KakaoBO {
 		}
 		
 		return kakaoTokenResponse;
-		
-		
-		// 사용자 정보 가져오기
-		
-//		RestTemplate restTemplate2 = new RestTemplate();
-//		
-//		HttpHeaders header2 = new HttpHeaders();
-//		header2.add("Authorization", "Bearer " + kakaoTokenResponse.getAccess_token());
-//		header2.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//		
-//		HttpEntity<MultiValueMap<String, String>> entity2 = new HttpEntity<>(header2);
-//		
-//		ResponseEntity<String> responseUserInfo = restTemplate2.exchange(
-//				reqUserInfoURL
-//				, HttpMethod.POST
-//				, entity2
-//				, String.class
-//				);
-//		
-//		ObjectMapper objectMapper2 = new ObjectMapper();
-//		
-//		KakaoUserResponse kakaoUserResponse = null;
-//		
-//		try {
-//			kakaoUserResponse = objectMapper2.readValue(responseUserInfo.getBody(), KakaoUserResponse.class);
-//		} catch (JsonGenerationException e) {
-//			e.printStackTrace();
-//		} catch (JsonMappingException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return kakaoUserResponse;
-		
 	}
 	
 
+	
 	// 사용자 정보 가져오기
-//	public KakaoUserResponse getUserInfo(String accessToken) {
-//		
-//		RestTemplate restTemplate = new RestTemplate();
-//		
-//		HttpHeaders header = new HttpHeaders();
-//		header.add("Authorization", "Bearer" + accessToken);
-//		header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-//		
-//		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(header);
-//		
-//		ResponseEntity<String> responseUserInfo = restTemplate.exchange(
-//				reqUserInfoURL
-//				, HttpMethod.POST
-//				, entity
-//				, String.class
-//				);
-//		
-//		ObjectMapper objectMapper = new ObjectMapper();
-//		
-//		KakaoUserResponse kakaoUserResponse = null;
-//		
-//		try {
-//			kakaoUserResponse = objectMapper.readValue(responseUserInfo.getBody(), KakaoUserResponse.class);
-//		} catch (JsonGenerationException e) {
-//			e.printStackTrace();
-//		} catch (JsonMappingException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		return kakaoUserResponse;
-//	}
-	
-	
-	
-	
+	public KakaoUserResponse getUserInfo(String accessToken) {
+		
+		RestTemplate restTemplate = new RestTemplate();
+		
+		HttpHeaders header = new HttpHeaders();
+		header.add("Authorization", "Bearer " + accessToken);
+		header.add("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+		
+		HttpEntity<MultiValueMap<String, String>> entity = new HttpEntity<>(header);
+		
+		ResponseEntity<String> responseUserInfo = restTemplate.exchange(
+				reqUserInfoURL
+				, HttpMethod.POST
+				, entity
+				, String.class
+				);
+		
+		
+		ObjectMapper objectMapper = new ObjectMapper();
+		
+		KakaoUserResponse kakaoUserResponse = null;
+		
+		try {
+			kakaoUserResponse = objectMapper.readValue(responseUserInfo.getBody(), KakaoUserResponse.class);
+		} catch (JsonGenerationException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return kakaoUserResponse;
+	}
 	
 	
 }

@@ -31,6 +31,24 @@
 	</insert>
 	
 	
+	<select id="selectKakaoUser" parameterType="String" resultType="com.ffaikrw.space.user.model.User">
+	
+		select
+			`id`
+			, `nickname`
+			, `email`
+			, `password`
+			, `profileImage`
+			, `createdAt`
+			, `updatedAt`
+		from
+			`user`
+		where
+			`email` = #{email}
+	
+	</select>
+	
+	
 	<select id="selectNicknameCount" parameterType="String" resultType="int">
 	
 		select
