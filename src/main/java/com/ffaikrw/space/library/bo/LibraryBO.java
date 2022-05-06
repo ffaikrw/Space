@@ -126,8 +126,6 @@ public class LibraryBO {
 	
 	// 캘린더
 	public List<Calendar> calendar(int userId) {
-		// 내 서재에 있는 도서들 정보 가져와서 캘린더 모델에 값 넣기
-		// 제목과 그뭐냐 그..... 그.... 아뭐더라 아 완독일만 가져오면 ㅇㅇ
 		
 		List<Library> libraryList = libraryDAO.selectLibrary(userId);
 		
