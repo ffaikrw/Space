@@ -22,7 +22,7 @@ public class KakaoBO {
 	
 	private final String grant_type = "authorization_code";
 	private final String client_id = "5170fc7c6355db5c1438e9b2e64d78bb";
-	private final String redirect_uri = "http://localhost:8080/user/oauth/kakaoLogin";
+	private final String redirect_uri = "http://52.79.141.125:8080/user/oauth/kakaoLogin";
 	private final String reqTokenURL = "https://kauth.kakao.com/oauth/token";
 	private final String reqUserInfoURL = "https://kapi.kakao.com/v2/user/me";
 	
