@@ -62,10 +62,7 @@
 	<select id="selectRecommendTop10" resultType="com.ffaikrw.space.library.recommend.model.Recommend">
 	
 		select
-			`id`
-			, `userId`
-			, `isbn`
-			, `createdAt`
+			`isbn`
 			, count(*)
 		from
 			`recommend`
