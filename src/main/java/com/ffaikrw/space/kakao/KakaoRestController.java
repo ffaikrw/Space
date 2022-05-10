@@ -12,7 +12,7 @@ public class KakaoRestController {
 		
 		String kakaoLoginUrl = "https://kauth.kakao.com/oauth/authorize?"
 							+ "client_id=5170fc7c6355db5c1438e9b2e64d78bb"
-							+ "&redirect_uri=http://localhost:8080/user/oauth/kakaoLogin"
+							+ "&redirect_uri=http://52.79.141.125:8080/user/oauth/kakaoLogin"
 							+ "&response_type=code";
 		
 		return kakaoLoginUrl;
