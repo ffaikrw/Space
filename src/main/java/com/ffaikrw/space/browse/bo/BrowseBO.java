@@ -14,6 +14,7 @@ import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.BookResultInfo;
 import com.ffaikrw.space.browse.model.Home;
 import com.ffaikrw.space.library.bo.LibraryBO;
+import com.ffaikrw.space.library.model.Library;
 import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 import com.ffaikrw.space.library.recommend.model.Recommend;
 import com.ffaikrw.space.wish.bo.WishBO;
@@ -73,6 +74,12 @@ public class BrowseBO {
 		
 		// 나의 책장
 		home.setHomeLibrary(libraryBO.getLibrary(userId, "Mid"));
+		
+		// 서재 속 작가들: 작가가 중복되지 않도록 내 서재 속 작가들을 한 명씩 리스트에 담아 model의 homeAuthorList에 set
+		List<BookInfo> libraryList = libraryBO.getLibrary(userId, "Mid");
+//		for (libraryList) {
+//			
+//		}
 		
 		// 읽어볼까 한 소설 랜덤 독서
 		List<BookInfo> wishlist = wishBO.getWishlist(userId, "Mid");
