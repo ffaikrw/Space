@@ -10,6 +10,7 @@ public class Home {
 	private List<BookInfo> todayTop10;
 	private List<BookInfo> homeWishlist;
 	private List<String> homeAuthorList;
+	private List<BookInfo> homeOutstanding;
 	private List<BookInfo> homeLibrary;
 	private String randomIsbn13;
 	
@@ -48,6 +49,12 @@ public class Home {
 	}
 	public void setHomeAuthorList(List<String> homeAuthorList) {
 		this.homeAuthorList = homeAuthorList;
+	}
+	public List<BookInfo> getHomeOutstanding() {
+		return homeOutstanding;
+	}
+	public void setHomeOutstanding(List<BookInfo> homeOutstanding) {
+		this.homeOutstanding = homeOutstanding;
 	}
 	public List<BookInfo> getHomeLibrary() {
 		return homeLibrary;

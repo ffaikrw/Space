@@ -14,7 +14,6 @@ import com.ffaikrw.space.browse.model.BookInfo;
 import com.ffaikrw.space.browse.model.BookResultInfo;
 import com.ffaikrw.space.browse.model.Home;
 import com.ffaikrw.space.library.bo.LibraryBO;
-import com.ffaikrw.space.library.model.Library;
 import com.ffaikrw.space.library.recommend.bo.RecommendBO;
 import com.ffaikrw.space.library.recommend.model.Recommend;
 import com.ffaikrw.space.wish.bo.WishBO;
@@ -77,9 +76,25 @@ public class BrowseBO {
 		
 		// 서재 속 작가들: 작가가 중복되지 않도록 내 서재 속 작가들을 한 명씩 리스트에 담아 model의 homeAuthorList에 set
 		List<BookInfo> libraryList = libraryBO.getLibrary(userId, "Mid");
-//		for (libraryList) {
-//			
-//		}
+		List<String> authors = new ArrayList<>();
+		libraryList.get(0).getAuthorList().get(0);
+		
+		for (int i = 0; i < libraryList.size(); i++) {
+			if (authors.contains(libraryList.get(i).getAuthorList().get(0))) {
+				continue;
+			}
+			authors.add(libraryList.get(i).getAuthorList().get(0));
+		}
+		
+		home.setHomeAuthorList(authors);
+		
+		// 주목할만한 신간
+		String itemListType = "ItemNewSpecial";
+		String coverSize = "Mid";
+		Integer startNum = 1;
+		
+		home.setHomeOutstanding(this.getBookList(userId, itemListType, startNum, coverSize));
+		
 		
 		// 읽어볼까 한 소설 랜덤 독서
 		List<BookInfo> wishlist = wishBO.getWishlist(userId, "Mid");
@@ -180,7 +195,7 @@ public class BrowseBO {
 	
 	
 	
-	// 도서 검색
+	// 도서 검색 결과
 	public List<BookInfo> getSearchResult(String search, String keyword, Integer startNum, String sort) {
 		
 		AladinResponse aladinResponse = aladinApiBO.getItemSearch(search, keyword, startNum, sort);
