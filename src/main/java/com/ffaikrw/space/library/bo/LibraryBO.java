@@ -47,7 +47,7 @@ public class LibraryBO {
 	
 	
 	// 내 서재의 모든 도서 가져오기
-	public List<BookInfo> getLibrary(Integer userId, String coverSize ) {
+	public List<BookInfo> getLibrary(Integer userId, String coverSize) {
 		
 		List<Library> libraryList = libraryDAO.selectLibrary(userId);
 		

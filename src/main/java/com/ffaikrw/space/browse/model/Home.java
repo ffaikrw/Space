@@ -9,7 +9,8 @@ public class Home {
 	private BookInfo homeEditorRecommend;
 	private List<BookInfo> todayTop10;
 	private List<BookInfo> homeWishlist;
-	private List<BookInfo> homeAuthorList;
+	private List<String> homeAuthorList;
+	private List<BookInfo> homeOutstanding;
 	private List<BookInfo> homeLibrary;
 	private String randomIsbn13;
 	
@@ -43,11 +44,17 @@ public class Home {
 	public void setHomeWishlist(List<BookInfo> homeWishlist) {
 		this.homeWishlist = homeWishlist;
 	}
-	public List<BookInfo> getHomeAuthorList() {
+	public List<String> getHomeAuthorList() {
 		return homeAuthorList;
 	}
-	public void setHomeAuthorList(List<BookInfo> homeAuthorList) {
+	public void setHomeAuthorList(List<String> homeAuthorList) {
 		this.homeAuthorList = homeAuthorList;
+	}
+	public List<BookInfo> getHomeOutstanding() {
+		return homeOutstanding;
+	}
+	public void setHomeOutstanding(List<BookInfo> homeOutstanding) {
+		this.homeOutstanding = homeOutstanding;
 	}
 	public List<BookInfo> getHomeLibrary() {
 		return homeLibrary;

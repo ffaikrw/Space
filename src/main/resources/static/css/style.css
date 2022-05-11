@@ -508,6 +508,31 @@ footer {
 	margin-right: 15px;
 }
 
+.outstanding-slide-wrapper {
+	position: relative;
+	width: 800px;
+	height: 190px;
+	margin: 0 auto;
+	overflow: hidden;
+	margin-top: 10px;
+}
+
+.outstanding-slides {
+	position: absolute;
+	left: 0;
+	top: 0;
+	transition: left 0.5s ease-out;
+}
+
+.outstanding-slides .home-outstanding-box:not(:last-child) {
+	float: left;
+	margin-right: 15px;
+}
+
+.home-outstanding-box {
+	width: 85px;
+	height: 190px;
+}
 
 .book-box {
 	width: 150px;

@@ -166,18 +166,18 @@
 					<div class="content-author mt-5">
 						<div class="home-subtitle">서재 속 작가들</div>
 						<div class="d-flex mt-3">
-						<c:if test="${ fn:length(home.homeLibrary) > 4 }">
+						<c:if test="${ fn:length(home.homeAuthorList) > 4 }">
 							<div class="author-prev arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-left-fill"></i>
 							</div>
 						</c:if>	
 							<div class="author-slide-wrapper">
 								<div class="author-slides">
-								<c:forEach var="homeAuthors" items="${ home.homeLibrary }" varStatus="status">
-									<div OnClick="location.href='/author?author=${ homeAuthors.authorList[0] }'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
+								<c:forEach var="homeAuthors" items="${ home.homeAuthorList }" varStatus="status">
+									<div OnClick="location.href='/author?author=${ homeAuthors }'" style="cursor:pointer;" class="author-box d-flex justify-content-center align-items-center">
 										<div class="author-name">
-											${ fn:substring(homeAuthors.authorList[0], 0, 8 ) }
-											<c:if test="${fn:length(homeAuthors.authorList[0]) > 9}">
+											${ fn:substring(homeAuthors, 0, 8 ) }
+											<c:if test="${fn:length(homeAuthors) > 9}">
 											...
 											</c:if>
 										</div>
@@ -185,7 +185,7 @@
 								</c:forEach>
 								</div>
 							</div>
-						<c:if test="${ fn:length(home.homeLibrary) > 4 }">
+						<c:if test="${ fn:length(home.homeAuthorList) > 4 }">
 							<div class="author-next arrow-icon d-flex align-items-center">
 								<i class="bi bi-caret-right-fill"></i>
 							</div>
@@ -193,6 +193,35 @@
 						</div>
 					</div>
 					</c:if>
+					
+					<!-- 주목할만한 신간 -->
+					<div class="mt-5">
+						<div class="home-subtitle">주목할만한 신간</div>
+						<div class="d-flex mt-3">
+							<div class="outstanding-prev arrow-icon mt-5">
+								<i class="bi bi-caret-left-fill"></i>
+							</div>
+							<div class="outstanding-slide-wrapper">
+								<div class="outstanding-slides">
+								<c:forEach var="homeOutstanding" items="${ home.homeOutstanding }" end="25">
+									<div OnClick="location.href='/book_info?isbn13=${ homeOutstanding.isbn13 }'" style="cursor:pointer;" class="home-outstanding-box">
+										<img src="${ homeOutstanding.cover }" >
+										<div class="top10-bookTitle">
+											${ fn:substring(homeOutstanding.title, 0, 12 ) }
+											<c:if test="${fn:length(homeOutstanding.title) > 12}">
+											...
+											</c:if>
+										</div>
+									</div>
+								</c:forEach>
+								</div>
+							</div>
+							<div class="outstanding-next arrow-icon mt-5">
+								<i class="bi bi-caret-right-fill"></i>
+							</div>
+						</div>
+					</div>
+					
 					
 					<!-- 나의 책장 -->
 					<c:if test="${ !empty home.homeLibrary }">
@@ -312,6 +341,43 @@
 					authorMoveSlide(authorSlideCount - 4);
 				}
 			});
+		
+			
+		// 주목할만한 신간 멀티 슬라이드
+		var outstandingSlides = document.querySelector('.outstanding-slides'),
+			outstandingSlide = document.querySelectorAll('.outstanding-slides .home-outstanding-box'),
+			outstandingCurrentIndex = 0,
+			outstandingSlideCount = outstandingSlide.length,
+			outstandingSlideWidth = 85,
+			outstandingSlideMargin = 15,
+			outstandingPrevBtn = document.querySelector('.outstanding-prev'),
+			outstandingNextBtn = document.querySelector('.outstanding-next');
+		
+			outstandingSlides.style.width = (outstandingSlideWidth + outstandingSlideMargin) * outstandingSlideCount - outstandingSlideMargin + 'px';
+			
+			function outstandingMoveSlide(outstandingNum) {
+				outstandingSlides.style.left = -outstandingNum * (outstandingSlideWidth + outstandingSlideMargin) + 'px';
+				outstandingCurrentIndex = outstandingNum;
+			}
+			
+			outstandingNextBtn.addEventListener('click', function(){
+				if (outstandingCurrentIndex < (outstandingSlideCount - 9)) {
+					outstandingMoveSlide(outstandingCurrentIndex + 1);
+				} else {
+					outstandingMoveSlide(0);
+				}
+			});
+			
+			outstandingPrevBtn.addEventListener('click', function(){
+				if (outstandingCurrentIndex > 0) {
+					outstandingMoveSlide(outstandingCurrentIndex - 1);
+				} else {
+					outstandingMoveSlide(outstandingSlideCount - 9);
+				}
+			});
+		
+		
+		
 		
 			
 	</script>
