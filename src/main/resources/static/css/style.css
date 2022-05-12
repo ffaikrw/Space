@@ -455,9 +455,10 @@ footer {
 .top10-slide-wrapper {
 	position: relative;
 	width: 800px;
-	height: 240px;
+	height: 190px;
 	margin: 0 auto;
 	overflow: hidden;
+	margin-top: 10px;
 }
 
 .top10-slides {
