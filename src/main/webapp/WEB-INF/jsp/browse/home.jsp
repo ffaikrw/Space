@@ -162,7 +162,7 @@
 					</c:if>
 					
 					<!-- 서재 속 작가들 -->
-					<c:if test="${ !empty home.homeLibrary }">
+					<c:if test="${ !empty home.homeAuthorList }">
 					<div class="content-author mt-5">
 						<div class="home-subtitle">서재 속 작가들</div>
 						<div class="d-flex mt-3">
@@ -310,37 +310,42 @@
 			
 			
 		// 서재 속 작가들 멀티 슬라이드
-		var authorSlides = document.querySelector('.author-slides'),
-			authorSlide = document.querySelectorAll('.author-slides .author-box'),
-			authorCurrentIndex = 0,
-			authorSlideCount = authorSlide.length,
-			authorSlideWidth = 170,
-			authorSlideMargin = 15,
-			authorPrevBtn = document.querySelector('.author-prev'),
-			authorNextBtn = document.querySelector('.author-next');
 		
-			authorSlides.style.width = (authorSlideWidth + authorSlideMargin) * authorSlideCount - authorSlideMargin + 'px';
+		if (document.querySelector('.author-slides') != null) {
 			
-			function authorMoveSlide(num) {
-				authorSlides.style.left = -num * (authorSlideWidth + authorSlideMargin) + 'px';
-				authorCurrentIndex = num;
-			}
+			var authorSlides = document.querySelector('.author-slides'),
+				authorSlide = document.querySelectorAll('.author-slides .author-box'),
+				authorCurrentIndex = 0,
+				authorSlideCount = authorSlide.length,
+				authorSlideWidth = 170,
+				authorSlideMargin = 15,
+				authorPrevBtn = document.querySelector('.author-prev'),
+				authorNextBtn = document.querySelector('.author-next');
 			
-			authorNextBtn.addEventListener('click', function(){
-				if (authorCurrentIndex < (authorSlideCount - 4)) {
-					authorMoveSlide(authorCurrentIndex + 1);
-				} else {
-					authorMoveSlide(0);
+				authorSlides.style.width = (authorSlideWidth + authorSlideMargin) * authorSlideCount - authorSlideMargin + 'px';
+			
+				function authorMoveSlide(num) {
+					authorSlides.style.left = -num * (authorSlideWidth + authorSlideMargin) + 'px';
+					authorCurrentIndex = num;
 				}
-			});
-			
-			authorPrevBtn.addEventListener('click', function(){
-				if (authorCurrentIndex > 0) {
-					authorMoveSlide(authorCurrentIndex - 1);
-				} else {
-					authorMoveSlide(authorSlideCount - 4);
-				}
-			});
+				
+				authorNextBtn.addEventListener('click', function(){
+					if (authorCurrentIndex < (authorSlideCount - 4)) {
+						authorMoveSlide(authorCurrentIndex + 1);
+					} else {
+						authorMoveSlide(0);
+					}
+				});
+				
+				authorPrevBtn.addEventListener('click', function(){
+					if (authorCurrentIndex > 0) {
+						authorMoveSlide(authorCurrentIndex - 1);
+					} else {
+						authorMoveSlide(authorSlideCount - 4);
+					}
+				});
+		}
+		
 		
 			
 		// 주목할만한 신간 멀티 슬라이드

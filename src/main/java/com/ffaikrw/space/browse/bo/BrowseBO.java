@@ -77,13 +77,22 @@ public class BrowseBO {
 		// 서재 속 작가들: 작가가 중복되지 않도록 내 서재 속 작가들을 한 명씩 리스트에 담아 model의 homeAuthorList에 set
 		List<BookInfo> libraryList = libraryBO.getLibrary(userId, "Mid");
 		List<String> authors = new ArrayList<>();
-		libraryList.get(0).getAuthorList().get(0);
 		
-		for (int i = 0; i < libraryList.size(); i++) {
-			if (authors.contains(libraryList.get(i).getAuthorList().get(0))) {
-				continue;
+		// 만약 서재가 비었으면 작가 리스트 null 저장
+
+		if (libraryList.size() != 0) {
+			
+			libraryList.get(0).getAuthorList().get(0);
+			
+			for (int i = 0; i < libraryList.size(); i++) {
+				if (authors.contains(libraryList.get(i).getAuthorList().get(0))) {
+					continue;
+				}
+				authors.add(libraryList.get(i).getAuthorList().get(0));
 			}
-			authors.add(libraryList.get(i).getAuthorList().get(0));
+			
+		} else {
+			authors = null;
 		}
 		
 		home.setHomeAuthorList(authors);
