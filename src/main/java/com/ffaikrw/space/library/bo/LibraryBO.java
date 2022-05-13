@@ -155,6 +155,7 @@ public class LibraryBO {
 			calendar.setStart(format.format(readDate));
 			calendar.setColor("#6b4bde");
 			calendar.setTextColor("#ffffff");
+			calendar.setUrl("http://52.79.141.125:8080/book_info?isbn13=" + aladinItem.get(0).getIsbn13());
 			
 			calendarList.add(calendar);
 		}
