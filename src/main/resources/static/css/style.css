@@ -1231,7 +1231,7 @@ footer {
 .note-box {
 	width: 900px;
 	border: 1px solid #6b4bde;
-	background-color: #1d1c21;
+	background-color: #f5f5f5;
 	padding-top: 10px;
 	padding-left: 15px;
 	padding-right: 15px;
@@ -1241,7 +1241,6 @@ footer {
 }
 
 .note-content {
-	color: #fff;
 	white-space: pre-wrap;
 }
 
