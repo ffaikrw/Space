@@ -53,13 +53,14 @@ public class BrowseController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		String itemListType = "ItemNewAll";
+		int maxResults = 50;
 		String coverSize = "MidBig";
 		
 		if (startNum == null) {
 			startNum = 1;
 		}
 		
-		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, startNum, coverSize);
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, maxResults, startNum, coverSize);
 		model.addAttribute("weeklyNew", bookInfoList);
 		
 		return "/browse/weeklyNew";
@@ -79,13 +80,14 @@ public class BrowseController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		String itemListType = "Bestseller";
+		int maxResults = 50;
 		String coverSize = "MidBig";
 		
 		if (startNum == null) {
 			startNum = 1;
 		}
 		
-		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, startNum, coverSize);
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, maxResults, startNum, coverSize);
 		model.addAttribute("bestseller", bookInfoList);
 		
 		return "/browse/bestseller";
@@ -104,13 +106,14 @@ public class BrowseController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		String itemListType = "ItemEditorChoice";
+		int maxResults = 50;
 		String coverSize = "MidBig";
 		
 		if (startNum == null) {
 			startNum = 1;
 		}
 		
-		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, startNum, coverSize);
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, maxResults, startNum, coverSize);
 		model.addAttribute("editorRecommend", bookInfoList);
 		
 		return "/browse/editorRecommend";
@@ -129,10 +132,11 @@ public class BrowseController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		String itemListType = "ItemNewSpecial";
+		int maxResults = 50;
 		String coverSize = "Mid";
 		Integer startNum = 1;
 		
-		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, startNum, coverSize);
+		List<BookInfo> bookInfoList = browseBO.getBookList(userId, itemListType, maxResults, startNum, coverSize);
 		model.addAttribute("outstandingBook", bookInfoList);
 		
 		return "/browse/search";

@@ -40,9 +40,9 @@ public class BrowseBO {
 		Home home = new Home();
 		
 		// 신작, 베스트셀러, 편집자추천 정보 가져오기
-		home.setHomeWeeklyNew(this.getBookList(userId, "ItemNewAll", 1, "Mid").get(0));
-		home.setHomeBestseller(this.getBookList(userId, "Bestseller", 1, "Mid").get(0));
-		home.setHomeEditorRecommend(this.getBookList(userId, "ItemEditorChoice", 1, "Mid").get(0));
+		home.setHomeWeeklyNew(this.getBookList(userId, "ItemNewAll", 1, 1, "Mid").get(0));
+		home.setHomeBestseller(this.getBookList(userId, "Bestseller", 1, 1, "Mid").get(0));
+		home.setHomeEditorRecommend(this.getBookList(userId, "ItemEditorChoice", 1, 1, "Mid").get(0));
 		
 		// 오늘의 10가지 소설
 		List<Recommend> recommendList = recommendBO.getRecommendTop10();
@@ -79,7 +79,6 @@ public class BrowseBO {
 		List<String> authors = new ArrayList<>();
 		
 		// 만약 서재가 비었으면 작가 리스트 null 저장
-
 		if (libraryList.size() != 0) {
 			
 			libraryList.get(0).getAuthorList().get(0);
@@ -102,7 +101,7 @@ public class BrowseBO {
 		String coverSize = "Mid";
 		Integer startNum = 1;
 		
-		home.setHomeOutstanding(this.getBookList(userId, itemListType, startNum, coverSize));
+		home.setHomeOutstanding(this.getBookList(userId, itemListType, 26, startNum, coverSize));
 		
 		
 		// 읽어볼까 한 소설 랜덤 독서
@@ -120,9 +119,9 @@ public class BrowseBO {
 	
 	
 	// 도서 리스트
-	public List<BookInfo> getBookList(Integer userId, String itemListType, Integer startNum, String coverSize) {
+	public List<BookInfo> getBookList(Integer userId, String itemListType, int maxResults, Integer startNum, String coverSize) {
 		
-		AladinResponse aladinResponse = aladinApiBO.getItemList(itemListType, startNum, coverSize);
+		AladinResponse aladinResponse = aladinApiBO.getItemList(itemListType, maxResults, startNum, coverSize);
 		List<AladinItem> aladinItemList = aladinResponse.getItem();
 		
 		List<BookInfo> bookInfoList = new ArrayList<>();
