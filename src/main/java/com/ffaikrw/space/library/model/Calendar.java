@@ -6,6 +6,7 @@ public class Calendar {
 	private String color;
 	private String textColor;
 	private String start;
+	private String url;
 
 	public String getTitle() {
 		return title;
@@ -30,6 +31,12 @@ public class Calendar {
 	}
 	public void setStart(String start) {
 		this.start = start;
+	}
+	public String getUrl() {
+		return url;
+	}
+	public void setUrl(String url) {
+		this.url = url;
 	}
 	
 }

@@ -99,9 +99,11 @@
 					
 					<div class="d-flex">
 						<div class="bookInfo-subtitle">한 줄 평</div>
-						<a href="#" id="moreComment">더보기 <i class="bi bi-caret-down"></i></a>
-						<a href="#" id="lessComment" class="d-none">접기 <i class="bi bi-caret-up"></i></a>
-					</div>
+						<c:if test="${ fn:length(bookDetail.reviewList) > 3 }">
+							<a href="#" id="moreComment">더보기 <i class="bi bi-caret-down"></i></a>
+							<a href="#" id="lessComment" class="d-none">접기 <i class="bi bi-caret-up"></i></a>
+						</c:if>
+						</div>
 					<div class="comment-box mt-1">
 					<c:choose>
 						<c:when test="${ empty bookDetail.reviewList }">
