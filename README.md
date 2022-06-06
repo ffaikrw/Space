@@ -4,6 +4,13 @@
 - 알라딘 도서 API를 이용한 소설 구독 웹서비스
 - 개발 기간 : 2022.04.05 - 2022.05.04
 
+### 🔗Test
+- LINK: http://52.79.141.125:8080/user/start
+- TEST ACCOUNT
+   * 저장된 데이터 X: ID - test@gmail.com / PASSWORD - test
+   * 저장된 데이터 O: ID - content@gmail.com / PASSWORD - content
+   * (한 줄 평은 구병모 <아가미> 상세정보에 들어가면 보실 수 있습니다.)
+
 ### 📑Portfolio
 [See a Portfolio👀](portfolio.pdf)
 
