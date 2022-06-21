@@ -12,7 +12,7 @@
    * (한 줄 평은 구병모 <아가미> 상세정보에 들어가면 보실 수 있습니다.)
 
 ### 📑Portfolio
-[See a Portfolio👀](portfolio.pdf)
+[See a Portfolio👀](JeongHyewon_portfolio.pdf)
 
 ### 👩‍💻Tech Stack
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=java&logoColor=white)
